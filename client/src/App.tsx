@@ -6,6 +6,9 @@ const App = () => {
   const [input, setInput] = useState("");
 
   useEffect(() => {
+    socket.on("init", (message) => {
+      setMessages(() => [...message]);
+    });
     socket.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });

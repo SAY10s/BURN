@@ -16,7 +16,9 @@ const messages = ["There will be", "Your messages"];
 io.on("connection", (socket) => {
   console.log("Client connected");
 
-  io.emit("message", messages);
+  // emit messages ONLY TO CONNECTED PLAYER
+  socket.emit("init", messages);
+
   socket.on("message", (message) => {
     console.log("Message received:", message);
     messages.push(message);
