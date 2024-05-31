@@ -2,3 +2,25 @@
   color: white;
   background-color: black;
 }
+
+.character-card {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.character-card h3 {
+  width: 100%;
+  margin-top: 3rem;
+}
+.character-card div {
+  width: 25%;
+  color: #666;
+}
+h2 {
+  width: 100%;
+  margin-top: 0;
+}
