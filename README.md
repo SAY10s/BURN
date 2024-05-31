@@ -1,0 +1,2 @@
+# BURN (Battle Utility for Roleplaying Narratives)
+BURN (Battle Utility for Roleplaying Narratives) is a web app designed to enhance tabletop RPG combat. Ideal for game masters and players, BURN simplifies complex combat scenarios, allowing for seamless storytelling and strategic gameplay.
