@@ -1,16 +1,33 @@
 import express from "express";
-import cors from "cors";
+import { createServer } from "http";
+import { Server } from "socket.io";
+
 const app = express();
-const port = 3000;
-
-app.use(cors());
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST"],
+  },
 });
-app.get("/api", (req, res) => {
-  res.json({ users: ["user1", "user2", "user3", "SAY10s", "HICZ"] });
+
+const messages = ["There will be", "Your messages"];
+
+io.on("connection", (socket) => {
+  console.log("Client connected");
+
+  io.emit("message", messages);
+  socket.on("message", (message) => {
+    console.log("Message received:", message);
+    messages.push(message);
+    io.emit("message", message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
 });
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+
+httpServer.listen(3000, () => {
+  console.log("Server is listening on port 3000");
 });

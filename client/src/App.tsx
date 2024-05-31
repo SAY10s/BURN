@@ -1,32 +1,39 @@
 import { useEffect, useState } from "react";
+import socket from "./helpers/socket.js";
 
 const App = () => {
-  interface BackendData {
-    users: string[];
-  }
-
-  const [backendData, setBackendData] = useState<BackendData>({ users: [] });
+  const [messages, setMessages] = useState<string[]>([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api")
-      .then((res) => res.json())
-      .then((data) => setBackendData(data))
-      .catch((err) => console.log(err));
+    socket.on("message", (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+
+    return () => {
+      socket.off("message");
+    };
   }, []);
+
+  const sendMessage = () => {
+    socket.emit("message", input);
+    setInput("");
+  };
 
   return (
     <div>
-      <h1>React App</h1>
-      <p>
-        React App with TypeScript. <br /> Backend data below:
-      </p>
-      <p>
-        {typeof backendData.users === "undefined"
-          ? "Loading..."
-          : backendData.users.map((user: string, index: number) => (
-              <div key={index}>{user}</div>
-            ))}
-      </p>
+      <h1>Socket.IO Chat</h1>
+      <div>
+        {messages.map((msg, index) => (
+          <div key={index}>{msg}</div>
+        ))}
+      </div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={sendMessage}>Send</button>
     </div>
   );
 };

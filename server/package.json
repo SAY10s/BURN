@@ -4,10 +4,10 @@
   "main": "src/server.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "build-server": "tsc",
+    "watch-server": "tsc --watch",
     "start": "node dist/server.js",
-    "dev": "nodemon dist/server.js"
+    "dev-server": "nodemon dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "socket.io": "^4.7.5",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
