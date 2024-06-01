@@ -5,14 +5,14 @@ class DiceManager {
   static rollD6() {
     return Math.floor(Math.random() * 6) + 1;
   }
-  static rollD10() {
+  static rollD10(isCriticalLuckOrFailurePossible = true) {
     let roll = Math.floor(Math.random() * 10) + 1;
     console.log("roll: " + roll);
-    if (roll === 10)
+    if (roll === 10 && isCriticalLuckOrFailurePossible)
       do {
         roll += Math.floor(Math.random() * 10) + 1;
       } while (roll % 10 === 0);
-    else if (roll === 1) {
+    else if (roll === 1 && isCriticalLuckOrFailurePossible) {
       roll = 0;
       do {
         roll -= Math.floor(Math.random() * 10) + 1;

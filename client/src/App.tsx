@@ -18,15 +18,61 @@ const App = () => {
     socket.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
+    socket.on(
+      "mirekZaatakowałTaco",
+      (data: {
+        atakujacy: string;
+        atakRoll: number;
+        atakMieczem: number;
+        atakSzansa: number;
+        obronca: string;
+        unik: number;
+        obronaSzansa: number;
+        obronaRoll: number;
+        obrazenia: number;
+      }) => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          `${data.atakujacy} zaatakował ${data.obronca} i zabrał mu ${data.obrazenia} punktów życia!`,
+        ]);
+      },
+    );
+    socket.on(
+      "tacoZaatakowałMirka",
+      (data: {
+        atakujacy: string;
+        atakRoll: number;
+        atakMieczem: number;
+        atakSzansa: number;
+        obronca: string;
+        unik: number;
+        obronaSzansa: number;
+        obronaRoll: number;
+        obrazenia: number;
+      }) => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          `${data.atakujacy} zaatakował ${data.obronca} i zabrał mu ${data.obrazenia} punktów życia!`,
+        ]);
+      },
+    );
 
     return () => {
       socket.off("message");
+      socket.off("tacoZaatakowałMirka");
+      socket.off("mirekZaatakowałTaco");
     };
   }, []);
 
   const sendMessage = () => {
     socket.emit("message", input);
     setInput("");
+  };
+  const mirekAtakujeTacoMieczem = () => {
+    socket.emit("mirekAtakujeTacoMieczem");
+  };
+  const tacoAtakujeMirkaZakleciem = () => {
+    socket.emit("tacoAtakujeMirkaZakleciem");
   };
 
   return (
@@ -46,6 +92,22 @@ const App = () => {
       {characters.map((character: any, index: number) => (
         <CharacterCard key={index} character={character} />
       ))}
+      <div>
+        <button
+          onClick={() => {
+            mirekAtakujeTacoMieczem();
+          }}
+        >
+          Mirek atakuje taco mieczem
+        </button>
+        <button
+          onClick={() => {
+            tacoAtakujeMirkaZakleciem();
+          }}
+        >
+          Taci atakuje Mirka zaklęciem
+        </button>
+      </div>
     </div>
   );
 };
