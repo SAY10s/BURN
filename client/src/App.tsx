@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import socket from "./helpers/socket.js";
 import CharacterCard from "./components/CharacterCard.js";
+import Character from "./helpers/Character.js";
 
 const App = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState("");
-  const [characters, setCharacters] = useState<any>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
 
   useEffect(() => {
     socket.on("init", (message) => {
@@ -43,9 +44,7 @@ const App = () => {
       />
       <button onClick={sendMessage}>Send</button>
       {characters.map((character: any, index: number) => (
-        <CharacterCard key={index} character={character}>
-          {character.name}
-        </CharacterCard>
+        <CharacterCard key={index} character={character} />
       ))}
     </div>
   );
