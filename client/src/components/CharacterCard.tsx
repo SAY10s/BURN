@@ -1,4 +1,9 @@
-const CharacterCard = ({ character }) => {
+import Character from "../helpers/Character.js";
+
+interface CharacterCardProps {
+  character: Character;
+}
+const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   return (
     <div className="character-card">
       <h2 className="name">{character.imie}</h2>
