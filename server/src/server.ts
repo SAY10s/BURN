@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
 
   // emit messages ONLY TO CONNECTED PLAYER
   socket.emit("init", messages);
-  socket.emit("initCharacters", Character.wszystkiePostacie);
+  io.emit("initCharacters", Character.wszystkiePostacie);
 
   socket.on("message", (message) => {
     console.log("Message received:", message);
@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
         4,
       ),
     );
-    socket.emit("initCharacters", Character.wszystkiePostacie);
+    io.emit("initCharacters", Character.wszystkiePostacie);
   });
   socket.on("mirekAtakujeTacoMieczem", () => {
     io.emit(
@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
         4,
       ),
     );
-    socket.emit("initCharacters", Character.wszystkiePostacie);
+    io.emit("initCharacters", Character.wszystkiePostacie);
   });
   socket.on("tacoAtakujeMirkaZakleciem", () => {
     io.emit(
@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
         4,
       ),
     );
-    socket.emit("initCharacters", Character.wszystkiePostacie);
+    io.emit("initCharacters", Character.wszystkiePostacie);
   });
 
   socket.on("disconnect", () => {
