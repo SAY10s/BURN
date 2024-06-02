@@ -1,6 +1,7 @@
 class Character {
   static wszystkiePostacie: Character[] = [];
 
+  jestBohaterem: boolean;
   imie: string;
   pz: number; // punkty zdrowia
   pzMax: number; // maksymalne punkty zdrowia
@@ -47,6 +48,7 @@ class Character {
   };
 
   constructor(
+    jestBohaterem: boolean = false,
     imie: string = "Anonimowy",
     pz: number = 10,
     pzMax: number = 10,
@@ -128,6 +130,7 @@ class Character {
       strzalZKuszy: 1,
     },
   ) {
+    this.jestBohaterem = jestBohaterem;
     this.imie = imie;
     this.pz = pz;
     this.pzMax = pzMax;
@@ -157,6 +160,7 @@ interface Szanse {
 }
 
 interface Character {
+  jestBohaterem: boolean;
   imie: string;
   pz: number;
   pzMax: number;

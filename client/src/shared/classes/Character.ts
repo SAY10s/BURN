@@ -1,6 +1,7 @@
 class Character {
   static wszystkiePostacie: Character[] = [];
 
+  jestBohaterem: boolean;
   imie: string;
   pz: number; // punkty zdrowia
   pzMax: number; // maksymalne punkty zdrowia
@@ -47,6 +48,7 @@ class Character {
   };
 
   constructor(
+    jestBohaterem: boolean = false,
     imie: string = "Anonimowy",
     pz: number = 10,
     pzMax: number = 10,
@@ -128,6 +130,7 @@ class Character {
       strzalZKuszy: 1,
     },
   ) {
+    this.jestBohaterem = jestBohaterem;
     this.imie = imie;
     this.pz = pz;
     this.pzMax = pzMax;
@@ -137,6 +140,42 @@ class Character {
     this.wyparowanie = wyparowanie;
     this.szanse = szanse;
   }
+}
+interface WyparowaniePart {
+  wyparowanie: number;
+  wyparowanieMax: number;
+}
+
+interface Szanse {
+  unik: number;
+  zejscieZLini: number;
+  atakMieczem: number;
+  atakPiescia: number;
+  atakDrzewcowa: number;
+  atakBitewna: number;
+  atakKrotka: number;
+  atakZakleciem: number;
+  strzalZLuku: number;
+  strzalZKuszy: number;
+}
+
+interface Character {
+  jestBohaterem: boolean;
+  imie: string;
+  pz: number;
+  pzMax: number;
+  pw: number;
+  pwMax: number;
+  wigor: number;
+  wyparowanie: {
+    glowa: WyparowaniePart;
+    korpus: WyparowaniePart;
+    lewaReka: WyparowaniePart;
+    prawaReka: WyparowaniePart;
+    lewaNoga: WyparowaniePart;
+    prawaNoga: WyparowaniePart;
+  };
+  szanse: Szanse;
 }
 
 export default Character;

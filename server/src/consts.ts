@@ -15,6 +15,7 @@ const mozliweLokacjeTrafienia = [
 
 Character.wszystkiePostacie = [
   new Character(
+    true,
     "Książe Taco",
     43,
     50,
@@ -61,6 +62,7 @@ Character.wszystkiePostacie = [
     },
   ),
   new Character(
+    true,
     "Azrael",
     30,
     30,
@@ -106,8 +108,11 @@ Character.wszystkiePostacie = [
       strzalZKuszy: 1,
     },
   ),
-  new Character("Rizzo"),
-  new Character("Fernar "),
+  new Character(true, "Rizzo"),
+  new Character(true, "Fernar "),
+  new Character(false, "Wieśniak #1", 30, 30),
+  new Character(false, "Wieśniak #2", 30, 30),
+  new Character(false, "Wieśniak #3", 30, 30),
 ];
 
 export { mozliweLokacjeTrafienia };

@@ -1,4 +1,4 @@
-import Character from "../helpers/Character.js";
+import Character from "../shared/classes/Character.js";
 import WyparowaniePasek from "./WyparowaniePasek.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { chooseCharacter } from "../CharacterSlice.ts";

@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import socket from "./helpers/socket.js";
 import CharacterCard from "./components/CharacterCard.js";
 import Character from "./shared/classes/Character.js";
+import NPCCard from "./components/NPCCard.tsx";
 
 const App = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [characters, setCharacters] = useState<Character[]>([]);
-
+  const bohaterowie = characters.filter((char) => char.jestBohaterem);
+  const npc = characters.filter((char) => !char.jestBohaterem);
   useEffect(() => {
     socket.on("init", (message) => {
       setMessages(() => [...message]);
@@ -65,8 +67,13 @@ const App = () => {
         <button onClick={sendMessage}>Send</button>
       </div>
       <div className="characters">
-        {characters.map((character: any, index: number) => (
+        {bohaterowie.map((character: any, index: number) => (
           <CharacterCard key={index} character={character} />
+        ))}
+      </div>
+      <div className="npc characters">
+        {npc.map((character: any, index: number) => (
+          <NPCCard key={index} character={character} />
         ))}
       </div>
     </div>
