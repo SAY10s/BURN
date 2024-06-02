@@ -24,6 +24,8 @@ io.on("connection", (socket) => {
   //---------------------------------------------
   socket.on("chooseCharacter", (characterName) => {
     socketToCharacterMap.set(socket.id, characterName);
+    console.log(`Character choosen by ${socket.id}: ${characterName}`);
+    console.table(socketToCharacterMap);
   });
 
   socket.on("getMyCharacter", () => {
@@ -39,6 +41,25 @@ io.on("connection", (socket) => {
     console.log("Message received:", message);
     messages.push(message);
     io.emit("message", message);
+  });
+  socket.on("attack", (data: { attacker: string; defender: string }) => {
+    console.log("--------- Attack received ---------");
+    const atakujacyIndex = Character.wszystkiePostacie.findIndex(
+      (postac) => postac.imie === data.attacker,
+    );
+    const obroncaIndex = Character.wszystkiePostacie.findIndex(
+      (postac) => postac.imie === data.defender,
+    );
+
+    io.emit(
+      "attackFeedback",
+      atakMieczem(
+        Character.wszystkiePostacie[atakujacyIndex],
+        Character.wszystkiePostacie[obroncaIndex],
+        4,
+      ),
+    );
+    socket.emit("initCharacters", Character.wszystkiePostacie);
   });
   socket.on("mirekAtakujeTacoMieczem", () => {
     io.emit(

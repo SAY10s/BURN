@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import socket from "./helpers/socket.js";
 
 interface CharacterState {
   currentCharacter: string | null;
@@ -15,6 +16,7 @@ const characterSlice = createSlice({
     chooseCharacter: (state, action: PayloadAction<string>) => {
       state.currentCharacter = action.payload;
       console.log("Wybrano postać:", action.payload);
+      socket.emit("chooseCharacter", action.payload);
     },
   },
 });

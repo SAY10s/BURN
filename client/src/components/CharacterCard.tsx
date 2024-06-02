@@ -2,6 +2,7 @@ import Character from "../helpers/Character.js";
 import WyparowaniePasek from "./WyparowaniePasek.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { chooseCharacter } from "../CharacterSlice.ts";
+import socket from "../helpers/socket.js";
 
 interface CharacterCardProps {
   character: Character;
@@ -17,6 +18,13 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 
   const handleChooseCharacter = (characterName: string) => {
     dispatch(chooseCharacter(characterName));
+  };
+  const attack = (defender: string) => {
+    console.log(`${currentCharacter} atakuje ${defender}`);
+    socket.emit("attack", {
+      attacker: currentCharacter,
+      defender: defender,
+    });
   };
 
   return (
@@ -154,6 +162,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
       >
         Wybierz postać
       </button>
+      {character.imie !== currentCharacter && (
+        <button
+          onClick={() => {
+            attack(character.imie);
+          }}
+        >
+          Zaatakuj!
+        </button>
+      )}
     </div>
   );
 };

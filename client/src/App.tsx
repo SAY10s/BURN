@@ -20,11 +20,11 @@ const App = () => {
   //   socket.emit("getMyCharacter");
   // };
 
-  // Nasłuchiwanie na zdarzenie 'myCharacter'
-  socket.on("myCharacter", (characterName: string) => {
-    // Wyświetlanie informacji o wybranej postaci
-    console.log("Moja postać to:", characterName);
-  });
+  // // Nasłuchiwanie na zdarzenie 'myCharacter'
+  // socket.on("myCharacter", (characterName: string) => {
+  //   // Wyświetlanie informacji o wybranej postaci
+  //   console.log("Moja postać to:", characterName);
+  // });
 
   // Przykładowe użycie funkcji chooseCharacter i getMyCharacter
   // chooseCharacter("characterId");
@@ -79,11 +79,31 @@ const App = () => {
         ]);
       },
     );
+    socket.on(
+      "attackFeedback",
+      (data: {
+        atakujacy: string;
+        atakRoll: number;
+        atakMieczem: number;
+        atakSzansa: number;
+        obronca: string;
+        unik: number;
+        obronaSzansa: number;
+        obronaRoll: number;
+        obrazenia: number;
+      }) => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          `${data.atakujacy} zaatakował ${data.obronca} i zabrał mu ${data.obrazenia} punktów życia!`,
+        ]);
+      },
+    );
 
     return () => {
       socket.off("message");
       socket.off("tacoZaatakowałMirka");
       socket.off("mirekZaatakowałTaco");
+      socket.off("attackFeedback");
     };
   }, []);
 
