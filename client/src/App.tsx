@@ -76,22 +76,25 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Socket.IO Chat</h1>
-      <div>
-        {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
+    <div className="wrapper">
+      <div className="logs">
+        <div>
+          {messages.map((msg, index) => (
+            <div key={index}>{msg}</div>
+          ))}
+        </div>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
+      <div className="characters">
+        {characters.map((character: any, index: number) => (
+          <CharacterCard key={index} character={character} />
         ))}
       </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
-      {characters.map((character: any, index: number) => (
-        <CharacterCard key={index} character={character} />
-      ))}
       <div>
         <button
           onClick={() => {

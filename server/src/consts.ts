@@ -16,7 +16,7 @@ const mozliweLokacjeTrafienia = [
 Character.wszystkiePostacie = [
   new Character(
     "Książe Taco",
-    50,
+    43,
     50,
     50,
     50,
@@ -61,10 +61,10 @@ Character.wszystkiePostacie = [
     },
   ),
   new Character(
-    "Mirek",
+    "Azrael",
     30,
     30,
-    30,
+    17,
     30,
     1,
     {
@@ -107,6 +107,7 @@ Character.wszystkiePostacie = [
     },
   ),
   new Character("Rizzo"),
+  new Character("Fernar "),
 ];
 
 export { mozliweLokacjeTrafienia };
