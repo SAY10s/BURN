@@ -1,4 +1,5 @@
 import Character from "../helpers/Character.js";
+import WyparowaniePasek from "./WyparowaniePasek.tsx";
 
 interface CharacterCardProps {
   character: Character;
@@ -46,43 +47,91 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
       <h3>Wyparowanie:</h3>
       <div className="wyparowanie">
         <div>
-          Głowa: {character.wyparowanie.glowa.wyparowanie}/
-          {character.wyparowanie.glowa.wyparowanieMax}
+          Głowa:
+          <WyparowaniePasek
+            wyparowanie={character.wyparowanie.glowa.wyparowanie}
+            wyparowanieMax={character.wyparowanie.glowa.wyparowanieMax}
+          />
         </div>
         <div>
-          Korpus: {character.wyparowanie.korpus.wyparowanie}/
-          {character.wyparowanie.korpus.wyparowanieMax}
+          Korpus:
+          <WyparowaniePasek
+            wyparowanie={character.wyparowanie.korpus.wyparowanie}
+            wyparowanieMax={character.wyparowanie.korpus.wyparowanieMax}
+          />
         </div>
         <div>
-          Lewa ręka: {character.wyparowanie.lewaReka.wyparowanie}/
-          {character.wyparowanie.lewaReka.wyparowanieMax}
+          L. ręka:
+          <WyparowaniePasek
+            wyparowanie={character.wyparowanie.lewaReka.wyparowanie}
+            wyparowanieMax={character.wyparowanie.lewaReka.wyparowanieMax}
+          />
         </div>
         <div>
-          Prawa ręka: {character.wyparowanie.prawaReka.wyparowanie}/
-          {character.wyparowanie.prawaReka.wyparowanieMax}
+          P. Ręka:
+          <WyparowaniePasek
+            wyparowanie={character.wyparowanie.prawaReka.wyparowanie}
+            wyparowanieMax={character.wyparowanie.prawaReka.wyparowanieMax}
+          />
         </div>
         <div>
-          Lewa noga: {character.wyparowanie.lewaNoga.wyparowanie}/
-          {character.wyparowanie.lewaNoga.wyparowanieMax}
+          L. noga:
+          <WyparowaniePasek
+            wyparowanie={character.wyparowanie.lewaNoga.wyparowanie}
+            wyparowanieMax={character.wyparowanie.lewaNoga.wyparowanieMax}
+          />
         </div>
         <div>
-          Prawa noga: {character.wyparowanie.prawaNoga.wyparowanie}/
-          {character.wyparowanie.prawaNoga.wyparowanieMax}
+          P. noga:
+          <WyparowaniePasek
+            wyparowanie={character.wyparowanie.prawaNoga.wyparowanie}
+            wyparowanieMax={character.wyparowanie.prawaNoga.wyparowanieMax}
+          />
         </div>
       </div>
 
       <h3>Szanse:</h3>
       <div className="szanse">
-        <div>Unik: {character.szanse.unik}</div>
-        <div>Zejście z linii: {character.szanse.zejscieZLini}</div>
-        <div>Atak mieczem: {character.szanse.atakMieczem}</div>
-        <div>Atak pięścią: {character.szanse.atakPiescia}</div>
-        <div>Atak drzewcowa: {character.szanse.atakDrzewcowa}</div>
-        <div>Atak bitewna: {character.szanse.atakBitewna}</div>
-        <div>Atak krótka: {character.szanse.atakKrotka}</div>
-        <div>Atak zaklęciem: {character.szanse.atakZakleciem}</div>
-        <div>Strzał z łuku: {character.szanse.strzalZLuku}</div>
-        <div>Strzał z kuszy: {character.szanse.strzalZKuszy}</div>
+        <div>
+          Unik:
+          <br /> {character.szanse.unik}
+        </div>
+        <div>
+          Zejście z linii:
+          <br /> {character.szanse.zejscieZLini}
+        </div>
+        <div>
+          Atak mieczem:
+          <br /> {character.szanse.atakMieczem}
+        </div>
+        <div>
+          Atak pięścią:
+          <br /> {character.szanse.atakPiescia}
+        </div>
+        <div>
+          Atak drzewcowa: <br />
+          {character.szanse.atakDrzewcowa}
+        </div>
+        <div>
+          Atak bitewna:
+          <br /> {character.szanse.atakBitewna}
+        </div>
+        <div>
+          Atak krótka:
+          <br /> {character.szanse.atakKrotka}
+        </div>
+        <div>
+          Atak zaklęciem: <br />
+          {character.szanse.atakZakleciem}
+        </div>
+        <div>
+          Strzał z łuku: <br />
+          {character.szanse.strzalZLuku}
+        </div>
+        <div>
+          Strzał z kuszy:
+          <br /> {character.szanse.strzalZKuszy}
+        </div>
       </div>
     </div>
   );
