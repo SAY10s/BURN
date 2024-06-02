@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import socket from "./helpers/socket.js";
+import socket from "../helpers/socket.ts";
 
 interface CharacterState {
   currentCharacter: string | null;
