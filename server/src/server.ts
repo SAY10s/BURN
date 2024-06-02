@@ -27,7 +27,7 @@ const io = new Server(httpServer, {
 });
 
 const messages = ["Hello there!", "General kenobi!"];
-const characters = [
+Character.wszystkiePostacie = [
   new Character(
     "Książe Taco",
     50,
@@ -128,7 +128,7 @@ io.on("connection", (socket) => {
 
   // emit messages ONLY TO CONNECTED PLAYER
   socket.emit("init", messages);
-  socket.emit("initCharacters", characters);
+  socket.emit("initCharacters", Character.wszystkiePostacie);
 
   socket.on("message", (message) => {
     console.log("Message received:", message);
@@ -138,16 +138,24 @@ io.on("connection", (socket) => {
   socket.on("mirekAtakujeTacoMieczem", () => {
     io.emit(
       "mirekZaatakowałTaco",
-      atakMieczem(characters[1], characters[0], 4),
+      atakMieczem(
+        Character.wszystkiePostacie[1],
+        Character.wszystkiePostacie[0],
+        4,
+      ),
     );
-    socket.emit("initCharacters", characters);
+    socket.emit("initCharacters", Character.wszystkiePostacie);
   });
   socket.on("tacoAtakujeMirkaZakleciem", () => {
     io.emit(
       "tacoZaatakowałMirka",
-      atakZakleciem(characters[0], characters[1], 4),
+      atakZakleciem(
+        Character.wszystkiePostacie[0],
+        Character.wszystkiePostacie[1],
+        4,
+      ),
     );
-    socket.emit("initCharacters", characters);
+    socket.emit("initCharacters", Character.wszystkiePostacie);
   });
 
   socket.on("disconnect", () => {
@@ -247,7 +255,3 @@ const atakZakleciem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
     obrazenia,
   };
 };
-// console.log(atakMieczem(characters[1], characters[0], 4));
-// console.log("-----");
-// atakZakleciem(characters[0], characters[1], 4);
-// console.log(`Taco: ${characters[0].pz}, Mirek: ${characters[1].pz}`);

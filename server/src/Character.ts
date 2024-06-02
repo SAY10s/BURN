@@ -1,4 +1,6 @@
 class Character {
+  static wszystkiePostacie: Character[] = [];
+
   imie: string;
   pz: number; // punkty zdrowia
   pzMax: number; // maksymalne punkty zdrowia
