@@ -8,6 +8,29 @@ const App = () => {
   const [input, setInput] = useState("");
   const [characters, setCharacters] = useState<Character[]>([]);
 
+  // ---------------------------------------------
+  // const chooseCharacter = (characterName: string) => {
+  //   // Wysłanie zdarzenia 'chooseCharacter' do serwera z wybranym identyfikatorem postaci
+  //   socket.emit("chooseCharacter", characterName);
+  // };
+  //
+  // // Funkcja do pobrania informacji o wybranej postaci
+  // const getMyCharacter = () => {
+  //   // Wysłanie zdarzenia 'getMyCharacter' do serwera
+  //   socket.emit("getMyCharacter");
+  // };
+
+  // Nasłuchiwanie na zdarzenie 'myCharacter'
+  socket.on("myCharacter", (characterName: string) => {
+    // Wyświetlanie informacji o wybranej postaci
+    console.log("Moja postać to:", characterName);
+  });
+
+  // Przykładowe użycie funkcji chooseCharacter i getMyCharacter
+  // chooseCharacter("characterId");
+  // getMyCharacter();
+  // ---------------------------------------------
+
   useEffect(() => {
     socket.on("init", (message) => {
       setMessages(() => [...message]);

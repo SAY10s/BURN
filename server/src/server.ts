@@ -14,10 +14,22 @@ const io = new Server(httpServer, {
   },
 });
 
+const socketToCharacterMap = new Map();
+
 const messages = ["Hello there!", "General kenobi!"];
 
 io.on("connection", (socket) => {
   console.log("Client connected");
+
+  //---------------------------------------------
+  socket.on("chooseCharacter", (characterName) => {
+    socketToCharacterMap.set(socket.id, characterName);
+  });
+
+  socket.on("getMyCharacter", () => {
+    socket.emit("myCharacter", socketToCharacterMap.get(socket.id));
+  });
+  //---------------------------------------------
 
   // emit messages ONLY TO CONNECTED PLAYER
   socket.emit("init", messages);

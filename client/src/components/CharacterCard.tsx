@@ -1,5 +1,7 @@
 import Character from "../helpers/Character.js";
 import WyparowaniePasek from "./WyparowaniePasek.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { chooseCharacter } from "../CharacterSlice.ts";
 
 interface CharacterCardProps {
   character: Character;
@@ -8,8 +10,22 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   const zdrowieProcent = (character.pz / character.pzMax) * 100;
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
 
+  const dispatch = useDispatch();
+  const currentCharacter = useSelector(
+    (state: any) => state.character.currentCharacter,
+  );
+
+  const handleChooseCharacter = (characterName: string) => {
+    dispatch(chooseCharacter(characterName));
+  };
+
   return (
-    <div className="character-card">
+    <div
+      className="character-card"
+      style={{
+        backgroundColor: character.imie === currentCharacter ? "black" : "",
+      }}
+    >
       <div className="stan">
         <h2 className="name">{character.imie}</h2>
 
@@ -43,7 +59,6 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 
         {/*<div>Wigor: {character.wigor}</div>*/}
       </div>
-
       <h3>Wyparowanie:</h3>
       <div className="wyparowanie">
         <div>
@@ -89,7 +104,6 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
           />
         </div>
       </div>
-
       <h3>Szanse:</h3>
       <div className="szanse">
         <div>
@@ -133,6 +147,13 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
           <br /> {character.szanse.strzalZKuszy}
         </div>
       </div>
+      <button
+        onClick={() => {
+          handleChooseCharacter(character.imie);
+        }}
+      >
+        Wybierz postać
+      </button>
     </div>
   );
 };
