@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import socket from "./helpers/socket.js";
 import CharacterCard from "./components/CharacterCard.js";
-import Character from "./helpers/Character.js";
+import Character from "./shared/classes/Character.js";
 
 const App = () => {
   const [messages, setMessages] = useState<string[]>([]);

@@ -2,7 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import DiceManager from "./DiceManager.js";
-import Character from "./Character.js";
+import Character from "./shared/classes/Character.js";
 import { mozliweLokacjeTrafienia } from "./consts.js";
 
 const app = express();
