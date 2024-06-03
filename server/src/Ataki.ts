@@ -6,7 +6,8 @@ const atakMieczem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
   console.log(`${atakujacy.imie} atakuje mieczem ${obronca.imie}`);
   let atakRoll = DiceManager.rollD10();
   let atakSzansa = atakujacy.szanse.atakMieczem + atakRoll;
-  let obrazenia = 0;
+  let obrazenia = -1;
+  let lokacjaTrafienia = -1;
 
   console.log(
     `Wynik ataku ${atakujacy.imie}: ${atakSzansa} (${atakujacy.szanse.atakMieczem} + ${atakRoll})`,
@@ -21,7 +22,7 @@ const atakMieczem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
 
   if (atakSzansa > obronaSzansa) {
     console.log("Atak trafił!");
-    const lokacjaTrafienia = DiceManager.rollD10(false);
+    lokacjaTrafienia = DiceManager.rollD10(false);
     console.log(
       `Lokacja trafienia: ${mozliweLokacjeTrafienia[lokacjaTrafienia - 1]}(${lokacjaTrafienia})`,
     );
@@ -44,6 +45,8 @@ const atakMieczem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
     obronaSzansa,
     obronaRoll,
     obrazenia,
+    rollTrafienie: lokacjaTrafienia,
+    lokacjaTrafienia: mozliweLokacjeTrafienia[lokacjaTrafienia - 1],
   };
 };
 

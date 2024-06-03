@@ -3,10 +3,10 @@ import socket from "../helpers/socket.js";
 import CharacterCard from "../components/CharacterCard.js";
 import Character from "../shared/classes/Character.js";
 import NPCCard from "../components/NPCCard.js";
+import attackFeedbackInterface  from "../shared/interfaces/attackFeedbackInterface.js";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const [messages, setMessages] = useState<string[]>([]);
-  const [input, setInput] = useState("");
   const [characters, setCharacters] = useState<Character[]>([]);
   const bohaterowie = characters.filter((char) => char.jestBohaterem);
   const npc = characters.filter((char) => !char.jestBohaterem);
@@ -22,20 +22,19 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
     });
     socket.on(
       "attackFeedback",
-      (data: {
-        atakujacy: string;
-        atakRoll: number;
-        atakMieczem: number;
-        atakSzansa: number;
-        obronca: string;
-        unik: number;
-        obronaSzansa: number;
-        obronaRoll: number;
-        obrazenia: number;
-      }) => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          `${data.atakujacy} zaatakował ${data.obronca} i zabrał mu ${data.obrazenia} punktów życia!`,
+      (data: attackFeedbackInterface) => {
+        let message = ``;
+        message += `${data.atakujacy} (${data.atakMieczem} + ${data.atakRoll} = ${data.atakSzansa})
+           zaatakował ${data.obronca} (${data.unik} + ${data.obronaRoll} = ${data.obronaSzansa})`;
+        if (data.atakSzansa < data.obronaSzansa) {
+            message += ` i nie trafił! (${data.atakSzansa} < ${data.obronaSzansa})`;
+        }
+        else {
+          message += ` i trafił (${data.atakSzansa} > ${data.obronaSzansa}) w ${data.lokacjaTrafienia.toLowerCase()}(${data.rollTrafienie})`;
+          message += ` i zabrał mu ${data.obrazenia} punktów życia!`;
+        }
+        setMessages(() => [
+          message
         ]);
       },
     );
@@ -45,11 +44,6 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
       socket.off("attackFeedback");
     };
   }, []);
-
-  const sendMessage = () => {
-    socket.emit("message", input);
-    setInput("");
-  };
   if (isGameMaster) {
     console.log("jestem GM");
   }
@@ -62,12 +56,6 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
             <div key={index}>{msg}</div>
           ))}
         </div>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button onClick={sendMessage}>Send</button>
       </div>
       <div className="characters">
         {bohaterowie.map((character: any, index: number) => (
