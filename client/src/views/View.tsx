@@ -31,7 +31,7 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
         }
         else {
           message += ` i trafił (${data.atakSzansa} > ${data.obronaSzansa}) w ${data.lokacjaTrafienia.toLowerCase()}(${data.rollTrafienie})`;
-          message += ` i zabrał mu ${data.obrazenia} punktów życia!`;
+          message += ` i zabrał mu ${data.obrazenia}((${data.obrazeniaRoll} - ${data.wyparowanie})*${data.mnoznikLokacji} = ${data.obrazenia}) punktów życia!`;
         }
         setMessages(() => [
           message

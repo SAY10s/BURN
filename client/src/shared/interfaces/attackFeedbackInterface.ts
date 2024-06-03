@@ -8,8 +8,11 @@ export default interface AttackFeedbackInterface {
     unik: number;
     obronaSzansa: number;
     obronaRoll: number;
+    wyparowanie: number;
 
     lokacjaTrafienia: string;
+    mnoznikLokacji: number;
     rollTrafienie: number;
     obrazenia: number;
+    obrazeniaRoll: number;
 }

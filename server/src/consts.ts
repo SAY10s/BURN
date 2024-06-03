@@ -1,16 +1,28 @@
 import Character from "./shared/classes/Character.js";
 
-const mozliweLokacjeTrafienia = [
-  "głowa",
+const mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki = [
+  "głowę",
   "korpus",
   "korpus",
   "korpus",
-  "Ramię prawe",
-  "Ramię lewe",
-  "Noga prawa",
-  "Noga prawa",
-  "Noga lewa",
-  "Noga lewa",
+  "prawe ramię",
+  "lewe ramię",
+  "prawą nogę",
+  "prawą nogę",
+  "lewą nogę",
+  "lewą nogę",
+];
+const mozliweLokacjeTrafieniaCamelCase = [
+    "glowa",
+    "korpus",
+    "korpus",
+    "korpus",
+    "prawaReka",
+    "lewaReka",
+    "prawaNoga",
+    "prawaNoga",
+    "lewaNoga",
+    "lewaNoga",
 ];
 
 Character.wszystkiePostacie = [
@@ -130,4 +142,4 @@ Character.wszystkiePostacie = [
   new Character(false, "Wieśniak #16", 30, 30),
 ];
 
-export { mozliweLokacjeTrafienia };
+export { mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki , mozliweLokacjeTrafieniaCamelCase};
