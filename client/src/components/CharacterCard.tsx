@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { chooseCharacter } from "../store/CharacterSlice.ts";
 import socket from "../helpers/socket.js";
 import attackInterface from "../shared/interfaces/attackInterface.js";
+import React from "react";
 
 interface CharacterCardProps {
   character: Character;
 }
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
-  const zdrowieProcent = (character.pz / character.pzMax) * 100;
+  const zdrowieProcent =
+    character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
 
   const dispatch = useDispatch();
@@ -23,11 +25,11 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   const attack = (defender: string) => {
     console.log(`${currentCharacter} atakuje ${defender}`);
     let attackData: attackInterface = {
-        attacker: currentCharacter,
-        defender: defender,
-        ileD6: 1,
-    }
-    socket.emit("attack", attackData});
+      attacker: currentCharacter,
+      defender: defender,
+      ileD6: 1,
+    };
+    socket.emit("attack", attackData);
   };
 
   return (
@@ -49,7 +51,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
             style={{ width: `${zdrowieProcent}%`, backgroundColor: "red" }}
           ></div>
           <div className="cyfry">
-            {character.pz}/{character.pzMax}
+            {character.pz > 0 ? character.pz : 0}/{character.pzMax}
           </div>
         </div>
         <div
@@ -64,7 +66,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
             }}
           ></div>
           <div className="cyfry">
-            {character.pw}/{character.pwMax}
+            {character.pw > 0 ? character.pw : 0}/{character.pwMax}
           </div>
         </div>
 
