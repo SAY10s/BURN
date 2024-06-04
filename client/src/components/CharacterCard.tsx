@@ -3,6 +3,7 @@ import WyparowaniePasek from "./WyparowaniePasek.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { chooseCharacter } from "../store/CharacterSlice.ts";
 import socket from "../helpers/socket.js";
+import attackInterface from "../shared/interfaces/attackInterface.js";
 
 interface CharacterCardProps {
   character: Character;
@@ -21,10 +22,12 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   };
   const attack = (defender: string) => {
     console.log(`${currentCharacter} atakuje ${defender}`);
-    socket.emit("attack", {
-      attacker: currentCharacter,
-      defender: defender,
-    });
+    let attackData: attackInterface = {
+        attacker: currentCharacter,
+        defender: defender,
+        ileD6: 1,
+    }
+    socket.emit("attack", attackData});
   };
 
   return (

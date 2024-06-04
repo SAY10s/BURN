@@ -3,6 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import Character from "./shared/classes/Character.js";
 import atakMieczem from "./Ataki.js";
+import attackInterface from "./shared/interfaces/attackInterface.js";
 
 const app = express();
 const httpServer = createServer(app);
@@ -41,7 +42,7 @@ io.on("connection", (socket) => {
     messages.push(message);
     io.emit("message", message);
   });
-  socket.on("attack", (data: { attacker: string; defender: string }) => {
+  socket.on("attack", (data: attackInterface) => {
     console.log("--------- Attack received ---------");
     const atakujacyIndex = Character.wszystkiePostacie.findIndex(
       (postac) => postac.imie === data.attacker,
