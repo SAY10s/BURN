@@ -35,5 +35,20 @@ class DiceManager {
     }
     return roll;
   }
+  static rollD100(isCriticalLuckOrFailurePossible = true) {
+    let roll = Math.floor(Math.random() * 100) + 1;
+    console.log("roll: " + roll);
+    if (roll === 100 && isCriticalLuckOrFailurePossible)
+      do {
+        roll += Math.floor(Math.random() * 100) + 1;
+      } while (roll % 100 === 0);
+    else if (roll === 1 && isCriticalLuckOrFailurePossible) {
+      roll = 0;
+      do {
+        roll -= Math.floor(Math.random() * 100) + 1;
+      } while (roll % 100 === 0);
+    }
+    return roll;
+  }
 }
 export default DiceManager;

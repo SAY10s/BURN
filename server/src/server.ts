@@ -26,6 +26,12 @@ io.on("connection", (socket) => {
     socketToCharacterMap.set(socket.id, characterName);
     console.log(`Character choosen by ${socket.id}: ${characterName}`);
     console.table(socketToCharacterMap);
+    socket.emit(
+      "choosenCharacterAttacks",
+      Character.wszystkiePostacie.find(
+        (postac) => postac.imie === characterName,
+      ).ataki,
+    );
   });
 
   socket.on("getMyCharacter", () => {

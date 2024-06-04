@@ -3,11 +3,16 @@ import socket from "../helpers/socket.js";
 import CharacterCard from "../components/CharacterCard.js";
 import Character from "../shared/classes/Character.js";
 import NPCCard from "../components/NPCCard.js";
+import { setCurrentCharacterAttacks } from "../store/CharacterSlice.ts";
+import { useDispatch } from "react-redux";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const [messages, setMessages] = useState<string[]>([]);
   const [characters, setCharacters] = useState<Character[]>([]);
+
   const bohaterowie = characters.filter((char) => char.jestBohaterem);
+  const dispatch = useDispatch();
+
   const npc = characters.filter((char) => !char.jestBohaterem);
   useEffect(() => {
     socket.on("init", (message) => {
@@ -21,6 +26,10 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
     });
     socket.on("attackFeedback", (data: string) => {
       setMessages(() => [data]);
+    });
+    socket.on("choosenCharacterAttacks", (attacks: []) => {
+      dispatch(setCurrentCharacterAttacks(attacks));
+      console.table(attacks);
     });
 
     return () => {

@@ -19,7 +19,7 @@ interface Props {
   obronca: string;
 }
 
-const AttackPlayerMenu: React.FC<Props> = ({ ataki, obronca }) => {
+const AttackPlayerMenu: React.FC<Props> = ({ obronca }) => {
   const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
   );
@@ -27,26 +27,30 @@ const AttackPlayerMenu: React.FC<Props> = ({ ataki, obronca }) => {
     console.log(`${currentCharacter} atakuje ${attackData.atakujacy}`);
     socket.emit("attack", attackData);
   };
+  const ataki = useSelector(
+    (state: any) => state.character.currentCharacterAttacks,
+  );
   console.log(ataki);
   return (
     <div>
-      {ataki.map((atak, index) => {
-        return (
-          <button
-            key={index}
-            onClick={() => {
-              attack({
-                nazwaAtaku: atak.nazwa,
-                atakujacy: currentCharacter,
-                obronca: obronca,
-                ...atak,
-              });
-            }}
-          >
-            {atak.nazwa}
-          </button>
-        );
-      })}
+      {currentCharacter &&
+        ataki.map((atak: any, index: number) => {
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                attack({
+                  nazwaAtaku: atak.nazwa,
+                  atakujacy: currentCharacter,
+                  obronca: obronca,
+                  ...atak,
+                });
+              }}
+            >
+              {atak.nazwa}
+            </button>
+          );
+        })}
     </div>
   );
 };

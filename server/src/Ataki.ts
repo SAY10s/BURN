@@ -65,9 +65,11 @@ const atak = (data: attackInterface) => {
       console.log("Wyparowanie: ", wyparowanie);
       if (obrazeniaRoll > wyparowanie) {
         obrazenia = obrazeniaRoll - wyparowanie;
-        data.obronca.wyparowanie[
-          mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1]
-        ].wyparowanie--;
+        if (wyparowanie) {
+          data.obronca.wyparowanie[
+            mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1]
+          ].wyparowanie--;
+        }
       } else {
         obrazenia = 0;
       }
@@ -85,13 +87,14 @@ const atak = (data: attackInterface) => {
       //finalne obrażenia
       data.obronca.pz -= obrazenia;
 
-      message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1].toLowerCase()}(${lokacjaTrafienia})`;
-      message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${mnoznikLokacji} = ${obrazenia}) punktów życia!`;
+      if (data.ileD6) {
+        message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1].toLowerCase()}(${lokacjaTrafienia})`;
+        message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${mnoznikLokacji} = ${obrazenia}) punktów życia!`;
+      }
 
       //efekty trafienia:
       //podpalenie
-      if (data.procentSzansNaPodpalenie > DiceManager.rollD10(false) * 10) {
-        data.obronca.pz -= 10;
+      if (data.procentSzansNaPodpalenie >= DiceManager.rollD100(false)) {
         message += ` ${data.obronca.imie} podpalił się!`;
       }
     } else {

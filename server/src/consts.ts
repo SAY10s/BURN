@@ -13,16 +13,16 @@ const mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki = [
   "lewą nogę",
 ];
 const mozliweLokacjeTrafieniaCamelCase = [
-    "glowa",
-    "korpus",
-    "korpus",
-    "korpus",
-    "prawaReka",
-    "lewaReka",
-    "prawaNoga",
-    "prawaNoga",
-    "lewaNoga",
-    "lewaNoga",
+  "glowa",
+  "korpus",
+  "korpus",
+  "korpus",
+  "prawaReka",
+  "lewaReka",
+  "prawaNoga",
+  "prawaNoga",
+  "lewaNoga",
+  "lewaNoga",
 ];
 
 Character.wszystkiePostacie = [
@@ -72,6 +72,28 @@ Character.wszystkiePostacie = [
       strzalZLuku: 1,
       strzalZKuszy: 1,
     },
+    [
+      {
+        nazwa: "Aenye",
+        kosztPW: 5,
+        kosztWigor: 0,
+        ileD6: 4,
+        zaklecie: true,
+        mozliweSposobyUniku: ["blok", "unik"],
+        srebrnyAtak: false,
+        procentSzansNaPodpalenie: 75,
+      },
+      {
+        nazwa: "Tanto Ilchar",
+        kosztPW: 3,
+        kosztWigor: 0,
+        ileD6: 0,
+        zaklecie: true,
+        mozliweSposobyUniku: ["unik"],
+        srebrnyAtak: false,
+        procentSzansNaPodpalenie: 100,
+      },
+    ],
   ),
   new Character(
     true,
@@ -142,4 +164,7 @@ Character.wszystkiePostacie = [
   new Character(false, "Wieśniak #16", 30, 30),
 ];
 
-export { mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki , mozliweLokacjeTrafieniaCamelCase};
+export {
+  mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki,
+  mozliweLokacjeTrafieniaCamelCase,
+};
