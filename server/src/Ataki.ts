@@ -1,8 +1,11 @@
 import Character from "./shared/classes/Character.js";
 import DiceManager from "./DiceManager.js";
-import { mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki, mozliweLokacjeTrafieniaCamelCase } from "./consts.js";
+import {
+  mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki,
+  mozliweLokacjeTrafieniaCamelCase,
+} from "./consts.js";
 
-const atakMieczem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
+const atak = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
   console.log(`${atakujacy.imie} atakuje mieczem ${obronca.imie}`);
   let atakRoll = DiceManager.rollD10();
   let atakSzansa = atakujacy.szanse.atakMieczem + atakRoll;
@@ -39,24 +42,29 @@ const atakMieczem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
     console.log(`Obrażenia wyrzucone przed wyparowaniem: ${obrazeniaRoll}`);
 
     //wyparowanie
-    wyparowanie = obronca.wyparowanie[mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1]].wyparowanie
-    console.log("Wyparowanie: ", wyparowanie)
+    wyparowanie =
+      obronca.wyparowanie[
+        mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1]
+      ].wyparowanie;
+    console.log("Wyparowanie: ", wyparowanie);
     if (obrazeniaRoll > wyparowanie) {
       obrazenia = obrazeniaRoll - wyparowanie;
-      obronca.wyparowanie[mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1]].wyparowanie--
+      obronca.wyparowanie[
+        mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1]
+      ].wyparowanie--;
     } else {
       obrazenia = 0;
     }
     //ODEJMIJ REDUKCJĘ I PODATNOŚ
 
     //mnożnik lokacji trafienia
-    const lokacjaTrafieniaCamelCase = mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1];
-    if (lokacjaTrafieniaCamelCase === "glowa") mnoznikLokacji = 3
+    const lokacjaTrafieniaCamelCase =
+      mozliweLokacjeTrafieniaCamelCase[lokacjaTrafienia - 1];
+    if (lokacjaTrafieniaCamelCase === "glowa") mnoznikLokacji = 3;
     if (lokacjaTrafieniaCamelCase === "korpus") mnoznikLokacji = 1;
-    else mnoznikLokacji = 0.5
+    else mnoznikLokacji = 0.5;
 
     obrazenia = Math.floor(obrazenia * mnoznikLokacji);
-
 
     //finalne obrażenia
     obronca.pz -= obrazenia;
@@ -77,8 +85,9 @@ const atakMieczem = (atakujacy: Character, obronca: Character, ileD6 = 1) => {
     wyparowanie,
     rollTrafienie: lokacjaTrafienia,
     mnoznikLokacji,
-    lokacjaTrafienia: mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1],
+    lokacjaTrafienia:
+      mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1],
   };
 };
 
-export default atakMieczem;
+export default atak;

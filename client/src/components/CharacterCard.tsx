@@ -15,20 +15,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
 
   const dispatch = useDispatch();
-  const currentCharacter = useSelector(
+  const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
   );
 
   const handleChooseCharacter = (characterName: string) => {
     dispatch(chooseCharacter(characterName));
   };
-  const attack = (defender: string) => {
-    console.log(`${currentCharacter} atakuje ${defender}`);
-    let attackData: attackInterface = {
-      attacker: currentCharacter,
-      defender: defender,
-      ileD6: 1,
-    };
+  const attack = (attackData: attackInterface) => {
+    console.log(`${currentCharacter} atakuje ${attackData.defender}`);
     socket.emit("attack", attackData);
   };
 
@@ -170,7 +165,16 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
       {character.imie !== currentCharacter && (
         <button
           onClick={() => {
-            attack(character.imie);
+            attack({
+              attacker: currentCharacter,
+              defender: character.imie,
+              ileD6: 1,
+              nazwaAtaku: "Ostrze treningowe",
+              kosztPW: 1,
+              zaklecie: false,
+              mozliweSposobyUniku: ["unik"],
+              srebrnyAtak: false,
+            });
           }}
         >
           Zaatakuj!

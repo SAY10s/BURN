@@ -2,7 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import Character from "./shared/classes/Character.js";
-import atakMieczem from "./Ataki.js";
+import atak from "./Ataki.js";
 import attackInterface from "./shared/interfaces/attackInterface.js";
 
 const app = express();
@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
 
     io.emit(
       "attackFeedback",
-      atakMieczem(
+      atak(
         Character.wszystkiePostacie[atakujacyIndex],
         Character.wszystkiePostacie[obroncaIndex],
         4,
