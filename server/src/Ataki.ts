@@ -32,6 +32,10 @@ const atak = (data: attackInterface) => {
       `Wynik obrony ${data.obronca.imie}: ${obronaSzansa} (${data.obronca.szanse.unik} + ${obronaRoll})`,
     );
 
+    let message = ``;
+    message += `${data.atakujacy.imie} (${data.atakujacy.szanse.atakMieczem} + ${atakRoll} = ${atakSzansa})
+           zaatakował ${data.obronca.imie} (${data.obronca.szanse.unik} + ${obronaRoll} = ${obronaSzansa})`;
+
     if (atakSzansa > obronaSzansa) {
       console.log("Atak trafił!");
 
@@ -74,26 +78,30 @@ const atak = (data: attackInterface) => {
 
       //finalne obrażenia
       data.obronca.pz -= obrazenia;
+
+      // konstruowanie wiadomości zwrotnej
+      // atakujacy: data.atakujacy.imie,
+      //     atakRoll,
+      //     atakMieczem: data.atakujacy.szanse.atakMieczem,
+      //     atakSzansa,
+      //     obronca: data.obronca.imie,
+      //     unik: data.obronca.szanse.unik,
+      //     obronaSzansa,
+      //     obronaRoll,
+      //     obrazeniaRoll,
+      //     obrazenia,
+      //     wyparowanie,
+      //     rollTrafienie: lokacjaTrafienia,
+      //     mnoznikLokacji,
+      //     lokacjaTrafienia:
+      // mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1],
+
+      message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1].toLowerCase()}(${lokacjaTrafienia})`;
+      message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${mnoznikLokacji} = ${obrazenia}) punktów życia!`;
     } else {
-      console.log("Atak nie trafił");
+      message += ` i nie trafił! (${atakSzansa} < ${obronaSzansa})`;
     }
-    return {
-      atakujacy: data.atakujacy.imie,
-      atakRoll,
-      atakMieczem: data.atakujacy.szanse.atakMieczem,
-      atakSzansa,
-      obronca: data.obronca.imie,
-      unik: data.obronca.szanse.unik,
-      obronaSzansa,
-      obronaRoll,
-      obrazeniaRoll,
-      obrazenia,
-      wyparowanie,
-      rollTrafienie: lokacjaTrafienia,
-      mnoznikLokacji,
-      lokacjaTrafienia:
-        mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1],
-    };
+    return message;
   } else {
     return "Błąd ataku";
   }

@@ -3,7 +3,6 @@ import socket from "../helpers/socket.js";
 import CharacterCard from "../components/CharacterCard.js";
 import Character from "../shared/classes/Character.js";
 import NPCCard from "../components/NPCCard.js";
-import attackFeedbackInterface  from "../shared/interfaces/attackFeedbackInterface.js";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const [messages, setMessages] = useState<string[]>([]);
@@ -20,24 +19,9 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
     socket.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
-    socket.on(
-      "attackFeedback",
-      (data: attackFeedbackInterface) => {
-        let message = ``;
-        message += `${data.atakujacy} (${data.atakMieczem} + ${data.atakRoll} = ${data.atakSzansa})
-           zaatakował ${data.obronca} (${data.unik} + ${data.obronaRoll} = ${data.obronaSzansa})`;
-        if (data.atakSzansa < data.obronaSzansa) {
-            message += ` i nie trafił! (${data.atakSzansa} < ${data.obronaSzansa})`;
-        }
-        else {
-          message += ` i trafił (${data.atakSzansa} > ${data.obronaSzansa}) w ${data.lokacjaTrafienia.toLowerCase()}(${data.rollTrafienie})`;
-          message += ` i zabrał mu ${data.obrazenia}((${data.obrazeniaRoll} - ${data.wyparowanie})*${data.mnoznikLokacji} = ${data.obrazenia}) punktów życia!`;
-        }
-        setMessages(() => [
-          message
-        ]);
-      },
-    );
+    socket.on("attackFeedback", (data: string) => {
+      setMessages(() => [data]);
+    });
 
     return () => {
       socket.off("message");
