@@ -11,6 +11,12 @@ const atak = (data: attackInterface) => {
     data.atakujacy instanceof Character &&
     data.obronca instanceof Character
   ) {
+    let message = ``;
+    //-----------------TESTS--------------
+    const { atakujacy, obronca, ...testData } = data;
+    message += `TESTY! ${JSON.stringify(testData)}`;
+    //------------------------------------
+
     console.log(`${data.atakujacy.imie} atakuje mieczem ${data.obronca.imie}`);
 
     let atakRoll = DiceManager.rollD10();
@@ -32,9 +38,9 @@ const atak = (data: attackInterface) => {
       `Wynik obrony ${data.obronca.imie}: ${obronaSzansa} (${data.obronca.szanse.unik} + ${obronaRoll})`,
     );
 
-    let message = ``;
     message += `${data.atakujacy.imie} (${data.atakujacy.szanse.atakMieczem} + ${atakRoll} = ${atakSzansa})
-           zaatakował ${data.obronca.imie} (${data.obronca.szanse.unik} + ${obronaRoll} = ${obronaSzansa})`;
+           zaatakował ${data.obronca.imie} (${data.obronca.szanse.unik} + ${obronaRoll} = ${obronaSzansa}) 
+           użwając ${data.nazwaAtaku}!`;
 
     if (atakSzansa > obronaSzansa) {
       console.log("Atak trafił!");
@@ -78,23 +84,6 @@ const atak = (data: attackInterface) => {
 
       //finalne obrażenia
       data.obronca.pz -= obrazenia;
-
-      // konstruowanie wiadomości zwrotnej
-      // atakujacy: data.atakujacy.imie,
-      //     atakRoll,
-      //     atakMieczem: data.atakujacy.szanse.atakMieczem,
-      //     atakSzansa,
-      //     obronca: data.obronca.imie,
-      //     unik: data.obronca.szanse.unik,
-      //     obronaSzansa,
-      //     obronaRoll,
-      //     obrazeniaRoll,
-      //     obrazenia,
-      //     wyparowanie,
-      //     rollTrafienie: lokacjaTrafienia,
-      //     mnoznikLokacji,
-      //     lokacjaTrafienia:
-      // mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1],
 
       message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1].toLowerCase()}(${lokacjaTrafienia})`;
       message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${mnoznikLokacji} = ${obrazenia}) punktów życia!`;
