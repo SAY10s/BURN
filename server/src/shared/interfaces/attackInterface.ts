@@ -1,6 +1,8 @@
+import Character from "../classes/Character.js";
+
 export default interface AttackInterface {
-  attacker: string; //nazwa postaci ATAKUJĄCEJ
-  defender: string; //nazwa postaci BRONIĄCEJ SIĘ
+  atakujacy: string | Character; //nazwa postaci ATAKUJĄCEJ po stronie klienta; po stronie serwera obiekt postaci
+  obronca: string | Character; //nazwa postaci BRONIĄCEJ SIĘ po stronie klienta; po stronie serwera obiekt postaci
   ileD6: number; //ile D6 jako DMG
   nazwaAtaku: string; //np, "miecz srebrny", "fireball", "kusza", "pięść"
   kosztPW: number; //koszt PW za użycie ataku, ?ORAZ prawdopoobnie WIGOR wymagany do castowania?

@@ -45,19 +45,24 @@ io.on("connection", (socket) => {
   socket.on("attack", (data: attackInterface) => {
     console.log("--------- Attack received ---------");
     const atakujacyIndex = Character.wszystkiePostacie.findIndex(
-      (postac) => postac.imie === data.attacker,
+      (postac) => postac.imie === data.atakujacy,
     );
     const obroncaIndex = Character.wszystkiePostacie.findIndex(
-      (postac) => postac.imie === data.defender,
+      (postac) => postac.imie === data.obronca,
     );
 
     io.emit(
       "attackFeedback",
-      atak(
-        Character.wszystkiePostacie[atakujacyIndex],
-        Character.wszystkiePostacie[obroncaIndex],
-        4,
-      ),
+      atak({
+        atakujacy: Character.wszystkiePostacie[atakujacyIndex],
+        obronca: Character.wszystkiePostacie[obroncaIndex],
+        ileD6: data.ileD6,
+        nazwaAtaku: data.nazwaAtaku,
+        kosztPW: data.kosztPW,
+        zaklecie: data.zaklecie,
+        mozliweSposobyUniku: data.mozliweSposobyUniku,
+        srebrnyAtak: data.srebrnyAtak,
+      }),
     );
     io.emit("initCharacters", Character.wszystkiePostacie);
   });

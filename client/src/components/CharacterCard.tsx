@@ -23,7 +23,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
     dispatch(chooseCharacter(characterName));
   };
   const attack = (attackData: attackInterface) => {
-    console.log(`${currentCharacter} atakuje ${attackData.defender}`);
+    console.log(`${currentCharacter} atakuje ${attackData.atakujacy}`);
     socket.emit("attack", attackData);
   };
 
@@ -166,8 +166,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         <button
           onClick={() => {
             attack({
-              attacker: currentCharacter,
-              defender: character.imie,
+              atakujacy: currentCharacter,
+              obronca: character.imie,
               ileD6: 1,
               nazwaAtaku: "Ostrze treningowe",
               kosztPW: 1,
