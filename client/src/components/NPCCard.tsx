@@ -1,6 +1,6 @@
 import Character from "../shared/classes/Character.js";
 import { useSelector } from "react-redux";
-import socket from "../helpers/socket.js";
+import AttackPlayerMenu from "./AttackPlayerMenu.tsx";
 
 interface CharacterCardProps {
   character: Character;
@@ -12,13 +12,6 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
     (state: any) => state.character.currentCharacter,
   );
 
-  const attack = (defender: string) => {
-    console.log(`${currentCharacter} atakuje ${defender}`);
-    socket.emit("attack", {
-      attacker: currentCharacter,
-      defender: defender,
-    });
-  };
   let statusColor = "black";
   if (zdrowieProcent === 100) {
     statusColor = "#008000";
@@ -55,13 +48,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         ></div>
       </div>
 
-      <button
-        onClick={() => {
-          attack(character.imie);
-        }}
-      >
-        Zaatakuj!
-      </button>
+      <AttackPlayerMenu obronca={character.imie} />
     </div>
   );
 };

@@ -164,26 +164,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
       >
         Wybierz postać
       </button>
-      {/*{character.imie !== currentCharacter && (*/}
-      {/*  <button*/}
-      {/*    onClick={() => {*/}
-      {/*      attack({*/}
-      {/*        atakujacy: currentCharacter,*/}
-      {/*        obronca: character.imie,*/}
-      {/*        ileD6: 1,*/}
-      {/*        nazwaAtaku: "Ostrze treningowe",*/}
-      {/*        kosztPW: 1,*/}
-      {/*        zaklecie: false,*/}
-      {/*        mozliweSposobyUniku: ["unik"],*/}
-      {/*        srebrnyAtak: false,*/}
-      {/*      });*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    Zaatakuj!*/}
-      {/*  </button>*/}
-      {/*)}*/}
       {character.imie !== currentCharacter && (
-        <AttackPlayerMenu ataki={character.ataki} obronca={character.imie} />
+        <AttackPlayerMenu obronca={character.imie} />
       )}
     </div>
   );

@@ -13,8 +13,8 @@ const atak = (data: attackInterface) => {
   ) {
     let message = ``;
     //-----------------TESTS--------------
-    const { atakujacy, obronca, ...testData } = data;
-    message += `TESTY! ${JSON.stringify(testData)}`;
+    // const { atakujacy, obronca, ...testData } = data;
+    // message += `TESTY! ${JSON.stringify(testData)}`;
     //------------------------------------
 
     console.log(`${data.atakujacy.imie} atakuje mieczem ${data.obronca.imie}`);

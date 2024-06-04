@@ -93,6 +93,16 @@ Character.wszystkiePostacie = [
         srebrnyAtak: false,
         procentSzansNaPodpalenie: 100,
       },
+      {
+        nazwa: "Pięść",
+        kosztPW: 1,
+        kosztWigor: 0,
+        ileD6: 2,
+        zaklecie: false,
+        mozliweSposobyUniku: ["unik"],
+        srebrnyAtak: false,
+        procentSzansNaPodpalenie: 0,
+      },
     ],
   ),
   new Character(

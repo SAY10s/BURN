@@ -3,19 +3,7 @@ import socket from "../helpers/socket.ts";
 import { useSelector } from "react-redux";
 import React from "react";
 
-interface Atak {
-  nazwa: string;
-  kosztPW: number;
-  kosztWigor: number;
-  ileD6: number;
-  zaklecie: boolean;
-  mozliweSposobyUniku: string[];
-  srebrnyAtak: boolean;
-  procentSzansNaPodpalenie: number;
-} //FIXME: dodać interface w shared
-
 interface Props {
-  ataki: Atak[];
   obronca: string;
 }
 
@@ -32,7 +20,7 @@ const AttackPlayerMenu: React.FC<Props> = ({ obronca }) => {
   );
   console.log(ataki);
   return (
-    <div>
+    <div className="attacksWrapper">
       {currentCharacter &&
         ataki.map((atak: any, index: number) => {
           return (

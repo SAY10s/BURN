@@ -160,7 +160,7 @@ class Character {
         procentSzansNaPodpalenie: 0,
       },
       {
-        nazwa: "POTĘŻNY SPELL treningowy",
+        nazwa: "Abra Kadabra",
         kosztPW: 5,
         kosztWigor: 0,
         ileD6: 4,
