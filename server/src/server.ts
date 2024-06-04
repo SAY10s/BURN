@@ -44,6 +44,7 @@ io.on("connection", (socket) => {
   });
   socket.on("attack", (data: attackInterface) => {
     console.log("--------- Attack received ---------");
+    console.table(data);
     const atakujacyIndex = Character.wszystkiePostacie.findIndex(
       (postac) => postac.imie === data.atakujacy,
     );
@@ -62,6 +63,7 @@ io.on("connection", (socket) => {
         zaklecie: data.zaklecie,
         mozliweSposobyUniku: data.mozliweSposobyUniku,
         srebrnyAtak: data.srebrnyAtak,
+        procentSzansNaPodpalenie: data.procentSzansNaPodpalenie,
       }),
     );
     io.emit("initCharacters", Character.wszystkiePostacie);

@@ -9,4 +9,5 @@ export default interface AttackInterface {
   zaklecie: boolean; //czy to jest zaklęcie
   mozliweSposobyUniku: string[]; //np. ["wyparowanie", "unik", "tarcza"] TODO: spytać Gracjana jakie są możliwe uniki i dodać interface z unikami
   srebrnyAtak: boolean; //czy potwory są na niego wrażliwe (głównie dla miecza srebrnego)
+  procentSzansNaPodpalenie: number; //procent szans na podpalenie
 }

@@ -46,6 +46,16 @@ class Character {
     strzalZLuku: number;
     strzalZKuszy: number;
   };
+  ataki: {
+    nazwa: string;
+    kosztPW: number;
+    kosztWigor: number;
+    ileD6: number;
+    zaklecie: boolean;
+    mozliweSposobyUniku: string[];
+    srebrnyAtak: boolean;
+    procentSzansNaPodpalenie: number;
+  }[]; //FIXME: dodać interface (jest też shared, więc nie wiem jak.)
 
   constructor(
     jestBohaterem: boolean = false,
@@ -129,6 +139,37 @@ class Character {
       strzalZLuku: 1,
       strzalZKuszy: 1,
     },
+    ataki: {
+      nazwa: string;
+      kosztPW: number;
+      kosztWigor: number;
+      ileD6: number;
+      zaklecie: boolean;
+      mozliweSposobyUniku: string[];
+      srebrnyAtak: boolean;
+      procentSzansNaPodpalenie: number;
+    }[] = [
+      {
+        nazwa: "Miecz treningowy",
+        kosztPW: 1,
+        kosztWigor: 0,
+        ileD6: 1,
+        zaklecie: false,
+        mozliweSposobyUniku: ["unik"],
+        srebrnyAtak: false,
+        procentSzansNaPodpalenie: 0,
+      },
+      {
+        nazwa: "POTĘŻNY SPELL treningowy",
+        kosztPW: 5,
+        kosztWigor: 0,
+        ileD6: 4,
+        zaklecie: true,
+        mozliweSposobyUniku: ["unik"],
+        srebrnyAtak: false,
+        procentSzansNaPodpalenie: 50,
+      },
+    ],
   ) {
     this.jestBohaterem = jestBohaterem;
     this.imie = imie;
@@ -139,6 +180,7 @@ class Character {
     this.wigor = wigor;
     this.wyparowanie = wyparowanie;
     this.szanse = szanse;
+    this.ataki = ataki;
   }
 }
 interface WyparowaniePart {
@@ -176,6 +218,16 @@ interface Character {
     prawaNoga: WyparowaniePart;
   };
   szanse: Szanse;
+  ataki: {
+    nazwa: string;
+    kosztPW: number;
+    kosztWigor: number;
+    ileD6: number;
+    zaklecie: boolean;
+    mozliweSposobyUniku: string[];
+    srebrnyAtak: boolean;
+    procentSzansNaPodpalenie: number;
+  }[];
 }
 
 export default Character;

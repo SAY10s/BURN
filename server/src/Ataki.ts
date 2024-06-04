@@ -87,6 +87,13 @@ const atak = (data: attackInterface) => {
 
       message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1].toLowerCase()}(${lokacjaTrafienia})`;
       message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${mnoznikLokacji} = ${obrazenia}) punktów życia!`;
+
+      //efekty trafienia:
+      //podpalenie
+      if (data.procentSzansNaPodpalenie > DiceManager.rollD10(false) * 10) {
+        data.obronca.pz -= 10;
+        message += ` ${data.obronca.imie} podpalił się!`;
+      }
     } else {
       message += ` i nie trafił! (${atakSzansa} < ${obronaSzansa})`;
     }

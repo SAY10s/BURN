@@ -2,14 +2,16 @@ import Character from "../shared/classes/Character.js";
 import WyparowaniePasek from "./WyparowaniePasek.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { chooseCharacter } from "../store/CharacterSlice.ts";
-import socket from "../helpers/socket.js";
-import attackInterface from "../shared/interfaces/attackInterface.js";
+// import socket from "../helpers/socket.js";
+// import attackInterface from "../shared/interfaces/attackInterface.js";
 import React from "react";
+import AttackPlayerMenu from "./AttackPlayerMenu.tsx";
 
 interface CharacterCardProps {
   character: Character;
 }
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+  console.log(character.ataki);
   const zdrowieProcent =
     character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
@@ -22,10 +24,10 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   const handleChooseCharacter = (characterName: string) => {
     dispatch(chooseCharacter(characterName));
   };
-  const attack = (attackData: attackInterface) => {
-    console.log(`${currentCharacter} atakuje ${attackData.atakujacy}`);
-    socket.emit("attack", attackData);
-  };
+  // const attack = (attackData: attackInterface) => {
+  //   console.log(`${currentCharacter} atakuje ${attackData.atakujacy}`);
+  //   socket.emit("attack", attackData);
+  // };
 
   return (
     <div
@@ -162,23 +164,26 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
       >
         Wybierz postać
       </button>
+      {/*{character.imie !== currentCharacter && (*/}
+      {/*  <button*/}
+      {/*    onClick={() => {*/}
+      {/*      attack({*/}
+      {/*        atakujacy: currentCharacter,*/}
+      {/*        obronca: character.imie,*/}
+      {/*        ileD6: 1,*/}
+      {/*        nazwaAtaku: "Ostrze treningowe",*/}
+      {/*        kosztPW: 1,*/}
+      {/*        zaklecie: false,*/}
+      {/*        mozliweSposobyUniku: ["unik"],*/}
+      {/*        srebrnyAtak: false,*/}
+      {/*      });*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    Zaatakuj!*/}
+      {/*  </button>*/}
+      {/*)}*/}
       {character.imie !== currentCharacter && (
-        <button
-          onClick={() => {
-            attack({
-              atakujacy: currentCharacter,
-              obronca: character.imie,
-              ileD6: 1,
-              nazwaAtaku: "Ostrze treningowe",
-              kosztPW: 1,
-              zaklecie: false,
-              mozliweSposobyUniku: ["unik"],
-              srebrnyAtak: false,
-            });
-          }}
-        >
-          Zaatakuj!
-        </button>
+        <AttackPlayerMenu ataki={character.ataki} obronca={character.imie} />
       )}
     </div>
   );
