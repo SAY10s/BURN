@@ -18,7 +18,6 @@ const AttackPlayerMenu: React.FC<Props> = ({ obronca }) => {
   const ataki = useSelector(
     (state: any) => state.character.currentCharacterAttacks,
   );
-  console.log(ataki);
   return (
     <div className="attacksWrapper">
       {currentCharacter &&

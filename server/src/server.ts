@@ -38,7 +38,10 @@ io.on("connection", (socket) => {
     socket.emit("myCharacter", socketToCharacterMap.get(socket.id));
   });
   //---------------------------------------------
-
+  socket.on("reloadPlz", () => {
+    socket.emit("init", messages);
+    socket.emit("initCharacters", Character.wszystkiePostacie);
+  });
   // emit messages ONLY TO CONNECTED PLAYER
   socket.emit("init", messages);
   io.emit("initCharacters", Character.wszystkiePostacie);

@@ -11,7 +11,6 @@ interface CharacterCardProps {
   character: Character;
 }
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
-  console.log(character.ataki);
   const zdrowieProcent =
     character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
