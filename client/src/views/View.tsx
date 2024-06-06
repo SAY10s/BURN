@@ -9,6 +9,7 @@ import {
 } from "../store/CharacterSlice.ts";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import DiceTable from "../components/DiceTable.tsx";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const [messages, setMessages] = useState<string[]>([]);
@@ -58,6 +59,7 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
 
   return (
     <div className="wrapper">
+      <DiceTable />
       <div>
         <h1>Links</h1>
         <Link to={"/gm"}>GM</Link>

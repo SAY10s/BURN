@@ -67,12 +67,14 @@ io.on("connection", (socket) => {
         atakujacy: Character.wszystkiePostacie[atakujacyIndex],
         obronca: Character.wszystkiePostacie[obroncaIndex],
         ileD6: data.ileD6,
+        dodatkowyDMG: data.dodatkowyDMG,
         nazwaAtaku: data.nazwaAtaku,
         kosztPW: data.kosztPW,
         zaklecie: data.zaklecie,
         mozliweSposobyUniku: data.mozliweSposobyUniku,
         srebrnyAtak: data.srebrnyAtak,
         procentSzansNaPodpalenie: data.procentSzansNaPodpalenie,
+        procentSzansNaKrwawienie: data.procentSzansNaKrwawienie,
       }),
     );
     io.emit("initCharacters", Character.wszystkiePostacie);

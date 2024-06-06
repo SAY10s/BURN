@@ -51,10 +51,12 @@ class Character {
     kosztPW: number;
     kosztWigor: number;
     ileD6: number;
+    dodatkowyDMG: number;
     zaklecie: boolean;
     mozliweSposobyUniku: string[];
     srebrnyAtak: boolean;
     procentSzansNaPodpalenie: number;
+    procentSzansNaKrwawienie: number; //procent szans na krwawienie
   }[]; //FIXME: dodać interface (jest też shared, więc nie wiem jak.)
 
   constructor(
@@ -144,30 +146,36 @@ class Character {
       kosztPW: number;
       kosztWigor: number;
       ileD6: number;
+      dodatkowyDMG: 0;
       zaklecie: boolean;
       mozliweSposobyUniku: string[];
       srebrnyAtak: boolean;
       procentSzansNaPodpalenie: number;
+      procentSzansNaKrwawienie: number; //procent szans na krwawienie
     }[] = [
       {
         nazwa: "Miecz treningowy",
         kosztPW: 1,
         kosztWigor: 0,
         ileD6: 1,
+        dodatkowyDMG: 0,
         zaklecie: false,
         mozliweSposobyUniku: ["unik"],
         srebrnyAtak: false,
         procentSzansNaPodpalenie: 0,
+        procentSzansNaKrwawienie: 0,
       },
       {
         nazwa: "Abra Kadabra",
         kosztPW: 5,
         kosztWigor: 0,
         ileD6: 4,
+        dodatkowyDMG: 0,
         zaklecie: true,
         mozliweSposobyUniku: ["unik"],
         srebrnyAtak: false,
         procentSzansNaPodpalenie: 50,
+        procentSzansNaKrwawienie: 0,
       },
     ],
   ) {
@@ -223,10 +231,12 @@ interface Character {
     kosztPW: number;
     kosztWigor: number;
     ileD6: number;
+    dodatkowyDMG: number;
     zaklecie: boolean;
     mozliweSposobyUniku: string[];
     srebrnyAtak: boolean;
     procentSzansNaPodpalenie: number;
+    procentSzansNaKrwawienie: number;
   }[];
 }
 
