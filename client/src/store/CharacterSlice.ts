@@ -28,6 +28,7 @@ const characterSlice = createSlice({
   reducers: {
     chooseCharacter: (state, action: PayloadAction<string>) => {
       state.currentCharacter = action.payload;
+      localStorage.setItem("currentCharacter", JSON.stringify(action.payload));
       console.log("Wybrano postać:", action.payload);
       socket.emit("chooseCharacter", action.payload);
     },

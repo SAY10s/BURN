@@ -3,7 +3,10 @@ import socket from "../helpers/socket.js";
 import CharacterCard from "../components/CharacterCard.js";
 import Character from "../shared/classes/Character.js";
 import NPCCard from "../components/NPCCard.js";
-import { setCurrentCharacterAttacks } from "../store/CharacterSlice.ts";
+import {
+  chooseCharacter,
+  setCurrentCharacterAttacks,
+} from "../store/CharacterSlice.ts";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -16,6 +19,11 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
 
   const npc = characters.filter((char) => !char.jestBohaterem);
   useEffect(() => {
+    let character = localStorage.getItem("currentCharacter");
+    console.log(character);
+    if (character) character = JSON.parse(character);
+    if (character) dispatch(chooseCharacter(character));
+
     socket.emit("reloadPlz");
     socket.on("init", (message) => {
       setMessages(() => [...message]);
