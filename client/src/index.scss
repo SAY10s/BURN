@@ -72,6 +72,9 @@ logo-colors {
   justify-content: center;
   gap: 25px;
   margin-top: 20px;
+  .current-character {
+    background-color: #1e1e1e;
+  }
   .character-card {
     width: calc(25% - 25px);
     display: flex;
@@ -163,8 +166,7 @@ logo-colors {
       opacity: 0.6;
     }
     div:last-child {
-      padding: 1rem;
-      padding-top: 3rem;
+      padding: 3rem 1rem 1rem;
       font-size: 2.5rem;
       opacity: 1;
     }
@@ -181,4 +183,9 @@ logo-colors {
       margin: 0 1rem;
     }
   }
+}
+
+//-----------------------------------
+.diceTableViewWrapper {
+  padding: 0rem 2rem;
 }

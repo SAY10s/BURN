@@ -24,10 +24,11 @@ const CharacterCardDiceTable: React.FC<CharacterCardProps> = ({
 
   return (
     <div
-      className="character-card"
-      style={{
-        backgroundColor: character.imie === currentCharacter ? "black" : "",
-      }}
+      className={
+        character.imie === currentCharacter
+          ? "character-card current-character"
+          : "character-card"
+      }
     >
       <div className="stan">
         <h2 className="name">{character.imie}</h2>

@@ -39,7 +39,7 @@ const DiceTableView = () => {
     };
   }, []);
   return (
-    <div>
+    <div className="diceTableViewWrapper">
       <div className="characters">
         {bohaterowie.map((character: any, index: number) => (
           <CharacterCardDiceTable key={index} character={character} />
