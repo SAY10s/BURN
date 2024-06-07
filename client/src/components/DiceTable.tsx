@@ -59,12 +59,17 @@ const DiceTable = () => {
                 <span className="smallNums">
                   {message.attackBasicChance} + {message.attackRoll}
                 </span>{" "}
-                i zadał {/*// @ts-ignore*/}
-                {message.diceDMG + message.basicAdditionalDmg}
-                <span className="smallNums">
-                  {message.diceDMG} + {message.basicAdditionalDmg}
-                </span>{" "}
-                obrażeń!
+                {/*// @ts-ignore*/}
+                {message.diceDMG > 0 && (
+                  <>
+                    i zadał {/*// @ts-ignore*/}
+                    {message.diceDMG + message.basicAdditionalDmg}
+                    <span className="smallNums">
+                      {message.diceDMG} + {message.basicAdditionalDmg}
+                    </span>{" "}
+                    obrażeń!
+                  </>
+                )}
                 <span className="bleeding">
                   {" "}
                   {message.isBleeding && " Nakłada krawienie!"}
