@@ -106,6 +106,24 @@ io.on("connection", (socket) => {
 
     socket.emit("diceTableFeedback", diceTableLogs);
   });
+  socket.on("d6", (data) => {
+    diceTableLogs.push({
+      type: "simpleRoll",
+      name: data.currentCharacter,
+      roll: DiceManager.rollD6(),
+    });
+    if (diceTableLogs.length > 5) diceTableLogs.shift();
+    socket.emit("diceTableFeedback", diceTableLogs);
+  });
+  socket.on("d10", (data) => {
+    diceTableLogs.push({
+      type: "simpleRoll",
+      name: data.currentCharacter,
+      roll: DiceManager.rollD10(),
+    });
+    if (diceTableLogs.length > 5) diceTableLogs.shift();
+    socket.emit("diceTableFeedback", diceTableLogs);
+  });
 
   //---------------------------------------------
 

@@ -126,8 +126,12 @@ const DiceTable = () => {
           Unik
         </button>
         <div className="separator">|</div>
-        <button onClick={() => socket.emit("d6")}>D6</button>
-        <button onClick={() => socket.emit("d10")}>D10</button>
+        <button onClick={() => socket.emit("d6", { currentCharacter })}>
+          D6
+        </button>
+        <button onClick={() => socket.emit("d10", { currentCharacter })}>
+          D10
+        </button>
       </div>
     </details>
   );
