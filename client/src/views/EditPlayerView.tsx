@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import socket from "../helpers/socket.ts";
 import { useForm } from "react-hook-form";
 import Character from "../shared/classes/Character.ts";
+import { useNavigate } from "react-router-dom";
 
 const EditPlayerView = () => {
   const currentCharacter = useSelector(
@@ -11,6 +12,7 @@ const EditPlayerView = () => {
     (state) => state.character.currentCharacter,
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   let character = localStorage.getItem("currentCharacter");
   if (character) character = JSON.parse(character);
@@ -81,6 +83,7 @@ const EditPlayerView = () => {
     console.table(convertedData);
 
     socket.emit("editCharacter", convertedData);
+    navigate(-1);
   };
 
   // @ts-ignore
