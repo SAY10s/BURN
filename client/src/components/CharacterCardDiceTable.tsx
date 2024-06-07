@@ -1,8 +1,12 @@
 import Character from "../shared/classes/Character.js";
 import WyparowaniePasek from "./WyparowaniePasek.tsx";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import React from "react";
-import { chooseCharacter } from "../store/CharacterSlice.ts";
+// import { chooseCharacter } from "../store/CharacterSlice.ts";
+// @ts-ignore
+import edit from "../assets/edit.svg";
+import { Link } from "react-router-dom";
 
 interface CharacterCardProps {
   character: Character;
@@ -10,7 +14,7 @@ interface CharacterCardProps {
 const CharacterCardDiceTable: React.FC<CharacterCardProps> = ({
   character,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const zdrowieProcent =
     character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
@@ -18,9 +22,9 @@ const CharacterCardDiceTable: React.FC<CharacterCardProps> = ({
   const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
   );
-  const handleChooseCharacter = (characterName: string) => {
-    dispatch(chooseCharacter(characterName));
-  };
+  // const handleChooseCharacter = (characterName: string) => {
+  //   dispatch(chooseCharacter(characterName));
+  // };
 
   return (
     <div
@@ -30,6 +34,11 @@ const CharacterCardDiceTable: React.FC<CharacterCardProps> = ({
           : "character-card"
       }
     >
+      {currentCharacter === character.imie ? (
+        <Link to="/edit">
+          <img src={edit} alt={character.imie} width={32} />
+        </Link>
+      ) : null}
       <div className="stan">
         <h2 className="name">{character.imie}</h2>
 
@@ -155,13 +164,13 @@ const CharacterCardDiceTable: React.FC<CharacterCardProps> = ({
       </details>
 
       {/*  TEMP */}
-      <button
-        onClick={() => {
-          handleChooseCharacter(character.imie);
-        }}
-      >
-        Wybierz postać
-      </button>
+      {/*<button*/}
+      {/*  onClick={() => {*/}
+      {/*    handleChooseCharacter(character.imie);*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  Wybierz postać*/}
+      {/*</button>*/}
     </div>
   );
 };

@@ -7,10 +7,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PlayerView from "./views/PlayerView.tsx";
 import GameMasterView from "./views/GameMasterView.tsx";
 import DiceTableView from "./views/DiceTableView.tsx";
+import EditPlayerView from "./views/EditPlayerView.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <DiceTableView />,
+  },
+  {
+    path: "/edit",
+    element: <EditPlayerView />,
   },
   {
     path: "/player",
