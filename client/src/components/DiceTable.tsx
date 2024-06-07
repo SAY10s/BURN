@@ -43,10 +43,13 @@ const DiceTable = () => {
     socket.emit("simpleAttack");
   }, []);
   return (
-    <details open={true} className="diceTable">
-      <summary>
-        <h1>Rzuty Kośćmi</h1>
-      </summary>
+    // <details open={true} className="diceTable">
+    //   <summary>
+    //     <h1>Rzuty Kośćmi</h1>
+    //   </summary>
+
+    //   TEMP:
+    <div className="diceTable">
       <div className="diceTableLogs">
         {diceTableMessages.map((message, index) => {
           if (message.type === "simpleAttack") {
@@ -133,7 +136,8 @@ const DiceTable = () => {
           D10
         </button>
       </div>
-    </details>
+    </div>
+    // </details>
   );
 };
 export default DiceTable;

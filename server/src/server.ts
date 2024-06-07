@@ -88,7 +88,7 @@ io.on("connection", (socket) => {
     });
     if (diceTableLogs.length > 5) diceTableLogs.shift();
 
-    socket.emit("diceTableFeedback", diceTableLogs);
+    io.emit("diceTableFeedback", diceTableLogs);
   });
 
   socket.on("unik", (data) => {
@@ -104,7 +104,7 @@ io.on("connection", (socket) => {
     });
     if (diceTableLogs.length > 5) diceTableLogs.shift();
 
-    socket.emit("diceTableFeedback", diceTableLogs);
+    io.emit("diceTableFeedback", diceTableLogs);
   });
   socket.on("d6", (data) => {
     diceTableLogs.push({
@@ -113,7 +113,7 @@ io.on("connection", (socket) => {
       roll: DiceManager.rollD6(),
     });
     if (diceTableLogs.length > 5) diceTableLogs.shift();
-    socket.emit("diceTableFeedback", diceTableLogs);
+    io.emit("diceTableFeedback", diceTableLogs);
   });
   socket.on("d10", (data) => {
     diceTableLogs.push({
@@ -122,7 +122,7 @@ io.on("connection", (socket) => {
       roll: DiceManager.rollD10(),
     });
     if (diceTableLogs.length > 5) diceTableLogs.shift();
-    socket.emit("diceTableFeedback", diceTableLogs);
+    io.emit("diceTableFeedback", diceTableLogs);
   });
 
   //---------------------------------------------

@@ -6,9 +6,14 @@ import store from "./store/store.ts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PlayerView from "./views/PlayerView.tsx";
 import GameMasterView from "./views/GameMasterView.tsx";
+import DiceTableView from "./views/DiceTableView.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <DiceTableView />,
+  },
+  {
+    path: "/player",
     element: <PlayerView />,
   },
   {
