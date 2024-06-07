@@ -7,7 +7,7 @@ export default interface AttackInterface {
   dodatkowyDMG: number; //stała dodatkowa wartość do DMG, np +2
   nazwaAtaku: string; //np, "miecz srebrny", "fireball", "kusza", "pięść"
   kosztPW: number; //koszt PW za użycie ataku, ?ORAZ prawdopoobnie WIGOR wymagany do castowania?
-  zaklecie: boolean; //czy to jest zaklęcie
+  nazwaStatystyki: string; //nazwa statystyki, która jest używana do ataku
   mozliweSposobyUniku: string[]; //np. ["wyparowanie", "unik", "tarcza"] TODO: spytać Gracjana jakie są możliwe uniki i dodać interface z unikami
   srebrnyAtak: boolean; //czy potwory są na niego wrażliwe (głównie dla miecza srebrnego)
   procentSzansNaPodpalenie: number; //procent szans na podpalenie

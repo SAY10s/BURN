@@ -21,7 +21,7 @@ const atak = (data: attackInterface) => {
     //TEMPORARY
     let atakStatystyka = 2137;
     let atakSzansa = -1;
-    if (data.zaklecie) {
+    if (data.nazwaStatystyki === "atakZakleciem") {
       atakStatystyka = data.atakujacy.szanse.atakZakleciem;
       atakSzansa = data.atakujacy.szanse.atakZakleciem + atakRoll;
     } else {

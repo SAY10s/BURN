@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import Character from "./shared/classes/Character.js";
 import atak from "./Ataki.js";
 import attackInterface from "./shared/interfaces/attackInterface.js";
+import DiceManager from "./DiceManager.js";
 
 const app = express();
 const httpServer = createServer(app);
@@ -18,40 +19,40 @@ const socketToCharacterMap = new Map();
 
 const messages = ["Hello there!", "General kenobi!"];
 
-const diceTableLogs = [
+const diceTableLogs: any[] = [
   {
     type: "simpleAttack",
     name: "Geralt",
     attackName: "srebrny miecz",
-    attackBasicChance: "15",
-    attackRoll: "5",
-    diceDMG: "16",
-    basicAdditionalDmg: "2",
-    isBleeding: false,
+    attackBasicChance: 15,
+    attackRoll: 5,
+    diceDMG: 16,
+    basicAdditionalDmg: 2,
+    isBleeding: true,
     isSetOnFire: false,
   },
   {
     type: "statRoll",
     name: "Geralt",
     rollName: "unik",
-    rollBasicChance: "20",
-    rollRoll: "17",
+    rollBasicChance: 20,
+    rollRoll: 17,
   },
   {
     type: "simpleRoll",
     name: "Geralt",
-    roll: "17",
+    roll: 17,
   },
   {
     type: "simpleAttack",
     name: "Strzyga",
     attackName: "Pazury",
-    attackBasicChance: "20",
-    attackRoll: "17",
-    diceDMG: "32",
-    basicAdditionalDmg: "0",
+    attackBasicChance: 20,
+    attackRoll: 17,
+    diceDMG: 32,
+    basicAdditionalDmg: 0,
     isBleeding: true,
-    isSetOnFire: false,
+    isSetOnFire: true,
   },
 ];
 
@@ -59,8 +60,35 @@ io.on("connection", (socket) => {
   console.log("Client connected");
 
   // -----------------DiceTable------------------
-  socket.on("simpleAttack", (attackData) => {
-    socket.emit("simpleAttackFeedback", diceTableLogs);
+  socket.on("simpleAttack", (attackData: attackInterface) => {
+    if (!attackData) {
+      socket.emit("diceTableFeedback", diceTableLogs);
+      return;
+    }
+    let postac = Character.wszystkiePostacie.find(
+      (postac) => postac.imie === attackData.atakujacy,
+    );
+    let diceDMG = 0;
+    for (let i = 0; i < attackData.ileD6; i++) {
+      diceDMG += DiceManager.rollD6();
+    }
+
+    diceTableLogs.push({
+      type: "simpleAttack",
+      name: attackData.atakujacy,
+      attackName: attackData.nazwaAtaku,
+      attackBasicChance: postac.szanse[attackData.nazwaStatystyki],
+      attackRoll: DiceManager.rollD10(),
+      diceDMG: diceDMG,
+      basicAdditionalDmg: attackData.dodatkowyDMG,
+      isSetOnFire:
+        attackData.procentSzansNaPodpalenie >= DiceManager.rollD100(false),
+      isBleeding:
+        attackData.procentSzansNaKrwawienie >= DiceManager.rollD100(false),
+    });
+    if (diceTableLogs.length > 5) diceTableLogs.shift();
+
+    socket.emit("diceTableFeedback", diceTableLogs);
   });
   //---------------------------------------------
 
@@ -115,7 +143,7 @@ io.on("connection", (socket) => {
         dodatkowyDMG: data.dodatkowyDMG,
         nazwaAtaku: data.nazwaAtaku,
         kosztPW: data.kosztPW,
-        zaklecie: data.zaklecie,
+        nazwaStatystyki: data.nazwaStatystyki,
         mozliweSposobyUniku: data.mozliweSposobyUniku,
         srebrnyAtak: data.srebrnyAtak,
         procentSzansNaPodpalenie: data.procentSzansNaPodpalenie,

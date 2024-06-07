@@ -52,7 +52,7 @@ class Character {
     kosztWigor: number;
     ileD6: number;
     dodatkowyDMG: number;
-    zaklecie: boolean;
+    nazwaStatystyki: string;
     mozliweSposobyUniku: string[];
     srebrnyAtak: boolean;
     procentSzansNaPodpalenie: number;
@@ -147,7 +147,7 @@ class Character {
       kosztWigor: number;
       ileD6: number;
       dodatkowyDMG: 0;
-      zaklecie: boolean;
+      nazwaStatystyki: string;
       mozliweSposobyUniku: string[];
       srebrnyAtak: boolean;
       procentSzansNaPodpalenie: number;
@@ -159,7 +159,7 @@ class Character {
         kosztWigor: 0,
         ileD6: 1,
         dodatkowyDMG: 0,
-        zaklecie: false,
+        nazwaStatystyki: "atakMieczem",
         mozliweSposobyUniku: ["unik"],
         srebrnyAtak: false,
         procentSzansNaPodpalenie: 0,
@@ -171,7 +171,7 @@ class Character {
         kosztWigor: 0,
         ileD6: 4,
         dodatkowyDMG: 0,
-        zaklecie: true,
+        nazwaStatystyki: "atakZakleciem",
         mozliweSposobyUniku: ["unik"],
         srebrnyAtak: false,
         procentSzansNaPodpalenie: 50,
@@ -232,7 +232,7 @@ interface Character {
     kosztWigor: number;
     ileD6: number;
     dodatkowyDMG: number;
-    zaklecie: boolean;
+    nazwaStatystyki: string;
     mozliweSposobyUniku: string[];
     srebrnyAtak: boolean;
     procentSzansNaPodpalenie: number;

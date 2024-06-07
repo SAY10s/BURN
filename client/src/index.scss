@@ -144,12 +144,20 @@ logo-colors {
     }
     div:last-child {
       padding: 1rem;
-      font-size: 2rem;
+      padding-top: 3rem;
+      font-size: 2.5rem;
     }
   }
   .simpleAttacksWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     button {
-      width: 20%;
+      width: 10%;
+      text-transform: uppercase;
+    }
+    .separator {
+      margin: 0 1rem;
     }
   }
 }

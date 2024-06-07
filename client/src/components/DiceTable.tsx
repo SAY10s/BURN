@@ -1,4 +1,4 @@
-import simpleAttackInterface from "../shared/interfaces/simpleAttackInterface.ts";
+import attackInterface from "../shared/interfaces/attackInterface.ts";
 import socket from "../helpers/socket.ts";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -20,10 +20,10 @@ const DiceTable = () => {
       type: "simpleAttack",
       name: "Geralt",
       attackName: "srebrny miecz",
-      attackBasicChance: "15",
-      attackRoll: "5",
-      diceDMG: "16",
-      basicAdditionalDmg: "2",
+      attackBasicChance: 15,
+      attackRoll: 5,
+      diceDMG: 16,
+      basicAdditionalDmg: 2,
       isBleeding: false,
       isSetOnFire: false,
     },
@@ -31,21 +31,19 @@ const DiceTable = () => {
       type: "statRoll",
       name: "Geralt",
       rollName: "Unik",
-      rollBasicChance: "20",
-      rollRoll: "17",
+      rollBasicChance: 20,
+      rollRoll: 17,
     },
   ]);
-  const attack = (attackData: simpleAttackInterface) => {
+  const attack = (attackData: attackInterface) => {
     socket.emit("simpleAttack", attackData);
   };
   const ataki = useSelector(
     (state: any) => state.character.currentCharacterAttacks,
   );
 
-  console.table(diceTableMessages);
-
   useEffect(() => {
-    socket.on("simpleAttackFeedback", (feedback) => {
+    socket.on("diceTableFeedback", (feedback) => {
       // console.table(feedback);
       // let message = `${feedback[0].name} używa ${feedback.attackName}`;
       setDiceTableMessages(() => {
@@ -62,10 +60,18 @@ const DiceTable = () => {
       <div className="diceTableLogs">
         {diceTableMessages.map((message, index) => {
           if (message.type === "simpleAttack") {
+            // alert(`${message.name} fire? ${message.isSetOnFire}`);
             return (
               <div key={index}>
-                {message.name} użył "{message.attackName}" (wynik rzutu:{" "}
-                {message.attackRoll}) i zadał {message.diceDMG} obrażeń!
+                <span className="name">{message.name}</span>
+                użył "{message.attackName}" ({/*// @ts-ignore*/}
+                {message.attackBasicChance + message.attackRoll} ={" "}
+                {message.attackBasicChance} + {message.attackRoll}) i zadał{" "}
+                {/*// @ts-ignore*/}(
+                {message.diceDMG + message.basicAdditionalDmg} ={" "}
+                {message.diceDMG} + {message.basicAdditionalDmg}) obrażeń!
+                {message.isBleeding && " Nakłada krawienie!"}
+                {message.isSetOnFire && " Podpala cel!"}
               </div>
             );
           } else if (message.type === "statRoll") {
@@ -102,6 +108,11 @@ const DiceTable = () => {
               </button>
             );
           })}
+        <div className="separator">|</div>
+        <button>Unik</button>
+        <div className="separator">|</div>
+        <button>D6</button>
+        <button>D10</button>
       </div>
     </details>
   );
