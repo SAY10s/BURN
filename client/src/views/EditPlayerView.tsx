@@ -19,8 +19,6 @@ const EditPlayerView = () => {
 
   const [characterToEdit, setCharacterToEdit] = useState<Character>();
 
-  console.log(currentCharacter);
-
   useEffect(() => {
     socket.emit("getCharacterToEdit", currentCharacter);
     socket.on("getCharacterToEditFeedback", (character) => {
@@ -45,7 +43,44 @@ const EditPlayerView = () => {
   }, [characterToEdit, reset]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    const convertedData = {
+      ...data,
+      pz: Number(data.pz),
+      pzMax: Number(data.pzMax),
+      pw: Number(data.pw),
+      pwMax: Number(data.pwMax),
+      wigor: Number(data.wigor),
+      wyparowanie: Object.fromEntries(
+        Object.entries(data.wyparowanie).map(([part, values]) => [
+          part,
+          {
+            // @ts-ignore
+            wyparowanie: Number(values.wyparowanie),
+            // @ts-ignore
+            wyparowanieMax: Number(values.wyparowanieMax),
+          },
+        ]),
+      ),
+      szanse: Object.fromEntries(
+        Object.entries(data.szanse).map(([chance, value]) => [
+          chance,
+          Number(value),
+        ]),
+      ),
+      // @ts-ignore
+      ataki: data.ataki.map((atak) => ({
+        ...atak,
+        kosztPW: Number(atak.kosztPW),
+        kosztWigor: Number(atak.kosztWigor),
+        ileD6: Number(atak.ileD6),
+        dodatkowyDMG: Number(atak.dodatkowyDMG),
+        procentSzansNaPodpalenie: Number(atak.procentSzansNaPodpalenie),
+        procentSzansNaKrwawienie: Number(atak.procentSzansNaKrwawienie),
+      })),
+    };
+    console.table(convertedData);
+
+    socket.emit("editCharacter", convertedData);
   };
 
   // @ts-ignore

@@ -66,6 +66,27 @@ io.on("connection", (socket) => {
     );
     socket.emit("getCharacterToEditFeedback", character);
   });
+  socket.on("editCharacter", (data) => {
+    // Znajdź postać, którą chcesz edytować
+    const character = Character.wszystkiePostacie.find(
+      (postac) => postac.imie === data.imie,
+    );
+
+    // Sprawdź, czy postać istnieje
+    if (!character) {
+      console.log(`Character ${data.imie} not found.`);
+      return;
+    }
+
+    // Aktualizuj postać
+    Object.assign(character, data);
+
+    // Wyślij zaktualizowaną postać do klienta
+    socket.emit("editCharacterFeedback", character);
+
+    // Wyślij zaktualizowane postacie do wszystkich klientów
+    io.emit("initCharacters", Character.wszystkiePostacie);
+  });
   // --------------------------------------------
 
   // -----------------DiceTable------------------
