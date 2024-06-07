@@ -133,3 +133,23 @@ logo-colors {
     font-size: 1.2rem;
   }
 }
+.diceTable {
+  padding: 3rem 0;
+  text-align: center;
+  .diceTableLogs {
+    padding: 2rem;
+    font-size: 1.5rem;
+    div {
+      padding: 0.3rem;
+    }
+    div:last-child {
+      padding: 1rem;
+      font-size: 2rem;
+    }
+  }
+  .simpleAttacksWrapper {
+    button {
+      width: 20%;
+    }
+  }
+}

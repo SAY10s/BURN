@@ -21,7 +21,7 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const npc = characters.filter((char) => !char.jestBohaterem);
   useEffect(() => {
     let character = localStorage.getItem("currentCharacter");
-    console.log(character);
+    // console.log(character);
     if (character) character = JSON.parse(character);
     if (character) dispatch(chooseCharacter(character));
 
@@ -44,7 +44,7 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
     });
     socket.on("choosenCharacterAttacks", (attacks: []) => {
       dispatch(setCurrentCharacterAttacks(attacks));
-      console.table(attacks);
+      // console.table(attacks);
       // console.log("choosenCharacterAttacks");
     });
 
