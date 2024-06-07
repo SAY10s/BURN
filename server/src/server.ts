@@ -59,6 +59,15 @@ const diceTableLogs: any[] = [
 io.on("connection", (socket) => {
   console.log("Client connected");
 
+  // ------------- editCharacter ----------------
+  socket.on("getCharacterToEdit", (characterName) => {
+    const character = Character.wszystkiePostacie.find(
+      (postac) => postac.imie === characterName,
+    );
+    socket.emit("getCharacterToEditFeedback", character);
+  });
+  // --------------------------------------------
+
   // -----------------DiceTable------------------
   socket.on("simpleAttack", (attackData: attackInterface) => {
     if (!attackData) {

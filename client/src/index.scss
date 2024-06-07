@@ -189,3 +189,127 @@ logo-colors {
 .diceTableViewWrapper {
   padding: 0rem 2rem;
 }
+
+.editPlayerViewWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  form {
+    .field-pair {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      label {
+        //width: 25%;
+      }
+      input {
+        width: 25%;
+      }
+    }
+    .slash {
+      padding: 1rem;
+    }
+    input {
+      font-size: 1.3rem;
+    }
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: black;
+    div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .hpPw {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        min-width: 20%;
+        padding-right: 2rem;
+      }
+      input {
+        width: 100%;
+      }
+    }
+    .szanse {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 800px;
+      div {
+        width: calc(50% - 10px);
+        text-align: center;
+      }
+      label {
+        width: 100%;
+      }
+    }
+  }
+
+  form div,
+  form fieldset {
+    margin-bottom: 15px;
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  form input[type="text"],
+  form input[type="number"],
+  form input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  form input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  form input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  form fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  form fieldset legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0 10px;
+  }
+
+  form fieldset div {
+    margin-bottom: 10px;
+  }
+
+  form .field-pair {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  form .field-pair label,
+  form .field-pair input {
+    width: 48%;
+  }
+}
