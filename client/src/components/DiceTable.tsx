@@ -7,14 +7,6 @@ const DiceTable = () => {
   const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
   );
-  // const [diceTableMessages, setDiceTableMessages] = useState([
-  //   "Geralt atakuje srebrnym mieczem (22) zadając 16 DMG!",
-  //   "Geralt atakuje pazurami (36) zadając 27 DMG!",
-  //   "Geralt rzuca igni (22) zadając 5 DMG!",
-  //   "Strzyga gryzie (17) zadająć 17 DMG!",
-  //   "Geralt atakuje silnie mieczem (12) zadając 35 DMG!",
-  //   "Strzyga szarżuje (16) zadająć 3 DMG!",
-  // ]);
   const [diceTableMessages, setDiceTableMessages] = useState([
     {
       type: "simpleAttack",
@@ -44,8 +36,6 @@ const DiceTable = () => {
 
   useEffect(() => {
     socket.on("diceTableFeedback", (feedback) => {
-      // console.table(feedback);
-      // let message = `${feedback[0].name} używa ${feedback.attackName}`;
       setDiceTableMessages(() => {
         return [...feedback];
       });
@@ -60,24 +50,21 @@ const DiceTable = () => {
       <div className="diceTableLogs">
         {diceTableMessages.map((message, index) => {
           if (message.type === "simpleAttack") {
-            // alert(`${message.name} fire? ${message.isSetOnFire}`);
             return (
               <div key={index}>
                 <span className="name">{message.name}</span> użył{" "}
-                <span className="name">{message.attackName}</span> (
+                <span className="name">{message.attackName}</span>{" "}
                 {/*// @ts-ignore*/}
                 {message.attackBasicChance + message.attackRoll}
                 <span className="smallNums">
-                  {" "}
                   {message.attackBasicChance} + {message.attackRoll}
-                </span>
-                ) i zadał {/*// @ts-ignore*/}(
-                {message.diceDMG + message.basicAdditionalDmg}{" "}
+                </span>{" "}
+                i zadał {/*// @ts-ignore*/}
+                {message.diceDMG + message.basicAdditionalDmg}
                 <span className="smallNums">
-                  {" "}
                   {message.diceDMG} + {message.basicAdditionalDmg}
-                </span>
-                ) obrażeń!
+                </span>{" "}
+                obrażeń!
                 <span className="bleeding">
                   {" "}
                   {message.isBleeding && " Nakłada krawienie!"}
@@ -92,7 +79,12 @@ const DiceTable = () => {
             return (
               <div key={index}>
                 <span className="name">{message.name}</span> rzucił{" "}
-                {message.rollRoll} na {message.rollName}!
+                {/*// @ts-ignore*/}
+                {message.rollRoll + message.rollBasicChance}
+                <span className="smallNums">
+                  {message.rollBasicChance} + {message.rollRoll}
+                </span>{" "}
+                na {message.rollName}!
               </div>
             );
           } else if (message.type === "simpleRoll") {
@@ -125,10 +117,12 @@ const DiceTable = () => {
             );
           })}
         <div className="separator">|</div>
-        <button>Unik</button>
+        <button onClick={() => socket.emit("unik", { currentCharacter })}>
+          Unik
+        </button>
         <div className="separator">|</div>
-        <button>D6</button>
-        <button>D10</button>
+        <button onClick={() => socket.emit("d6")}>D6</button>
+        <button onClick={() => socket.emit("d10")}>D10</button>
       </div>
     </details>
   );

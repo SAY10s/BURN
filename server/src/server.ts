@@ -90,6 +90,23 @@ io.on("connection", (socket) => {
 
     socket.emit("diceTableFeedback", diceTableLogs);
   });
+
+  socket.on("unik", (data) => {
+    let postac = Character.wszystkiePostacie.find(
+      (postac) => postac.imie === data.currentCharacter,
+    );
+    diceTableLogs.push({
+      type: "statRoll",
+      name: data.currentCharacter,
+      rollName: "Unik",
+      rollBasicChance: postac.szanse.unik,
+      rollRoll: DiceManager.rollD10(),
+    });
+    if (diceTableLogs.length > 5) diceTableLogs.shift();
+
+    socket.emit("diceTableFeedback", diceTableLogs);
+  });
+
   //---------------------------------------------
 
   //---------------------------------------------
