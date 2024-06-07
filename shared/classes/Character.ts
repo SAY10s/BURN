@@ -146,7 +146,7 @@ class Character {
       kosztPW: number;
       kosztWigor: number;
       ileD6: number;
-      dodatkowyDMG: 0;
+      dodatkowyDMG: number;
       nazwaStatystyki: string;
       mozliweSposobyUniku: string[];
       srebrnyAtak: boolean;
