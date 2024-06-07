@@ -1,54 +1,38 @@
 class DiceManager {
-  static rollD4() {
-    return Math.floor(Math.random() * 8) + 1;
+  static rollDice(sides: number, isCriticalLuckOrFailurePossible = true) {
+    let roll = Math.floor(Math.random() * sides) + 1;
+    if (roll === sides && isCriticalLuckOrFailurePossible) {
+      do {
+        roll += Math.floor(Math.random() * sides) + 1;
+      } while (roll % sides === 0);
+    } else if (roll === 1 && isCriticalLuckOrFailurePossible) {
+      roll = 0;
+      do {
+        roll -= Math.floor(Math.random() * sides) + 1;
+      } while (roll % sides === 0);
+    }
+    return roll;
   }
+
+  static rollD4() {
+    return Math.floor(Math.random() * 4) + 1;
+  }
+
   static rollD6() {
     return Math.floor(Math.random() * 6) + 1;
   }
+
   static rollD10(isCriticalLuckOrFailurePossible = true) {
-    let roll = Math.floor(Math.random() * 10) + 1;
-    console.log("roll: " + roll);
-    if (roll === 10 && isCriticalLuckOrFailurePossible)
-      do {
-        roll += Math.floor(Math.random() * 10) + 1;
-      } while (roll % 10 === 0);
-    else if (roll === 1 && isCriticalLuckOrFailurePossible) {
-      roll = 0;
-      do {
-        roll -= Math.floor(Math.random() * 10) + 1;
-      } while (roll % 10 === 0);
-    }
-    return roll;
+    return this.rollDice(10, isCriticalLuckOrFailurePossible);
   }
+
   static rollD20() {
-    let roll = Math.floor(Math.random() * 20) + 1;
-    console.log("roll: " + roll);
-    if (roll === 20)
-      do {
-        roll += Math.floor(Math.random() * 20) + 1;
-      } while (roll % 20 === 0);
-    else if (roll === 1) {
-      roll = 0;
-      do {
-        roll -= Math.floor(Math.random() * 20) + 1;
-      } while (roll % 20 === 0);
-    }
-    return roll;
+    return this.rollDice(20);
   }
+
   static rollD100(isCriticalLuckOrFailurePossible = true) {
-    let roll = Math.floor(Math.random() * 100) + 1;
-    console.log("roll: " + roll);
-    if (roll === 100 && isCriticalLuckOrFailurePossible)
-      do {
-        roll += Math.floor(Math.random() * 100) + 1;
-      } while (roll % 100 === 0);
-    else if (roll === 1 && isCriticalLuckOrFailurePossible) {
-      roll = 0;
-      do {
-        roll -= Math.floor(Math.random() * 100) + 1;
-      } while (roll % 100 === 0);
-    }
-    return roll;
+    return this.rollDice(100, isCriticalLuckOrFailurePossible);
   }
 }
+
 export default DiceManager;
