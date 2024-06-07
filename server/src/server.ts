@@ -1,9 +1,8 @@
 import express from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import Character from "./shared/classes/Character.js";
 import atak from "./Ataki.js";
-import attackInterface from "./shared/interfaces/attackInterface.js";
 import DiceManager from "./DiceManager.js";
 
 const app = express();
@@ -16,88 +15,64 @@ const io = new Server(httpServer, {
 });
 
 const socketToCharacterMap = new Map();
-
 const messages = ["Hello there!", "General kenobi!"];
+const diceTableLogs = [];
 
-const diceTableLogs: any[] = [
-  {
-    type: "simpleAttack",
-    name: "Geralt",
-    attackName: "srebrny miecz",
-    attackBasicChance: 15,
-    attackRoll: 5,
-    diceDMG: 16,
-    basicAdditionalDmg: 2,
-    isBleeding: true,
-    isSetOnFire: false,
-  },
-  {
-    type: "statRoll",
-    name: "Geralt",
-    rollName: "unik",
-    rollBasicChance: 20,
-    rollRoll: 17,
-  },
-  {
-    type: "simpleRoll",
-    name: "Geralt",
-    roll: 9,
-  },
-  {
-    type: "simpleAttack",
-    name: "Strzyga",
-    attackName: "Pazury",
-    attackBasicChance: 20,
-    attackRoll: 17,
-    diceDMG: 32,
-    basicAdditionalDmg: 0,
-    isBleeding: true,
-    isSetOnFire: true,
-  },
-];
+initializeServer();
 
-io.on("connection", (socket) => {
+function initializeServer() {
+  io.on("connection", handleConnection);
+  httpServer.listen(3000, () => {
+    console.log("Server is listening on port 3000");
+  });
+}
+
+function handleConnection(socket: Socket) {
   console.log("Client connected");
+  handleEditCharacter(socket);
+  handleDiceTable(socket);
+  handleCharacter(socket);
+  handleMessages(socket);
+  handleAttack(socket);
+  handleDisconnect(socket);
+}
 
-  // ------------- editCharacter ----------------
-  socket.on("getCharacterToEdit", (characterName) => {
+function handleEditCharacter(socket: Socket) {
+  socket.on("getCharacterToEdit", (characterName: string) => {
     const character = Character.wszystkiePostacie.find(
       (postac) => postac.imie === characterName,
     );
     socket.emit("getCharacterToEditFeedback", character);
   });
-  socket.on("editCharacter", (data) => {
-    // Znajdź postać, którą chcesz edytować
+
+  socket.on("editCharacter", (data: Character) => {
     const character = Character.wszystkiePostacie.find(
       (postac) => postac.imie === data.imie,
     );
 
-    // Sprawdź, czy postać istnieje
     if (!character) {
       console.log(`Character ${data.imie} not found.`);
       return;
     }
 
-    // Aktualizuj postać
     Object.assign(character, data);
 
-    // Wyślij zaktualizowaną postać do klienta
     socket.emit("editCharacterFeedback", character);
-
-    // Wyślij zaktualizowane postacie do wszystkich klientów
     io.emit("initCharacters", Character.wszystkiePostacie);
   });
-  // --------------------------------------------
+}
 
-  // -----------------DiceTable------------------
-  socket.on("simpleAttack", (attackData: attackInterface) => {
+function handleDiceTable(socket: Socket) {
+  socket.on("simpleAttack", (attackData) => {
     if (!attackData) {
       socket.emit("diceTableFeedback", diceTableLogs);
       return;
     }
-    let postac = Character.wszystkiePostacie.find(
+
+    const postac = Character.wszystkiePostacie.find(
       (postac) => postac.imie === attackData.atakujacy,
     );
+
     let diceDMG = 0;
     for (let i = 0; i < attackData.ileD6; i++) {
       diceDMG += DiceManager.rollD6();
@@ -116,15 +91,17 @@ io.on("connection", (socket) => {
       isBleeding:
         attackData.procentSzansNaKrwawienie >= DiceManager.rollD100(false),
     });
+
     if (diceTableLogs.length > 5) diceTableLogs.shift();
 
     io.emit("diceTableFeedback", diceTableLogs);
   });
 
   socket.on("unik", (data) => {
-    let postac = Character.wszystkiePostacie.find(
+    const postac = Character.wszystkiePostacie.find(
       (postac) => postac.imie === data.currentCharacter,
     );
+
     diceTableLogs.push({
       type: "statRoll",
       name: data.currentCharacter,
@@ -132,36 +109,37 @@ io.on("connection", (socket) => {
       rollBasicChance: postac.szanse.unik,
       rollRoll: DiceManager.rollD10(),
     });
-    if (diceTableLogs.length > 5) diceTableLogs.shift();
 
+    if (diceTableLogs.length > 5) diceTableLogs.shift();
     io.emit("diceTableFeedback", diceTableLogs);
   });
+
   socket.on("d6", (data) => {
     diceTableLogs.push({
       type: "simpleRoll",
       name: data.currentCharacter,
       roll: DiceManager.rollD6(),
     });
+
     if (diceTableLogs.length > 5) diceTableLogs.shift();
     io.emit("diceTableFeedback", diceTableLogs);
   });
+
   socket.on("d10", (data) => {
     diceTableLogs.push({
       type: "simpleRoll",
       name: data.currentCharacter,
       roll: DiceManager.rollD10(),
     });
+
     if (diceTableLogs.length > 5) diceTableLogs.shift();
     io.emit("diceTableFeedback", diceTableLogs);
   });
+}
 
-  //---------------------------------------------
-
-  //---------------------------------------------
+function handleCharacter(socket: Socket) {
   socket.on("chooseCharacter", (characterName) => {
     socketToCharacterMap.set(socket.id, characterName);
-    // console.log(`Character choosen by ${socket.id}: ${characterName}`);
-    // console.table(socketToCharacterMap);
     socket.emit(
       "choosenCharacterAttacks",
       Character.wszystkiePostacie.find(
@@ -173,23 +151,26 @@ io.on("connection", (socket) => {
   socket.on("getMyCharacter", () => {
     socket.emit("myCharacter", socketToCharacterMap.get(socket.id));
   });
-  //---------------------------------------------
 
   socket.on("reloadPlz", () => {
     socket.emit("init", messages);
     socket.emit("initCharacters", Character.wszystkiePostacie);
   });
 
-  // emit messages TO ALL CONNECTED PLAYER
   socket.emit("init", messages);
   io.emit("initCharacters", Character.wszystkiePostacie);
+}
 
+function handleMessages(socket: Socket) {
   socket.on("message", (message) => {
     console.log("Message received:", message);
     messages.push(message);
     io.emit("message", message);
   });
-  socket.on("attack", (data: attackInterface) => {
+}
+
+function handleAttack(socket: Socket) {
+  socket.on("attack", (data) => {
     console.log("--------- Attack received ---------");
     console.table(data);
     const atakujacyIndex = Character.wszystkiePostacie.findIndex(
@@ -215,14 +196,14 @@ io.on("connection", (socket) => {
         procentSzansNaKrwawienie: data.procentSzansNaKrwawienie,
       }),
     );
+
     io.emit("initCharacters", Character.wszystkiePostacie);
   });
+}
+
+function handleDisconnect(socket: Socket) {
   socket.on("disconnect", () => {
     socketToCharacterMap.delete(socket.id);
     console.log("A user disconnected");
   });
-});
-
-httpServer.listen(3000, () => {
-  console.log("Server is listening on port 3000");
-});
+}
