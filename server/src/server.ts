@@ -41,7 +41,7 @@ const diceTableLogs: any[] = [
   {
     type: "simpleRoll",
     name: "Geralt",
-    roll: 17,
+    roll: 9,
   },
   {
     type: "simpleAttack",

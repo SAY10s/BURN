@@ -63,28 +63,44 @@ const DiceTable = () => {
             // alert(`${message.name} fire? ${message.isSetOnFire}`);
             return (
               <div key={index}>
-                <span className="name">{message.name}</span>
-                użył "{message.attackName}" ({/*// @ts-ignore*/}
-                {message.attackBasicChance + message.attackRoll} ={" "}
-                {message.attackBasicChance} + {message.attackRoll}) i zadał{" "}
-                {/*// @ts-ignore*/}(
-                {message.diceDMG + message.basicAdditionalDmg} ={" "}
-                {message.diceDMG} + {message.basicAdditionalDmg}) obrażeń!
-                {message.isBleeding && " Nakłada krawienie!"}
-                {message.isSetOnFire && " Podpala cel!"}
+                <span className="name">{message.name}</span> użył{" "}
+                <span className="name">{message.attackName}</span> (
+                {/*// @ts-ignore*/}
+                {message.attackBasicChance + message.attackRoll}
+                <span className="smallNums">
+                  {" "}
+                  {message.attackBasicChance} + {message.attackRoll}
+                </span>
+                ) i zadał {/*// @ts-ignore*/}(
+                {message.diceDMG + message.basicAdditionalDmg}{" "}
+                <span className="smallNums">
+                  {" "}
+                  {message.diceDMG} + {message.basicAdditionalDmg}
+                </span>
+                ) obrażeń!
+                <span className="bleeding">
+                  {" "}
+                  {message.isBleeding && " Nakłada krawienie!"}
+                </span>
+                <span className="onFire">
+                  {" "}
+                  {message.isSetOnFire && " Podpala cel!"}
+                </span>
               </div>
             );
           } else if (message.type === "statRoll") {
             return (
               <div key={index}>
-                {message.name} rzucił {message.rollRoll} na {message.rollName}!
+                <span className="name">{message.name}</span> rzucił{" "}
+                {message.rollRoll} na {message.rollName}!
               </div>
             );
           } else if (message.type === "simpleRoll") {
             return (
               <div key={index}>
+                <span className="name">{message.name}</span> rzucił{" "}
                 {/*// @ts-ignore*/}
-                {message.name} rzucił {message.roll}!
+                {message.roll}!
               </div>
             );
           }
