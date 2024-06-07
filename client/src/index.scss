@@ -76,6 +76,15 @@ logo-colors {
     background-color: #1e1e1e;
   }
   .character-card {
+    position: relative;
+    img {
+      right: 1rem;
+      top: 1rem;
+      position: absolute;
+      width: 2rem;
+      cursor: pointer;
+      //border-radius: 10px;
+    }
     width: calc(25% - 25px);
     display: flex;
     flex-direction: column;
@@ -116,6 +125,7 @@ logo-colors {
       text-transform: uppercase;
       font-family: "Courier New", Courier, monospace;
       font-size: 2rem;
+      padding-bottom: 1rem;
     }
     .szanse {
       display: flex;
