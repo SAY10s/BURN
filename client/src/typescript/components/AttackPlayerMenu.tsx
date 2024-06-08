@@ -19,7 +19,7 @@ const AttackPlayerMenu: React.FC<Props> = ({ obronca }) => {
     (state: any) => state.character.currentCharacterAttacks,
   );
   return (
-    <div className="attacksWrapper">
+    <div className="attackPlayerMenuWrapper">
       {currentCharacter &&
         ataki.map((atak: any, index: number) => {
           return (
