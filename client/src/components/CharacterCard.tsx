@@ -12,12 +12,14 @@ interface CharacterCardProps {
   character: Character;
   showAttackPlayerMenu: boolean;
   showChooseCharacterButton: boolean;
+  showChances: boolean;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({
   character,
   showAttackPlayerMenu,
   showChooseCharacterButton,
+  showChances = true,
 }) => {
   const zdrowieProcent =
     character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
@@ -121,53 +123,56 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
           />
         </div>
       </div>
-      <details>
-        <summary>
-          <h3>Szanse:</h3>
-        </summary>
-        <div className="szanse">
-          <div>
-            Unik:
-            <br /> {character.szanse.unik}
+      {showChances && (
+        <details>
+          <summary>
+            <h3>Szanse:</h3>
+          </summary>
+          <div className="szanse">
+            <div>
+              Unik:
+              <br /> {character.szanse.unik}
+            </div>
+            <div>
+              Zejście z linii:
+              <br /> {character.szanse.zejscieZLini}
+            </div>
+            <div>
+              Atak mieczem:
+              <br /> {character.szanse.atakMieczem}
+            </div>
+            <div>
+              Atak pięścią:
+              <br /> {character.szanse.atakPiescia}
+            </div>
+            <div>
+              Atak drzewcowa: <br />
+              {character.szanse.atakDrzewcowa}
+            </div>
+            <div>
+              Atak bitewna:
+              <br /> {character.szanse.atakBitewna}
+            </div>
+            <div>
+              Atak krótka:
+              <br /> {character.szanse.atakKrotka}
+            </div>
+            <div>
+              Atak zaklęciem: <br />
+              {character.szanse.atakZakleciem}
+            </div>
+            <div>
+              Strzał z łuku: <br />
+              {character.szanse.strzalZLuku}
+            </div>
+            <div>
+              Strzał z kuszy:
+              <br /> {character.szanse.strzalZKuszy}
+            </div>
           </div>
-          <div>
-            Zejście z linii:
-            <br /> {character.szanse.zejscieZLini}
-          </div>
-          <div>
-            Atak mieczem:
-            <br /> {character.szanse.atakMieczem}
-          </div>
-          <div>
-            Atak pięścią:
-            <br /> {character.szanse.atakPiescia}
-          </div>
-          <div>
-            Atak drzewcowa: <br />
-            {character.szanse.atakDrzewcowa}
-          </div>
-          <div>
-            Atak bitewna:
-            <br /> {character.szanse.atakBitewna}
-          </div>
-          <div>
-            Atak krótka:
-            <br /> {character.szanse.atakKrotka}
-          </div>
-          <div>
-            Atak zaklęciem: <br />
-            {character.szanse.atakZakleciem}
-          </div>
-          <div>
-            Strzał z łuku: <br />
-            {character.szanse.strzalZLuku}
-          </div>
-          <div>
-            Strzał z kuszy:
-            <br /> {character.szanse.strzalZKuszy}
-          </div>
-        </div>
-      </details>
+        </details>
+      )}
+
       {showChooseCharacterButton && (
         <button
           onClick={() => {
