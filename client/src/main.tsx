@@ -2,12 +2,12 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createRoot } from "react-dom/client";
 import "./index.scss";
-import store from "./store/store.ts";
+import store from "./typescript/store/store.ts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PlayerView from "./views/PlayerView.tsx";
-import GameMasterView from "./views/GameMasterView.tsx";
-import DiceTableView from "./views/DiceTableView.tsx";
-import EditPlayerView from "./views/EditPlayerView.tsx";
+import PlayerView from "./typescript/views/PlayerView.tsx";
+import GameMasterView from "./typescript/views/GameMasterView.tsx";
+import DiceTableView from "./typescript/views/DiceTableView.tsx";
+import EditPlayerView from "./typescript/views/EditPlayerView.tsx";
 const router = createBrowserRouter([
   {
     path: "/",

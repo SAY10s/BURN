@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Character from "../shared/classes/Character.js";
+import Character from "../../shared/classes/Character.ts";
 import { chooseCharacter } from "../store/CharacterSlice.ts";
 import AttackPlayerMenu from "./AttackPlayerMenu.tsx";
 // @ts-ignore
-import edit from "../assets/edit.svg";
+import edit from "../../assets/edit.svg";
 import StatBar from "./StatBar.tsx";
 
 interface CharacterCardProps {

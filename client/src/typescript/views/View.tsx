@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import socket from "../helpers/socket.js";
-import NPCCard from "../components/NPCCard.js";
+import socket from "../helpers/socket.ts";
+import NPCCard from "../components/NPCCard.tsx";
 import {
   chooseCharacter,
   setCurrentCharacterAttacks,
 } from "../store/CharacterSlice.ts";
 import { useDispatch } from "react-redux";
-import Character from "../shared/classes/Character.ts";
+import Character from "../../shared/classes/Character.ts";
 import CharacterCard from "../components/CharacterCard.tsx";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {

@@ -2,28 +2,16 @@
 // I SAID I WOULD CLEAN IT UP BUT I NEVER DID
 // AND I FEEL LIKE NOW IT'S TOO LATE
 
+@use "variables" as *;
+
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @font-face {
   font-family: "The Witcher";
-  src: url("Thewitcher-jnOj.ttf") format("truetype");
+  src: url("scss/fonts/Thewitcher-jnOj.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 //------------- WITCHER STYLE ----------------
-$primaryFontBlack: #090909;
-$primaryFontWhite: #fefefe;
-$primaryFontColor: #d1cabc;
-$buttonFontColor: #8f7e66;
-
-$primaryFontColorTextShadow: #8f7e66;
-
-//border
-$borderColor: #201a16;
-$borderWidth: 5px;
-$borderStyle: double;
-
-$primaryBorder: $borderWidth $borderStyle $borderColor;
-$simpleBorder: 1px solid $borderColor;
 
 //------------- after mixins ----------------
 button,

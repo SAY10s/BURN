@@ -1,4 +1,4 @@
-import attackInterface from "../shared/interfaces/attackInterface.ts";
+import attackInterface from "../../shared/interfaces/attackInterface.ts";
 import socket from "../helpers/socket.ts";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";

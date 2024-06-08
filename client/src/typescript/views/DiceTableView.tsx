@@ -1,6 +1,6 @@
 import DiceTable from "../components/DiceTable.tsx";
 import { useEffect, useState } from "react";
-import Character from "../shared/classes/Character.ts";
+import Character from "../../shared/classes/Character.ts";
 import { useDispatch } from "react-redux";
 import {
   chooseCharacter,

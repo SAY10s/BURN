@@ -1,4 +1,4 @@
-import Character from "../shared/classes/Character.js";
+import Character from "../../shared/classes/Character.ts";
 import { useSelector } from "react-redux";
 import AttackPlayerMenu from "./AttackPlayerMenu.tsx";
 

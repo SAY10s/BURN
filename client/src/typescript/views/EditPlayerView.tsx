@@ -3,7 +3,7 @@ import { chooseCharacter } from "../store/CharacterSlice.ts";
 import { useEffect, useState } from "react";
 import socket from "../helpers/socket.ts";
 import { useForm } from "react-hook-form";
-import Character from "../shared/classes/Character.ts";
+import Character from "../../shared/classes/Character.ts";
 import { useNavigate } from "react-router-dom";
 
 const EditPlayerView = () => {
