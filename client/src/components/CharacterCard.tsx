@@ -50,10 +50,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
       <div className="stan">
         <h2 className="name">{character.imie}</h2>
 
-        <div
-          className="health-bar-container"
-          style={{ width: "100%", backgroundColor: "#ccc" }}
-        >
+        <div className="health-bar-container">
           <div
             className="health-bar"
             style={{ width: `${zdrowieProcent}%`, backgroundColor: "red" }}
@@ -62,10 +59,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
             {character.pz > 0 ? character.pz : 0}/{character.pzMax}
           </div>
         </div>
-        <div
-          className="health-bar-container"
-          style={{ width: "100%", backgroundColor: "#ccc" }}
-        >
+        <div className="health-bar-container">
           <div
             className="health-bar"
             style={{
@@ -73,7 +67,10 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
               backgroundColor: "#149dff",
             }}
           ></div>
-          <div className="cyfry">
+          <div
+            className="cyfry"
+            style={{ color: wytrzymaloscProcent < 40 ? "white" : "black" }}
+          >
             {character.pw > 0 ? character.pw : 0}/{character.pwMax}
           </div>
         </div>

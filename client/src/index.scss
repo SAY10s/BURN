@@ -2,12 +2,55 @@
 // I SAID I WOULD CLEAN IT UP BUT I NEVER DID
 // AND I FEEL LIKE NOW IT'S TOO LATE
 
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@font-face {
+  font-family: "The Witcher";
+  src: url("Thewitcher-jnOj.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+//------------- WITCHER STYLE ----------------
+$primaryFontBlack: #090909;
+$primaryFontWhite: #fefefe;
+$primaryFontColor: #d1cabc;
+$buttonFontColor: #8f7e66;
+
+$primaryFontColorTextShadow: #8f7e66;
+
+//border
+$borderColor: #201a16;
+$borderWidth: 5px;
+$borderStyle: double;
+
+$primaryBorder: $borderWidth $borderStyle $borderColor;
+$simpleBorder: 1px solid $borderColor;
+
+//------------- after mixins ----------------
+button,
+input {
+  background-color: transparent;
+  border: $primaryBorder;
+  margin: 0.5rem;
+  color: $buttonFontColor;
+  font-weight: bold;
+}
+input {
+  margin: unset;
+}
+
+//------------- GLOBAL STYLES ----------------
+
+body {
+  background-image: url("./assets/smokebg.png");
+}
 * {
-  color: white;
-  font-family: Calibri, sans-serif;
+  color: $primaryFontColor;
+  text-transform: uppercase;
+  font-family: "PT Sans", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-weight: bold;
 }
 
 //---------TEMP
@@ -19,11 +62,6 @@ summary {
   cursor: pointer;
 }
 
-body,
-button,
-input {
-  background-color: #333;
-}
 logo-colors {
   background-color: #ff7b29;
   background-color: #ffb616;
@@ -37,10 +75,12 @@ logo-colors {
 }
 .health-bar-container {
   position: relative;
-  height: 2rem;
-  border: 1px solid #000;
+  height: 1.5rem;
+  border: $simpleBorder;
   display: flex;
   align-items: center;
+  background-color: transparent;
+  width: 100%;
   .health-bar {
     height: 100%;
     position: absolute;
@@ -49,7 +89,8 @@ logo-colors {
     position: absolute;
     width: 100%;
     text-align: center;
-    color: black;
+    color: $primaryFontBlack;
+    text-shadow: 0px 0px 3px $primaryFontColorTextShadow;
     font-weight: bold;
     font-size: 1.5rem;
     font-family: Arial, serif;
@@ -77,7 +118,6 @@ logo-colors {
   gap: 25px;
   margin-top: 20px;
   .current-character {
-    background-color: #1e1e1e;
   }
   .character-card {
     position: relative;
@@ -87,13 +127,12 @@ logo-colors {
       position: absolute;
       width: 2rem;
       cursor: pointer;
-      //border-radius: 10px;
     }
     width: calc(25% - 25px);
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border: 1px solid #ddd;
+    border: $primaryBorder;
     border-radius: 10px;
     button {
       padding: 10px;
@@ -127,7 +166,7 @@ logo-colors {
     h2 {
       text-align: center;
       text-transform: uppercase;
-      font-family: "Courier New", Courier, monospace;
+      font-family: "The Witcher", Courier, monospace;
       font-size: 2rem;
       padding-bottom: 1rem;
     }
@@ -156,10 +195,10 @@ logo-colors {
   text-align: center;
   .diceTableLogs {
     .name {
-      font-family: "Courier New", Courier, monospace;
+      font-family: "The Witcher", Courier, monospace;
       font-weight: bold;
       text-transform: uppercase;
-      color: pink;
+      color: #fefefe;
       min-height: 350px;
     }
     .smallNums {
@@ -232,7 +271,7 @@ logo-colors {
     max-width: 90%;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: $primaryBorder;
     border-radius: 10px;
     background-color: black;
     div {
@@ -285,7 +324,7 @@ logo-colors {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: $primaryBorder;
     border-radius: 5px;
     box-sizing: border-box;
   }
@@ -302,7 +341,7 @@ logo-colors {
   }
 
   form fieldset {
-    border: 1px solid #ccc;
+    border: $primaryBorder;
     border-radius: 5px;
     padding: 10px;
   }
