@@ -38,16 +38,19 @@
   // Styling for the character stats
   h3 {
     text-align: center;
-    margin: 1rem 0;
+    //margin: 1rem 0;
   }
 
+  details {
+    padding-bottom: 1rem;
+  }
   // Styling for the character chances
   .szanse {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    padding-bottom: 1rem;
+    padding-top: 1rem;
 
     div {
       width: calc(33.333333333% - 10px);
@@ -61,6 +64,7 @@
     align-items: center;
     gap: 5px;
     padding-top: 1rem;
+    padding-bottom: 1rem;
 
     div {
       width: 16.666666666666666666%;
