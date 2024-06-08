@@ -4,8 +4,8 @@ import { createRoot } from "react-dom/client";
 import "./index.scss";
 import store from "./typescript/store/store.ts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PlayerView from "./typescript/views/PlayerView.tsx";
-import GameMasterView from "./typescript/views/GameMasterView.tsx";
+import PlayerView from "./typescript/views/BattleViews/PlayerView.tsx";
+import GameMasterView from "./typescript/views/BattleViews/GameMasterView.tsx";
 import DiceTableView from "./typescript/views/DiceTableView.tsx";
 import EditPlayerView from "./typescript/views/EditPlayerView.tsx";
 const router = createBrowserRouter([

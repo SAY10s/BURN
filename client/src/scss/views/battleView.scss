@@ -1,0 +1,70 @@
+@use "../variables" as *;
+
+.characters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+  .current-character {
+  }
+  .character-card {
+    position: relative;
+    img {
+      right: 1rem;
+      top: 1rem;
+      position: absolute;
+      width: 2rem;
+      cursor: pointer;
+    }
+    width: calc(25% - 25px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: $primaryBorder;
+    border-radius: 10px;
+    button {
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+    .wyparowanie {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      div {
+        width: 16.666666666666666666%;
+        text-align: center;
+
+        .stat-bar-container {
+          width: 100%;
+          .cyfry {
+            width: 100%;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    h3 {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      font-family: "The Witcher", Courier, monospace;
+      font-size: 2rem;
+      padding-bottom: 1rem;
+    }
+    .szanse {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      div {
+        width: calc(33.333333333% - 10px);
+        text-align: center;
+      }
+    }
+  }
+}
