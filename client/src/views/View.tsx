@@ -1,88 +1,72 @@
 import { useEffect, useState } from "react";
 import socket from "../helpers/socket.js";
 import CharacterCard from "../components/CharacterCard.js";
-import Character from "../shared/classes/Character.js";
 import NPCCard from "../components/NPCCard.js";
 import {
   chooseCharacter,
   setCurrentCharacterAttacks,
 } from "../store/CharacterSlice.ts";
 import { useDispatch } from "react-redux";
-// import { Link } from "react-router-dom";
-// import DiceTable from "../components/DiceTable.tsx";
+import Character from "../shared/classes/Character.ts";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const [messages, setMessages] = useState<string[]>([]);
   const [characters, setCharacters] = useState<Character[]>([]);
-
-  const bohaterowie = characters.filter((char) => char.jestBohaterem);
   const dispatch = useDispatch();
 
+  const bohaterowie = characters.filter((char) => char.jestBohaterem);
   const npc = characters.filter((char) => !char.jestBohaterem);
+
   useEffect(() => {
-    let character = localStorage.getItem("currentCharacter");
-    // console.log(character);
-    if (character) character = JSON.parse(character);
+    const character = JSON.parse(
+      localStorage.getItem("currentCharacter") || "{}",
+    );
     if (character) dispatch(chooseCharacter(character));
 
     socket.emit("reloadPlz");
-    socket.on("init", (message) => {
-      setMessages(() => [...message]);
-      // console.log("init (messages)");
-    });
-    socket.on("initCharacters", (characters) => {
-      setCharacters(() => [...characters]);
-      // console.log("initCharacters");
-    });
-    socket.on("message", (message) => {
+
+    const handleInit = (message: string[]) => setMessages(message);
+    const handleInitCharacters = (characters: Character[]) =>
+      setCharacters(characters);
+    const handleMessage = (message: string) =>
       setMessages((prevMessages) => [...prevMessages, message]);
-      // console.log("message");
-    });
-    socket.on("attackFeedback", (data: string) => {
-      setMessages(() => [data]);
-      // console.log("attackFeedback");
-    });
-    socket.on("choosenCharacterAttacks", (attacks: []) => {
+    const handleAttackFeedback = (data: string) => setMessages([data]);
+    const handleChoosenCharacterAttacks = (attacks: []) =>
       dispatch(setCurrentCharacterAttacks(attacks));
-      // console.table(attacks);
-      // console.log("choosenCharacterAttacks");
-    });
+
+    socket.on("init", handleInit);
+    socket.on("initCharacters", handleInitCharacters);
+    socket.on("message", handleMessage);
+    socket.on("attackFeedback", handleAttackFeedback);
+    socket.on("choosenCharacterAttacks", handleChoosenCharacterAttacks);
 
     return () => {
-      socket.off("init");
-      socket.off("initCharacters");
-      socket.off("message");
-      socket.off("attackFeedback");
-      socket.off("choosenCharacterAttacks");
+      socket.off("init", handleInit);
+      socket.off("initCharacters", handleInitCharacters);
+      socket.off("message", handleMessage);
+      socket.off("attackFeedback", handleAttackFeedback);
+      socket.off("choosenCharacterAttacks", handleChoosenCharacterAttacks);
     };
-  }, [isGameMaster]);
+  }, [isGameMaster, dispatch]);
 
   return (
     <div className="wrapper">
-      {/*<div>*/}
-      {/*  <h1>Links</h1>*/}
-      {/*  <Link to={"/gm"}>GM</Link>*/}
-      {/*  <br />*/}
-      {/*  <Link to={"/"}>player</Link>*/}
-      {/*</div>*/}
       <div className="logs">
-        <div>
-          {messages.map((msg, index) => (
-            <div key={index}>{msg}</div>
-          ))}
-        </div>
+        {messages.map((msg, index) => (
+          <div key={index}>{msg}</div>
+        ))}
       </div>
       <div className="characters">
-        {bohaterowie.map((character: any, index: number) => (
+        {bohaterowie.map((character, index) => (
           <CharacterCard key={index} character={character} />
         ))}
       </div>
       <div className="npc characters">
         {isGameMaster
-          ? npc.map((character: any, index: number) => (
+          ? npc.map((character, index) => (
               <CharacterCard key={index} character={character} />
             ))
-          : npc.map((character: any, index: number) => (
+          : npc.map((character, index) => (
               <NPCCard key={index} character={character} />
             ))}
       </div>
