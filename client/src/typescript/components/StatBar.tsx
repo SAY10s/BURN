@@ -15,10 +15,7 @@ const StatBar: React.FC<StatBarProps> = ({ statValue, statMax, barColor }) => {
         className="stat-bar"
         style={{ width: `${statPercent}%`, backgroundColor: barColor }}
       ></div>
-      <div
-        className="cyfry"
-        style={{ color: statPercent < 50 ? "white" : "black" }}
-      >
+      <div className={`cyfry ${statPercent < 60 ? "under60percent" : ""} `}>
         {statValue > 0 ? statValue : 0}/{statMax}
       </div>
     </div>
