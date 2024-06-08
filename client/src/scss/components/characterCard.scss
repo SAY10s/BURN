@@ -1,0 +1,75 @@
+@use "../variables" as *;
+
+.character-card {
+  position: relative;
+  width: calc(25% - 25px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: $primaryBorder;
+  border-radius: 10px;
+
+  // Positioning and styling for the character image
+  img {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 2rem;
+    cursor: pointer;
+  }
+
+  // Styling for the character name
+  h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "The Witcher", Courier, monospace;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  // Styling for the character stats
+  h3 {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  // Styling for the character chances
+  .szanse {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    div {
+      width: calc(33.333333333% - 10px);
+      text-align: center;
+    }
+  }
+
+  // Styling for the character evaporation
+  .wyparowanie {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    div {
+      width: 16.666666666666666666%;
+      text-align: center;
+
+      .stat-bar-container {
+        width: 100%;
+
+        .cyfry {
+          width: 100%;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  // Styling for the character card button
+  button {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+}

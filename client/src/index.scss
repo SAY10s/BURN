@@ -6,6 +6,7 @@
 @use "scss/components/statBar";
 @use "scss/components/diceTable";
 @use "scss/components/attackPlayerMenu";
+@use "scss/components/characterCard";
 
 //views
 @use "scss/views/diceTableView";
@@ -32,6 +33,7 @@
 body {
   background-image: url("./assets/smokebg.png");
 }
+//-------------------------------
 
 button,
 input {
