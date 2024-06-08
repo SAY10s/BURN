@@ -1,0 +1,47 @@
+.diceTable {
+  padding: 3rem 0;
+  text-align: center;
+  .diceTableLogs {
+    .name {
+      font-family: "The Witcher", Courier, monospace;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fefefe;
+      min-height: 350px;
+    }
+    .smallNums {
+      font-size: 0.4em;
+      opacity: 0.5;
+    }
+    .bleeding {
+      color: red;
+    }
+    .onFire {
+      color: #ffb616;
+    }
+
+    padding: 2rem;
+    font-size: 1.5rem;
+    div {
+      padding: 0.3rem;
+      opacity: 0.6;
+    }
+    div:last-child {
+      padding: 3rem 1rem 1rem;
+      font-size: 2.5rem;
+      opacity: 1;
+    }
+  }
+  .simpleAttacksWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      width: 10%;
+      text-transform: uppercase;
+    }
+    .separator {
+      margin: 0 1rem;
+    }
+  }
+}

@@ -1,19 +1,36 @@
-// THIS FILE IS AN ABSOLUTE MESS. I'M SORRY.
-// I SAID I WOULD CLEAN IT UP BUT I NEVER DID
-// AND I FEEL LIKE NOW IT'S TOO LATE
+//variables, fonts, mixins
+@use "scss/variables" as *;
+@use "scss/fonts";
 
-@use "variables" as *;
+//components
+@use "scss/components/statBar";
+@use "scss/components/diceTable";
 
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+//views
+@use "scss/views/diceTableView";
+@use "scss/views/editPlayerView";
+
+// TO BE MOVED
 @font-face {
   font-family: "The Witcher";
-  src: url("scss/fonts/Thewitcher-jnOj.ttf") format("truetype");
+  src: url("assets/fonts/Thewitcher-jnOj.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-//------------- WITCHER STYLE ----------------
 
-//------------- after mixins ----------------
+* {
+  color: $primaryFontColor;
+  text-transform: uppercase;
+  font-family: "PT Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+body {
+  background-image: url("./assets/smokebg.png");
+}
+
 button,
 input {
   background-color: transparent;
@@ -26,22 +43,6 @@ input {
   margin: unset;
 }
 
-//------------- GLOBAL STYLES ----------------
-
-body {
-  background-image: url("./assets/smokebg.png");
-}
-* {
-  color: $primaryFontColor;
-  text-transform: uppercase;
-  font-family: "PT Sans", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-weight: bold;
-}
-
-//---------TEMP
 details {
   margin-bottom: 1rem;
 }
@@ -49,40 +50,11 @@ summary {
   list-style: none;
   cursor: pointer;
 }
-
-logo-colors {
-  background-color: #ff7b29;
-  background-color: #ffb616;
-  background-color: #ffdc65;
-}
 .wrapper {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
-}
-.stat-bar-container {
-  position: relative;
-  height: 1.5rem;
-  border: $simpleBorder;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  width: 100%;
-  .stat-bar {
-    height: 100%;
-    position: absolute;
-  }
-  .cyfry {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    color: $primaryFontBlack;
-    text-shadow: 0px 0px 3px $primaryFontColorTextShadow;
-    font-weight: bold;
-    font-size: 1.5rem;
-    font-family: Arial, serif;
-  }
 }
 
 .logs {
@@ -175,179 +147,5 @@ logo-colors {
     font-size: 1.2rem;
   }
 }
-.diceTable {
-  padding: 3rem 0;
-  text-align: center;
-  .diceTableLogs {
-    .name {
-      font-family: "The Witcher", Courier, monospace;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #fefefe;
-      min-height: 350px;
-    }
-    .smallNums {
-      font-size: 0.4em;
-      opacity: 0.5;
-    }
-    .bleeding {
-      color: red;
-    }
-    .onFire {
-      color: #ffb616;
-    }
-
-    padding: 2rem;
-    font-size: 1.5rem;
-    div {
-      padding: 0.3rem;
-      opacity: 0.6;
-    }
-    div:last-child {
-      padding: 3rem 1rem 1rem;
-      font-size: 2.5rem;
-      opacity: 1;
-    }
-  }
-  .simpleAttacksWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    button {
-      width: 10%;
-      text-transform: uppercase;
-    }
-    .separator {
-      margin: 0 1rem;
-    }
-  }
-}
 
 //-----------------------------------
-.diceTableViewWrapper {
-  padding: 0rem 2rem;
-}
-
-.editPlayerViewWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.5rem;
-  form {
-    .field-pair {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      label {
-        //width: 25%;
-      }
-      input {
-        width: 25%;
-      }
-    }
-    .slash {
-      padding: 1rem;
-    }
-    input {
-      font-size: 1.3rem;
-    }
-    display: flex;
-    flex-direction: column;
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    border: $primaryBorder;
-    border-radius: 10px;
-    background-color: black;
-    div {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .hpPw {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        min-width: 20%;
-        padding-right: 2rem;
-      }
-      input {
-        width: 100%;
-      }
-    }
-    .szanse {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      max-width: 800px;
-      div {
-        width: calc(50% - 10px);
-        text-align: center;
-      }
-      label {
-        width: 100%;
-      }
-    }
-  }
-
-  form div,
-  form fieldset {
-    margin-bottom: 15px;
-  }
-
-  form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-
-  form input[type="text"],
-  form input[type="number"],
-  form input[type="submit"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: $primaryBorder;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-
-  form input[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  form input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-
-  form fieldset {
-    border: $primaryBorder;
-    border-radius: 5px;
-    padding: 10px;
-  }
-
-  form fieldset legend {
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0 10px;
-  }
-
-  form fieldset div {
-    margin-bottom: 10px;
-  }
-
-  form .field-pair {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  form .field-pair label,
-  form .field-pair input {
-    width: 48%;
-  }
-}
