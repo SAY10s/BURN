@@ -29,9 +29,9 @@ Character.wszystkiePostacie = [
   new Character(
     true,
     "Prince Taco",
-    43,
+    37,
     50,
-    50,
+    42,
     50,
     5,
     {
@@ -114,9 +114,9 @@ Character.wszystkiePostacie = [
   new Character(
     true,
     "Azrael",
+    7,
     30,
-    30,
-    17,
+    5,
     30,
     1,
     {
@@ -175,9 +175,9 @@ Character.wszystkiePostacie = [
   new Character(
     true,
     "Rizzo",
+    15,
     30,
-    30,
-    17,
+    13,
     30,
     1,
     {
