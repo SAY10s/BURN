@@ -17,7 +17,6 @@ const DiceTableView = () => {
 
   useEffect(() => {
     let character = localStorage.getItem("currentCharacter");
-    // console.log(character);
     if (character) character = JSON.parse(character);
     if (character) dispatch(chooseCharacter(character));
 
