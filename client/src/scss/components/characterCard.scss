@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  padding-bottom: 0;
   border: $primaryBorder;
   border-radius: 10px;
   transition: 0.5s;
@@ -46,6 +47,7 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
+    padding-bottom: 1rem;
 
     div {
       width: calc(33.333333333% - 10px);
@@ -58,6 +60,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    padding-top: 1rem;
 
     div {
       width: 16.666666666666666666%;

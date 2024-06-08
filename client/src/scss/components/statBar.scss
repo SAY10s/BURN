@@ -2,7 +2,7 @@
 
 .stat-bar-container {
   position: relative;
-  height: 1.5rem;
+  height: 1.7rem;
   border: $simpleBorder;
   display: flex;
   align-items: center;
@@ -20,9 +20,7 @@
     width: 100%;
     text-align: center;
     color: $primaryFontBlack;
-    font-weight: bold;
     font-size: 1.5rem;
-    font-family: Arial, serif;
   }
 
   .under60percent {

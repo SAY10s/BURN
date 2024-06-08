@@ -58,7 +58,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
           barColor="#149dff"
         />
       </div>
-      <h3>Wyparowanie:</h3>
+      {/*<h3>Wyparowanie:</h3>*/}
       <div className="wyparowanie">
         <div>
           Głowa:
