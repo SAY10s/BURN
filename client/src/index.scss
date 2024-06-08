@@ -73,7 +73,7 @@ logo-colors {
   flex-direction: column;
   justify-content: center;
 }
-.health-bar-container {
+.stat-bar-container {
   position: relative;
   height: 1.5rem;
   border: $simpleBorder;
@@ -81,7 +81,7 @@ logo-colors {
   align-items: center;
   background-color: transparent;
   width: 100%;
-  .health-bar {
+  .stat-bar {
     height: 100%;
     position: absolute;
   }
@@ -146,11 +146,8 @@ logo-colors {
         width: 16.666666666666666666%;
         text-align: center;
 
-        .health-bar-container {
-          display: flex;
-          align-items: center;
-
-          height: 20px;
+        .stat-bar-container {
+          width: 100%;
           .cyfry {
             width: 100%;
             font-size: 0.8rem;

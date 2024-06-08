@@ -63,6 +63,7 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
             character={character}
             showAttackPlayerMenu={true}
             showChooseCharacterButton={true}
+            showChances={true}
           />
         ))}
       </div>
@@ -74,6 +75,7 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
                 character={character}
                 showAttackPlayerMenu={true}
                 showChooseCharacterButton={true}
+                showChances={true}
               />
             ))
           : npc.map((character, index) => (

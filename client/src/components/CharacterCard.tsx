@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Character from "../shared/classes/Character.js";
-import WyparowaniePasek from "./WyparowaniePasek.tsx";
 import { chooseCharacter } from "../store/CharacterSlice.ts";
 import AttackPlayerMenu from "./AttackPlayerMenu.tsx";
 // @ts-ignore
 import edit from "../assets/edit.svg";
+import StatBar from "./StatBar.tsx";
 
 interface CharacterCardProps {
   character: Character;
@@ -21,10 +21,6 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   showChooseCharacterButton,
   showChances = true,
 }) => {
-  const zdrowieProcent =
-    character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
-  const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
-
   const dispatch = useDispatch();
   const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
@@ -50,73 +46,66 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
       <div className="stan">
         <h2 className="name">{character.imie}</h2>
 
-        <div className="health-bar-container">
-          <div
-            className="health-bar"
-            style={{ width: `${zdrowieProcent}%`, backgroundColor: "red" }}
-          ></div>
-          <div className="cyfry">
-            {character.pz > 0 ? character.pz : 0}/{character.pzMax}
-          </div>
-        </div>
-        <div className="health-bar-container">
-          <div
-            className="health-bar"
-            style={{
-              width: `${wytrzymaloscProcent}%`,
-              backgroundColor: "#149dff",
-            }}
-          ></div>
-          <div
-            className="cyfry"
-            style={{ color: wytrzymaloscProcent < 40 ? "white" : "black" }}
-          >
-            {character.pw > 0 ? character.pw : 0}/{character.pwMax}
-          </div>
-        </div>
+        <StatBar
+          statValue={character.pz}
+          statMax={character.pzMax}
+          barColor="red"
+        />
+
+        <StatBar
+          statValue={character.pw}
+          statMax={character.pwMax}
+          barColor="#149dff"
+        />
       </div>
       <h3>Wyparowanie:</h3>
       <div className="wyparowanie">
         <div>
           Głowa:
-          <WyparowaniePasek
-            wyparowanie={character.wyparowanie.glowa.wyparowanie}
-            wyparowanieMax={character.wyparowanie.glowa.wyparowanieMax}
+          <StatBar
+            statValue={character.wyparowanie.glowa.wyparowanie}
+            statMax={character.wyparowanie.glowa.wyparowanieMax}
+            barColor="green"
           />
         </div>
         <div>
           Korpus:
-          <WyparowaniePasek
-            wyparowanie={character.wyparowanie.korpus.wyparowanie}
-            wyparowanieMax={character.wyparowanie.korpus.wyparowanieMax}
+          <StatBar
+            statValue={character.wyparowanie.korpus.wyparowanie}
+            statMax={character.wyparowanie.korpus.wyparowanieMax}
+            barColor="green"
           />
         </div>
         <div>
           L. ręka:
-          <WyparowaniePasek
-            wyparowanie={character.wyparowanie.lewaReka.wyparowanie}
-            wyparowanieMax={character.wyparowanie.lewaReka.wyparowanieMax}
+          <StatBar
+            statValue={character.wyparowanie.lewaReka.wyparowanie}
+            statMax={character.wyparowanie.lewaReka.wyparowanieMax}
+            barColor="green"
           />
         </div>
         <div>
           P. Ręka:
-          <WyparowaniePasek
-            wyparowanie={character.wyparowanie.prawaReka.wyparowanie}
-            wyparowanieMax={character.wyparowanie.prawaReka.wyparowanieMax}
+          <StatBar
+            statValue={character.wyparowanie.prawaReka.wyparowanie}
+            statMax={character.wyparowanie.prawaReka.wyparowanieMax}
+            barColor="green"
           />
         </div>
         <div>
           L. noga:
-          <WyparowaniePasek
-            wyparowanie={character.wyparowanie.lewaNoga.wyparowanie}
-            wyparowanieMax={character.wyparowanie.lewaNoga.wyparowanieMax}
+          <StatBar
+            statValue={character.wyparowanie.lewaNoga.wyparowanie}
+            statMax={character.wyparowanie.lewaNoga.wyparowanieMax}
+            barColor="green"
           />
         </div>
         <div>
           P. noga:
-          <WyparowaniePasek
-            wyparowanie={character.wyparowanie.prawaNoga.wyparowanie}
-            wyparowanieMax={character.wyparowanie.prawaNoga.wyparowanieMax}
+          <StatBar
+            statValue={character.wyparowanie.prawaNoga.wyparowanie}
+            statMax={character.wyparowanie.prawaNoga.wyparowanieMax}
+            barColor="green"
           />
         </div>
       </div>
