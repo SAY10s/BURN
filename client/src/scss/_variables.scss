@@ -23,4 +23,20 @@ $borderStyle: double;
 
 $primaryBorder: $borderWidth $borderStyle $borderColor;
 $hoverBorder: $borderWidth $borderStyle $hoverBorderColor;
+$activeBorder: $borderWidth $borderStyle rgba(143, 126, 102, 0.51);
 $simpleBorder: 1px solid $borderColor;
+
+//active
+$activeGradientBackground: linear-gradient(
+  90deg,
+  #291e0555 0%,
+  #2a210355 25%,
+  #10100a55 100%
+);
+@mixin activeStyle {
+  //border: $activeBorder;
+  //background: $activeGradientBackground;
+  //* {
+  //  //color: $primaryFontWhite;
+  //}
+}

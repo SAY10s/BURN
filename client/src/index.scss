@@ -1,6 +1,7 @@
-//variables, fonts, mixins
+//variables, fonts, mixins, etc
 @use "scss/variables" as *;
 @use "scss/fonts";
+@use "scss/hideScrollbar";
 
 //components
 @use "scss/components/statBar";
@@ -33,7 +34,6 @@
 body {
   background-image: url("./assets/smokebg.png");
 }
-//-------------------------------
 
 button,
 input {
