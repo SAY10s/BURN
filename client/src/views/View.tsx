@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import socket from "../helpers/socket.js";
-import CharacterCard from "../components/CharacterCard.js";
 import NPCCard from "../components/NPCCard.js";
 import {
   chooseCharacter,
@@ -8,6 +7,7 @@ import {
 } from "../store/CharacterSlice.ts";
 import { useDispatch } from "react-redux";
 import Character from "../shared/classes/Character.ts";
+import CharacterCard from "../components/CharacterCard.tsx";
 
 const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
   const [messages, setMessages] = useState<string[]>([]);
@@ -58,13 +58,23 @@ const View = ({ isGameMaster }: { isGameMaster: boolean }) => {
       </div>
       <div className="characters">
         {bohaterowie.map((character, index) => (
-          <CharacterCard key={index} character={character} />
+          <CharacterCard
+            key={index}
+            character={character}
+            showAttackPlayerMenu={true}
+            showChooseCharacterButton={true}
+          />
         ))}
       </div>
       <div className="npc characters">
         {isGameMaster
           ? npc.map((character, index) => (
-              <CharacterCard key={index} character={character} />
+              <CharacterCard
+                key={index}
+                character={character}
+                showAttackPlayerMenu={true}
+                showChooseCharacterButton={true}
+              />
             ))
           : npc.map((character, index) => (
               <NPCCard key={index} character={character} />

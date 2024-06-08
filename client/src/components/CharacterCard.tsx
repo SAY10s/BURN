@@ -1,16 +1,24 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Character from "../shared/classes/Character.js";
 import WyparowaniePasek from "./WyparowaniePasek.tsx";
-import { useDispatch, useSelector } from "react-redux";
 import { chooseCharacter } from "../store/CharacterSlice.ts";
-// import socket from "../helpers/socket.js";
-// import attackInterface from "../shared/interfaces/attackInterface.js";
-import React from "react";
 import AttackPlayerMenu from "./AttackPlayerMenu.tsx";
+// @ts-ignore
+import edit from "../assets/edit.svg";
 
 interface CharacterCardProps {
   character: Character;
+  showAttackPlayerMenu: boolean;
+  showChooseCharacterButton: boolean;
 }
-const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+
+const CharacterCard: React.FC<CharacterCardProps> = ({
+  character,
+  showAttackPlayerMenu,
+  showChooseCharacterButton,
+}) => {
   const zdrowieProcent =
     character.pz > 0 ? (character.pz / character.pzMax) * 100 : 0;
   const wytrzymaloscProcent = (character.pw / character.pwMax) * 100;
@@ -23,18 +31,20 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   const handleChooseCharacter = (characterName: string) => {
     dispatch(chooseCharacter(characterName));
   };
-  // const attack = (attackData: attackInterface) => {
-  //   console.log(`${currentCharacter} atakuje ${attackData.atakujacy}`);
-  //   socket.emit("attack", attackData);
-  // };
 
   return (
     <div
-      className="character-card"
-      style={{
-        backgroundColor: character.imie === currentCharacter ? "black" : "",
-      }}
+      className={
+        character.imie === currentCharacter
+          ? "character-card current-character"
+          : "character-card"
+      }
     >
+      {currentCharacter === character.imie ? (
+        <Link to="/edit">
+          <img src={edit} alt={character.imie} width={32} />
+        </Link>
+      ) : null}
       <div className="stan">
         <h2 className="name">{character.imie}</h2>
 
@@ -65,8 +75,6 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
             {character.pw > 0 ? character.pw : 0}/{character.pwMax}
           </div>
         </div>
-
-        {/*<div>Wigor: {character.wigor}</div>*/}
       </div>
       <h3>Wyparowanie:</h3>
       <div className="wyparowanie">
@@ -160,14 +168,16 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
           </div>
         </div>
       </details>
-      <button
-        onClick={() => {
-          handleChooseCharacter(character.imie);
-        }}
-      >
-        Wybierz postać
-      </button>
-      {character.imie !== currentCharacter && (
+      {showChooseCharacterButton && (
+        <button
+          onClick={() => {
+            handleChooseCharacter(character.imie);
+          }}
+        >
+          Wybierz postać
+        </button>
+      )}
+      {showAttackPlayerMenu && character.imie !== currentCharacter && (
         <AttackPlayerMenu obronca={character.imie} />
       )}
     </div>

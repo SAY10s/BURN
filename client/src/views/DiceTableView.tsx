@@ -7,7 +7,7 @@ import {
   setCurrentCharacterAttacks,
 } from "../store/CharacterSlice.ts";
 import socket from "../helpers/socket.ts";
-import CharacterCardDiceTable from "../components/CharacterCardDiceTable.tsx";
+import CharacterCard from "../components/CharacterCard.tsx";
 
 const DiceTableView = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -42,7 +42,12 @@ const DiceTableView = () => {
     <div className="diceTableViewWrapper">
       <div className="characters">
         {bohaterowie.map((character: any, index: number) => (
-          <CharacterCardDiceTable key={index} character={character} />
+          <CharacterCard
+            key={index}
+            character={character}
+            showAttackPlayerMenu={false}
+            showChooseCharacterButton={false}
+          />
         ))}
       </div>
       <DiceTable />
