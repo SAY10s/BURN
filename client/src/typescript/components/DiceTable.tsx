@@ -106,7 +106,7 @@ const DiceTable = () => {
           }
         })}
       </div>
-      <div className="attacksWrapper simpleAttacksWrapper">
+      <div className="diceTableRolls">
         {currentCharacter &&
           ataki.map((atak: any, index: number) => {
             return (

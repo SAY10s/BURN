@@ -35,11 +35,23 @@ body {
 
 button,
 input {
-  background-color: transparent;
+  background: linear-gradient(
+    90deg,
+    #291e0500 0%,
+    #2a210300 25%,
+    #10100a00 100%
+  );
   border: $primaryBorder;
   margin: 0.5rem;
   color: $buttonFontColor;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.1s;
+}
+button:hover {
+  border: $hoverBorder;
+  color: $primaryFontWhite;
+  background: $hoverGradientBackground;
 }
 input {
   margin: unset;

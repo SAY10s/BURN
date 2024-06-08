@@ -1,9 +1,20 @@
+//primary colors
 $primaryFontBlack: #090909;
 $primaryFontWhite: #fefefe;
 $primaryFontColor: #d1cabc;
+$primaryFontColorTextShadow: #8f7e66;
+
+//button
 $buttonFontColor: #8f7e66;
 
-$primaryFontColorTextShadow: #8f7e66;
+//hover
+$hoverBorderColor: #6d470f;
+$hoverGradientBackground: linear-gradient(
+  90deg,
+  #291e05 0%,
+  #2a2103 25%,
+  #10100a 100%
+);
 
 //border
 $borderColor: #201a16;
@@ -11,4 +22,5 @@ $borderWidth: 5px;
 $borderStyle: double;
 
 $primaryBorder: $borderWidth $borderStyle $borderColor;
+$hoverBorder: $borderWidth $borderStyle $hoverBorderColor;
 $simpleBorder: 1px solid $borderColor;
