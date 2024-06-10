@@ -102,7 +102,7 @@ class Character {
     wigor: number = 1,
     wyparowanie: { [key: string]: WyparowaniePart } = defaultWyparowanie,
     szanse: Szanse = defaultSzanse,
-    ataki: Atak[] = defaultAtaki,
+    ataki: Atak[] = defaultAtaki
   ) {
     this.jestBohaterem = jestBohaterem;
     this.imie = imie;

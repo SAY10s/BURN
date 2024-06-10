@@ -1,9 +1,9 @@
 import express from "express";
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
-import Character from "./shared/classes/Character.js";
-import atak from "./Ataki.js";
-import DiceManager from "./DiceManager.js";
+import Character from "./shared/classes/Character";
+import atak from "./Ataki";
+import DiceManager from "./DiceManager";
 
 const app = express();
 const httpServer = createServer(app);
@@ -40,14 +40,14 @@ function handleConnection(socket: Socket) {
 function handleEditCharacter(socket: Socket) {
   socket.on("getCharacterToEdit", (characterName: string) => {
     const character = Character.wszystkiePostacie.find(
-      (postac) => postac.imie === characterName,
+      (postac) => postac.imie === characterName
     );
     socket.emit("getCharacterToEditFeedback", character);
   });
 
   socket.on("editCharacter", (data: Character) => {
     const character = Character.wszystkiePostacie.find(
-      (postac) => postac.imie === data.imie,
+      (postac) => postac.imie === data.imie
     );
 
     if (!character) {
@@ -70,7 +70,7 @@ function handleDiceTable(socket: Socket) {
     }
 
     const postac = Character.wszystkiePostacie.find(
-      (postac) => postac.imie === attackData.atakujacy,
+      (postac) => postac.imie === attackData.atakujacy
     );
 
     let diceDMG = 0;
@@ -99,7 +99,7 @@ function handleDiceTable(socket: Socket) {
 
   socket.on("unik", (data) => {
     const postac = Character.wszystkiePostacie.find(
-      (postac) => postac.imie === data.currentCharacter,
+      (postac) => postac.imie === data.currentCharacter
     );
 
     diceTableLogs.push({
@@ -143,8 +143,8 @@ function handleCharacter(socket: Socket) {
     socket.emit(
       "choosenCharacterAttacks",
       Character.wszystkiePostacie.find(
-        (postac) => postac.imie === characterName,
-      ).ataki,
+        (postac) => postac.imie === characterName
+      ).ataki
     );
   });
 
@@ -174,10 +174,10 @@ function handleAttack(socket: Socket) {
     console.log("--------- Attack received ---------");
     console.table(data);
     const atakujacyIndex = Character.wszystkiePostacie.findIndex(
-      (postac) => postac.imie === data.atakujacy,
+      (postac) => postac.imie === data.atakujacy
     );
     const obroncaIndex = Character.wszystkiePostacie.findIndex(
-      (postac) => postac.imie === data.obronca,
+      (postac) => postac.imie === data.obronca
     );
 
     io.emit(
@@ -194,7 +194,7 @@ function handleAttack(socket: Socket) {
         srebrnyAtak: data.srebrnyAtak,
         procentSzansNaPodpalenie: data.procentSzansNaPodpalenie,
         procentSzansNaKrwawienie: data.procentSzansNaKrwawienie,
-      }),
+      })
     );
 
     io.emit("initCharacters", Character.wszystkiePostacie);
