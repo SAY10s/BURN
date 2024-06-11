@@ -8,6 +8,7 @@ import DiceManager from "./DiceManager";
 //db
 import { AppDataSource } from "./db/data-source";
 import { User } from "./db/entity/User";
+import { Character as CharacterDB } from "./db/entity/Character";
 
 const app = express();
 const httpServer = createServer(app);
@@ -23,12 +24,18 @@ const io = new Server(httpServer, {
 AppDataSource.initialize()
   .then(async () => {
     console.log("Inserting a new user into the database...");
+
     const user = new User();
     user.firstName = "Timber";
     user.lastName = "Saw";
     user.age = 25;
+
+    const character = new CharacterDB();
+
     await AppDataSource.manager.save(user);
     console.log("Saved a new user with id: " + user.id);
+
+    await AppDataSource.manager.save(character);
 
     console.log("Loading users from the database...");
     let users = await AppDataSource.manager.find(User);
@@ -66,8 +73,8 @@ AppDataSource.initialize()
       });
 
       socket.on("editCharacter", async (data: Character) => {
-        let users = await AppDataSource.manager.find(User);
-        console.table(users);
+        let characters = await AppDataSource.manager.find(CharacterDB);
+        console.table(characters);
 
         const character = Character.wszystkiePostacie.find(
           (postac) => postac.imie === data.imie,
