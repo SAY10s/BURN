@@ -31,7 +31,7 @@ AppDataSource.initialize()
     console.log("Saved a new user with id: " + user.id);
 
     console.log("Loading users from the database...");
-    const users = await AppDataSource.manager.find(User);
+    let users = await AppDataSource.manager.find(User);
     console.table(users);
 
     const socketToCharacterMap = new Map();
@@ -65,7 +65,10 @@ AppDataSource.initialize()
         socket.emit("getCharacterToEditFeedback", character);
       });
 
-      socket.on("editCharacter", (data: Character) => {
+      socket.on("editCharacter", async (data: Character) => {
+        let users = await AppDataSource.manager.find(User);
+        console.table(users);
+
         const character = Character.wszystkiePostacie.find(
           (postac) => postac.imie === data.imie,
         );
