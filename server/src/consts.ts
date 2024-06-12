@@ -12,6 +12,18 @@ const mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki = [
   "lewą nogę",
   "lewą nogę",
 ];
+const mozliweLokacjeTrafieniaNieodmienionePrzezPrzypadki = [
+  "głowa",
+  "korpus",
+  "korpus",
+  "korpus",
+  "prawe ramię",
+  "lewe ramię",
+  "prawa noga",
+  "prawa noga",
+  "lewa noga",
+  "lewa noga",
+];
 const mozliweLokacjeTrafieniaCamelCase = [
   "glowa",
   "korpus",
@@ -341,4 +353,5 @@ Character.wszystkiePostacie = [
 export {
   mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki,
   mozliweLokacjeTrafieniaCamelCase,
+  mozliweLokacjeTrafieniaNieodmienionePrzezPrzypadki,
 };

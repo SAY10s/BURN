@@ -16,6 +16,7 @@ const DiceTable = () => {
       attackRoll: 5,
       diceDMG: 16,
       basicAdditionalDmg: 2,
+      bodyPart: "korpus",
       isBleeding: false,
       isSetOnFire: false,
     },
@@ -70,7 +71,7 @@ const DiceTable = () => {
                     <span className="smallNums">
                       {message.diceDMG} + {message.basicAdditionalDmg}
                     </span>{" "}
-                    obrażeń!
+                    obrażeń! ({message.bodyPart})
                   </>
                 )}
                 <span className="bleeding">

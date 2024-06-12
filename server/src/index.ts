@@ -8,6 +8,7 @@ import DiceManager from "./DiceManager";
 //db
 import { AppDataSource, getAllCharacters } from "./db/data-source";
 import { Character as CharacterDB } from "./db/entity/Character";
+import { mozliweLokacjeTrafieniaNieodmienionePrzezPrzypadki } from "./consts";
 
 const app = express();
 const httpServer = createServer(app);
@@ -144,6 +145,10 @@ AppDataSource.initialize()
           attackBasicChance: postac.szanse[attackData.nazwaStatystyki],
           attackRoll: DiceManager.rollD10(),
           diceDMG: diceDMG,
+          bodyPart:
+            mozliweLokacjeTrafieniaNieodmienionePrzezPrzypadki[
+              Math.floor(Math.random() * 10)
+            ],
           basicAdditionalDmg: attackData.dodatkowyDMG,
           isSetOnFire:
             attackData.procentSzansNaPodpalenie >= DiceManager.rollD100(false),
