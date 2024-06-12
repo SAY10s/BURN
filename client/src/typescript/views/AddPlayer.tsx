@@ -6,73 +6,71 @@ const AddPlayer = () => {
   const navigate = useNavigate();
 
   // ----------------------------------- react hook form -------------------------
-  const { register, handleSubmit } = useForm();
-  // const { setValue } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
-  // const setRandomValues = () => {
-  //   console.log("Setting random values");
-  //   setValue("imie", Math.random().toString(36).substring(7));
-  //   setValue("pz", Math.floor(Math.random() * 100));
-  //   setValue("pzMax", Math.floor(Math.random() * 100));
-  //   setValue("pw", Math.floor(Math.random() * 100));
-  //   setValue("pwMax", Math.floor(Math.random() * 100));
-  //   setValue("wigor", Math.floor(Math.random() * 100));
-  //   [
-  //     "glowa",
-  //     "korpus",
-  //     "lewaReka",
-  //     "prawaReka",
-  //     "lewaNoga",
-  //     "prawaNoga",
-  //   ].forEach((part) => {
-  //     setValue(
-  //       `wyparowanie.${part}.wyparowanie`,
-  //       Math.floor(Math.random() * 100),
-  //     );
-  //     setValue(
-  //       `wyparowanie.${part}.wyparowanieMax`,
-  //       Math.floor(Math.random() * 100),
-  //     );
-  //   });
-  //   [
-  //     "unik",
-  //     "zejscieZLini",
-  //     "atakMieczem",
-  //     "atakPiescia",
-  //     "atakDrzewcowa",
-  //     "atakBitewna",
-  //     "atakKrotka",
-  //     "atakZakleciem",
-  //     "strzalZLuku",
-  //     "strzalZKuszy",
-  //   ].forEach((chance) => {
-  //     setValue(`szanse.${chance}`, Math.floor(Math.random() * 100));
-  //   });
-  //   Array.from({ length: 5 }, (_, index) => {
-  //     setValue(`ataki.${index}.nazwa`, Math.random().toString(36).substring(7));
-  //     setValue(`ataki.${index}.kosztPW`, Math.floor(Math.random() * 100));
-  //     setValue(`ataki.${index}.kosztWigor`, Math.floor(Math.random() * 100));
-  //     setValue(`ataki.${index}.ileD6`, Math.floor(Math.random() * 6) + 1);
-  //     setValue(`ataki.${index}.dodatkowyDMG`, Math.floor(Math.random() * 100));
-  //     setValue(
-  //       `ataki.${index}.nazwaStatystyki`,
-  //       Math.random().toString(36).substring(7),
-  //     );
-  //     setValue(
-  //       `ataki.${index}.mozliweSposobyUniku`,
-  //       Math.random().toString(36).substring(7),
-  //     );
-  //     setValue(`ataki.${index}.srebrnyAtak`, Math.random() < 0.5);
-  //     setValue(
-  //       `ataki.${index}.procentSzansNaPodpalenie`,
-  //       Math.floor(Math.random() * 100),
-  //     );
-  //     setValue(
-  //       `ataki.${index}.procentSzansNaKrwawienie`,
-  //       Math.floor(Math.random() * 100),
-  //     );
-  //   });
-  // };
+  const setRandomValues = () => {
+    console.log("Setting random values");
+    setValue("imie", Math.random().toString(36).substring(7));
+
+    let pz = Math.floor(Math.random() * 100);
+    setValue("pz", pz);
+    setValue("pzMax", pz);
+
+    let pw = Math.floor(Math.random() * 100);
+    setValue("pw", pw);
+    setValue("pwMax", pw);
+    setValue("wigor", Math.floor(Math.random() * 100));
+    [
+      "glowa",
+      "korpus",
+      "lewaReka",
+      "prawaReka",
+      "lewaNoga",
+      "prawaNoga",
+    ].forEach((part) => {
+      let wyparowanie = Math.floor(Math.random() * 10);
+      setValue(`wyparowanie.${part}.wyparowanie`, wyparowanie);
+      setValue(`wyparowanie.${part}.wyparowanieMax`, wyparowanie);
+    });
+    [
+      "unik",
+      "zejscieZLini",
+      "atakMieczem",
+      "atakPiescia",
+      "atakDrzewcowa",
+      "atakBitewna",
+      "atakKrotka",
+      "atakZakleciem",
+      "strzalZLuku",
+      "strzalZKuszy",
+    ].forEach((chance) => {
+      setValue(`szanse.${chance}`, Math.floor(Math.random() * 100));
+    });
+    Array.from({ length: 5 }, (_, index) => {
+      setValue(`ataki.${index}.nazwa`, Math.random().toString(36).substring(7));
+      setValue(`ataki.${index}.kosztPW`, Math.floor(Math.random() * 100));
+      setValue(`ataki.${index}.kosztWigor`, Math.floor(Math.random() * 100));
+      setValue(`ataki.${index}.ileD6`, Math.floor(Math.random() * 6) + 1);
+      setValue(`ataki.${index}.dodatkowyDMG`, Math.floor(Math.random() * 100));
+      setValue(
+        `ataki.${index}.nazwaStatystyki`,
+        Math.random().toString(36).substring(7),
+      );
+      setValue(
+        `ataki.${index}.mozliweSposobyUniku`,
+        Math.random().toString(36).substring(7),
+      );
+      setValue(`ataki.${index}.srebrnyAtak`, Math.random() < 0.5);
+      setValue(
+        `ataki.${index}.procentSzansNaPodpalenie`,
+        Math.floor(Math.random() * 100),
+      );
+      setValue(
+        `ataki.${index}.procentSzansNaKrwawienie`,
+        Math.floor(Math.random() * 100),
+      );
+    });
+  };
   const createCharacter = (data: any) => {
     const convertedData = {
       ...data,
@@ -120,9 +118,9 @@ const AddPlayer = () => {
     <div className="editPlayerViewWrapper">
       <h1>Dodaj postać</h1>
       <form onSubmit={handleSubmit(createCharacter)}>
-        {/*<button type="button" onClick={setRandomValues}>*/}
-        {/*  Ustaw losowe wartości*/}
-        {/*</button>*/}
+        <button type="button" onClick={setRandomValues}>
+          Ustaw losowe wartości
+        </button>
         <div className="hpPw">
           <div>
             <label>Imię:</label>
