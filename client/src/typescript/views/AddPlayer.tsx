@@ -1,12 +1,14 @@
 import socket from "../helpers/socket.ts";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const AddPlayer = () => {
   const navigate = useNavigate();
 
   // ----------------------------------- react hook form -------------------------
   const { register, handleSubmit, setValue } = useForm();
+  const [numberOfAttacks, setNumberOfAttacks] = useState(1);
 
   const setRandomValues = () => {
     console.log("Setting random values");
@@ -143,7 +145,7 @@ const AddPlayer = () => {
             <input type="number" {...register("pwMax")} />
           </div>
           <div>
-            <label>Wigor:</label>
+            <label>Wigor + focus:</label>
             <input type="number" {...register("wigor")} />
           </div>
         </div>
@@ -191,9 +193,17 @@ const AddPlayer = () => {
             </div>
           ))}
         </fieldset>
+        <div>
+          <label>Ile ataków chcesz dodać:</label>
+          <input
+            type="number"
+            value={numberOfAttacks}
+            onChange={(e) => setNumberOfAttacks(Number(e.target.value))}
+          />
+        </div>
         <fieldset className="ataki">
           <legend>Ataki:</legend>
-          {Array.from({ length: 5 }, (_, index) => (
+          {Array.from({ length: numberOfAttacks }, (_, index) => (
             <div className="atak">
               <div>
                 <label>Nazwa:</label>
