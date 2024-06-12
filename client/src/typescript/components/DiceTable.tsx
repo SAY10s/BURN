@@ -4,6 +4,31 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 const DiceTable = () => {
+  function replacePolishChars(str: string) {
+    const polishChars = {
+      ą: "a",
+      ć: "c",
+      ę: "e",
+      ł: "l",
+      ń: "n",
+      ó: "o",
+      ś: "s",
+      ź: "z",
+      ż: "z",
+      Ą: "A",
+      Ć: "C",
+      Ę: "E",
+      Ł: "L",
+      Ń: "N",
+      Ó: "O",
+      Ś: "S",
+      Ź: "Z",
+      Ż: "Z",
+    };
+    //@ts-ignore
+    return str.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, (match) => polishChars[match]);
+  }
+
   const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
   );
@@ -56,8 +81,12 @@ const DiceTable = () => {
           if (message.type === "simpleAttack") {
             return (
               <div key={index}>
-                <span className="name">{message.name}</span> użył{" "}
-                <span className="name">{message.attackName}</span>{" "}
+                <span className="name">{replacePolishChars(message.name)}</span>{" "}
+                użył{" "}
+                <span className="name">
+                  {/*@ts-ignore*/}
+                  {replacePolishChars(message.attackName)}
+                </span>{" "}
                 {/*// @ts-ignore*/}
                 {message.attackBasicChance + message.attackRoll}
                 <span className="smallNums">
