@@ -8,6 +8,7 @@ import PlayerView from "./typescript/views/BattleViews/PlayerView.tsx";
 import GameMasterView from "./typescript/views/BattleViews/GameMasterView.tsx";
 import DiceTableView from "./typescript/views/DiceTableView.tsx";
 import EditPlayerView from "./typescript/views/EditPlayerView.tsx";
+import AddPlayer from "./typescript/views/AddPlayer.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "gm",
     element: <GameMasterView />,
+  },
+  {
+    path: "add",
+    element: <AddPlayer />,
   },
 ]);
 

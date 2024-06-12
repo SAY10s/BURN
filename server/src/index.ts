@@ -6,8 +6,7 @@ import atak from "./Ataki";
 import DiceManager from "./DiceManager";
 
 //db
-import { AppDataSource } from "./db/data-source";
-import { User } from "./db/entity/User";
+import { AppDataSource, getAllCharacters } from "./db/data-source";
 import { Character as CharacterDB } from "./db/entity/Character";
 
 const app = express();
@@ -23,23 +22,14 @@ const io = new Server(httpServer, {
 
 AppDataSource.initialize()
   .then(async () => {
-    console.log("Inserting a new user into the database...");
+    let characters = await getAllCharacters();
+    console.table(characters);
 
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
+    console.table(Character.wszystkiePostacie);
 
-    const character = new CharacterDB();
-
-    await AppDataSource.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
-
-    await AppDataSource.manager.save(character);
-
-    console.log("Loading users from the database...");
-    let users = await AppDataSource.manager.find(User);
-    console.table(users);
+    //@ts-ignore TODO: fix this (i mean, it works ig?)
+    Character.wszystkiePostacie = characters;
+    console.table(Character.wszystkiePostacie);
 
     const socketToCharacterMap = new Map();
     const messages = ["Hello there!", "General kenobi!"];
@@ -57,6 +47,7 @@ AppDataSource.initialize()
     function handleConnection(socket: Socket) {
       console.log("Client connected");
       handleEditCharacter(socket);
+      handleAddCharacter(socket);
       handleDiceTable(socket);
       handleCharacter(socket);
       handleMessages(socket);
@@ -64,6 +55,32 @@ AppDataSource.initialize()
       handleDisconnect(socket);
     }
 
+    //chooseCharacter and getMyCharacter
+    function handleCharacter(socket: Socket) {
+      socket.on("chooseCharacter", (characterName) => {
+        socketToCharacterMap.set(socket.id, characterName);
+        socket.emit(
+          "choosenCharacterAttacks",
+          Character.wszystkiePostacie.find(
+            (postac) => postac.imie === characterName,
+          ).ataki,
+        );
+      });
+
+      socket.on("getMyCharacter", () => {
+        socket.emit("myCharacter", socketToCharacterMap.get(socket.id));
+      });
+
+      socket.on("reloadPlz", () => {
+        socket.emit("init", messages);
+        socket.emit("initCharacters", Character.wszystkiePostacie);
+      });
+
+      socket.emit("init", messages);
+      io.emit("initCharacters", Character.wszystkiePostacie);
+    }
+
+    //editCharacter and getCharacterToEdit
     function handleEditCharacter(socket: Socket) {
       socket.on("getCharacterToEdit", (characterName: string) => {
         const character = Character.wszystkiePostacie.find(
@@ -73,9 +90,6 @@ AppDataSource.initialize()
       });
 
       socket.on("editCharacter", async (data: Character) => {
-        let characters = await AppDataSource.manager.find(CharacterDB);
-        console.table(characters);
-
         const character = Character.wszystkiePostacie.find(
           (postac) => postac.imie === data.imie,
         );
@@ -88,6 +102,21 @@ AppDataSource.initialize()
         Object.assign(character, data);
 
         socket.emit("editCharacterFeedback", character);
+        io.emit("initCharacters", Character.wszystkiePostacie);
+      });
+    }
+
+    function handleAddCharacter(socket: Socket) {
+      socket.on("addCharacter", async (data: Character) => {
+        let characters = await AppDataSource.manager.find(CharacterDB);
+        console.table(characters);
+
+        const character = new CharacterDB();
+        Object.assign(character, data);
+
+        await AppDataSource.manager.save(character);
+
+        socket.emit("addCharacterFeedback", character);
         io.emit("initCharacters", Character.wszystkiePostacie);
       });
     }
@@ -128,6 +157,8 @@ AppDataSource.initialize()
       });
 
       socket.on("unik", (data) => {
+        console.table(Character.wszystkiePostacie);
+
         const postac = Character.wszystkiePostacie.find(
           (postac) => postac.imie === data.currentCharacter,
         );
@@ -165,30 +196,6 @@ AppDataSource.initialize()
         if (diceTableLogs.length > 5) diceTableLogs.shift();
         io.emit("diceTableFeedback", diceTableLogs);
       });
-    }
-
-    function handleCharacter(socket: Socket) {
-      socket.on("chooseCharacter", (characterName) => {
-        socketToCharacterMap.set(socket.id, characterName);
-        socket.emit(
-          "choosenCharacterAttacks",
-          Character.wszystkiePostacie.find(
-            (postac) => postac.imie === characterName,
-          ).ataki,
-        );
-      });
-
-      socket.on("getMyCharacter", () => {
-        socket.emit("myCharacter", socketToCharacterMap.get(socket.id));
-      });
-
-      socket.on("reloadPlz", () => {
-        socket.emit("init", messages);
-        socket.emit("initCharacters", Character.wszystkiePostacie);
-      });
-
-      socket.emit("init", messages);
-      io.emit("initCharacters", Character.wszystkiePostacie);
     }
 
     function handleMessages(socket: Socket) {
@@ -239,4 +246,3 @@ AppDataSource.initialize()
     }
   })
   .catch((error) => console.log(error));
-//---------------------------------------------
