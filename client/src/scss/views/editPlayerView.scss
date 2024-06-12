@@ -10,6 +10,7 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      //width: 100%;
       label {
         //width: 25%;
       }
@@ -60,6 +61,30 @@
       }
       label {
         width: 100%;
+      }
+    }
+    .ataki {
+      display: flex;
+      flex-direction: column;
+      max-width: 800px;
+      .atak {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 4rem;
+        gap: 10px;
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: calc(50% - 10px);
+        }
+        label {
+          width: 100%;
+        }
+        input {
+          width: 100%;
+        }
       }
     }
   }
@@ -121,5 +146,11 @@
   form .field-pair label,
   form .field-pair input {
     width: 48%;
+  }
+}
+.addPlayerViewWrapper {
+  width: 100vw;
+  .szanse {
+    max-width: 100vw;
   }
 }

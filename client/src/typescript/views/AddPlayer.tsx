@@ -115,7 +115,7 @@ const AddPlayer = () => {
 
   // @ts-ignore
   return (
-    <div className="editPlayerViewWrapper">
+    <div className="editPlayerViewWrapper addPlayerViewWrapper">
       <h1>Dodaj postać</h1>
       <form onSubmit={handleSubmit(createCharacter)}>
         <button type="button" onClick={setRandomValues}>
@@ -191,42 +191,65 @@ const AddPlayer = () => {
             </div>
           ))}
         </fieldset>
-        <fieldset>
+        <fieldset className="ataki">
           <legend>Ataki:</legend>
           {Array.from({ length: 5 }, (_, index) => (
-            <div key={index}>
-              <label>Nazwa:</label>
-              <input {...register(`ataki.${index}.nazwa`)} />
-              <label>Koszt PW:</label>
-              <input type="number" {...register(`ataki.${index}.kosztPW`)} />
-              <label>Koszt Wigor:</label>
-              <input type="number" {...register(`ataki.${index}.kosztWigor`)} />
-              <label>Ile D6:</label>
-              <input type="number" {...register(`ataki.${index}.ileD6`)} />
-              <label>Dodatkowy DMG:</label>
-              <input
-                type="number"
-                {...register(`ataki.${index}.dodatkowyDMG`)}
-              />
-              <label>Nazwa Statystyki:</label>
-              <input {...register(`ataki.${index}.nazwaStatystyki`)} />
-              <label>Możliwe Sposoby Uniku:</label>
-              <input {...register(`ataki.${index}.mozliweSposobyUniku`)} />
-              <label>Srebrny Atak:</label>
-              <input
-                type="checkbox"
-                {...register(`ataki.${index}.srebrnyAtak`)}
-              />
-              <label>Procent Szans Na Podpalenie:</label>
-              <input
-                type="number"
-                {...register(`ataki.${index}.procentSzansNaPodpalenie`)}
-              />
-              <label>Procent Szans Na Krwawienie:</label>
-              <input
-                type="number"
-                {...register(`ataki.${index}.procentSzansNaKrwawienie`)}
-              />
+            <div className="atak">
+              <div>
+                <label>Nazwa:</label>
+                <input {...register(`ataki.${index}.nazwa`)} />
+              </div>
+              <div>
+                <label>Koszt PW:</label>
+                <input type="number" {...register(`ataki.${index}.kosztPW`)} />
+              </div>
+              <div>
+                <label>Koszt Wigor:</label>
+                <input
+                  type="number"
+                  {...register(`ataki.${index}.kosztWigor`)}
+                />
+              </div>
+              <div>
+                <label>Ile D6 DMG:</label>
+                <input type="number" {...register(`ataki.${index}.ileD6`)} />
+              </div>
+              <div>
+                <label>Dodatkowy DMG:</label>
+                <input
+                  type="number"
+                  {...register(`ataki.${index}.dodatkowyDMG`)}
+                />
+              </div>
+              <div>
+                <label>Statystyka</label>
+                <input {...register(`ataki.${index}.nazwaStatystyki`)} />
+              </div>
+              {/*<div>*/}
+              {/*  <label>Możliwe Sposoby Uniku:</label>*/}
+              {/*  <input {...register(`ataki.${index}.mozliweSposobyUniku`)} />*/}
+              {/*</div>*/}
+              {/*<div>*/}
+              {/*  <label>Srebrny Atak:</label>*/}
+              {/*  <input*/}
+              {/*    type="checkbox"*/}
+              {/*    {...register(`ataki.${index}.srebrnyAtak`)}*/}
+              {/*  />*/}
+              {/*</div>*/}
+              <div>
+                <label>Podpalenie szansa: (0-100)</label>
+                <input
+                  type="number"
+                  {...register(`ataki.${index}.procentSzansNaPodpalenie`)}
+                />
+              </div>
+              <div>
+                <label>Krwawienie szansa: (0-100)</label>
+                <input
+                  type="number"
+                  {...register(`ataki.${index}.procentSzansNaKrwawienie`)}
+                />
+              </div>
             </div>
           ))}
         </fieldset>
