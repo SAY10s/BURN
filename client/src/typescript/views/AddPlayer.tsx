@@ -128,7 +128,7 @@ const AddPlayer = () => {
           </div>
           <div>
             <label>Czy jest graczem:</label>
-            <input type="checkbox" {...register("czyJestBohaterem")} />
+            <input type="checkbox" {...register("jestBohaterem")} />
           </div>
           <div className="field-pair">
             <label>PZ:</label>
