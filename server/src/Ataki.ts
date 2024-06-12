@@ -1,10 +1,10 @@
-import Character from "./shared/classes/Character.js";
-import DiceManager from "./DiceManager.js";
+import Character from "./shared/classes/Character";
+import DiceManager from "./DiceManager";
 import {
   mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki,
   mozliweLokacjeTrafieniaCamelCase,
-} from "./consts.js";
-import attackInterface from "./shared/interfaces/attackInterface.js";
+} from "./consts";
+import attackInterface from "./shared/interfaces/attackInterface";
 
 const calculateDamage = (data: attackInterface) => {
   let lokacjaTrafienia = DiceManager.rollD10(false);
@@ -23,7 +23,7 @@ const calculateDamage = (data: attackInterface) => {
   let obrazenia =
     obrazeniaRoll > wyparowanie
       ? Math.floor(
-          (obrazeniaRoll - wyparowanie) * getDamageMultiplier(lokacjaTrafienia),
+          (obrazeniaRoll - wyparowanie) * getDamageMultiplier(lokacjaTrafienia)
         )
       : 0;
 
@@ -77,8 +77,12 @@ const atak = (data: attackInterface) => {
   let { lokacjaTrafienia, obrazeniaRoll, obrazenia, wyparowanie } =
     calculateDamage(data);
 
-  message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[lokacjaTrafienia - 1].toLowerCase()}(${lokacjaTrafienia})`;
-  message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${getDamageMultiplier(lokacjaTrafienia)} = ${obrazenia}) punktów życia!`;
+  message += ` i trafił (${atakSzansa} > ${obronaSzansa}) w ${mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki[
+    lokacjaTrafienia - 1
+  ].toLowerCase()}(${lokacjaTrafienia})`;
+  message += ` i zabrał mu ${obrazenia}((${obrazeniaRoll} - ${wyparowanie})*${getDamageMultiplier(
+    lokacjaTrafienia
+  )} = ${obrazenia}) punktów życia!`;
 
   if (data.procentSzansNaPodpalenie >= DiceManager.rollD100(false)) {
     message += ` ${data.obronca.imie} podpalił się!`;

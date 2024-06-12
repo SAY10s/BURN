@@ -1,4 +1,4 @@
-import Character from "./shared/classes/Character.js";
+import Character from "./shared/classes/Character";
 
 const mozliweLokacjeTrafieniaOdmienionePrzezPrzypadki = [
   "głowę",
