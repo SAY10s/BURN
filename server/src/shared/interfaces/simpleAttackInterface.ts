@@ -1,4 +1,4 @@
-import Character from "../classes/Character";
+import Character from "../classes/Character.js";
 
 export default interface AttackInterface {
   atakujacy: string | Character; //nazwa postaci ATAKUJĄCEJ po stronie klienta; po stronie serwera obiekt postaci

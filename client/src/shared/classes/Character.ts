@@ -87,6 +87,8 @@ class Character {
   pzMax: number;
   pw: number;
   pwMax: number;
+  fart: number;
+  fartMax: number;
   wigor: number;
   wyparowanie: { [key: string]: WyparowaniePart };
   szanse: Szanse;
@@ -99,6 +101,8 @@ class Character {
     pzMax: number = 10,
     pw: number = 10,
     pwMax: number = 10,
+    fart: number = 10,
+    fartMax: number = 10,
     wigor: number = 1,
     wyparowanie: { [key: string]: WyparowaniePart } = defaultWyparowanie,
     szanse: Szanse = defaultSzanse,
@@ -110,6 +114,8 @@ class Character {
     this.pzMax = pzMax;
     this.pw = pw;
     this.pwMax = pwMax;
+    this.fart = fart;
+    this.fartMax = fartMax;
     this.wigor = wigor;
     this.wyparowanie = wyparowanie;
     this.szanse = szanse;

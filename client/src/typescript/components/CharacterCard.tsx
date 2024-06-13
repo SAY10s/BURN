@@ -57,6 +57,11 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
           statMax={character.pwMax}
           barColor="#149dff"
         />
+        <StatBar
+          statValue={character.fart}
+          statMax={character.fartMax}
+          barColor="#c78c06 "
+        />
       </div>
       {/*<h3>Wyparowanie:</h3>*/}
       <div className="wyparowanie">

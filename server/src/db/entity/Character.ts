@@ -18,6 +18,12 @@ export class Character {
   pzMax: number;
 
   @Column({ default: 10 })
+  fart: number;
+
+  @Column({ default: 10 })
+  fartMax: number;
+
+  @Column({ default: 10 })
   pw: number;
 
   @Column({ default: 10 })
