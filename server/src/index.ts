@@ -135,6 +135,10 @@ AppDataSource.initialize()
         const postac = Character.wszystkiePostacie.find(
           (postac) => postac.imie === attackData.atakujacy,
         );
+        if (!postac) {
+          socket.emit("diceTableFeedback", diceTableLogs);
+          return;
+        }
 
         let diceDMG = 0;
         for (let i = 0; i < attackData.ileD6; i++) {
@@ -170,6 +174,10 @@ AppDataSource.initialize()
         const postac = Character.wszystkiePostacie.find(
           (postac) => postac.imie === data.currentCharacter,
         );
+        if (!postac) {
+          socket.emit("diceTableFeedback", diceTableLogs);
+          return;
+        }
 
         diceTableLogs.push({
           type: "statRoll",
@@ -184,6 +192,7 @@ AppDataSource.initialize()
       });
 
       socket.on("d6", (data) => {
+        if (!data.currentCharacter) return;
         diceTableLogs.push({
           type: "simpleRoll",
           name: data.currentCharacter,
@@ -195,6 +204,7 @@ AppDataSource.initialize()
       });
 
       socket.on("d10", (data) => {
+        if (!data.currentCharacter) return;
         diceTableLogs.push({
           type: "simpleRoll",
           name: data.currentCharacter,
@@ -224,6 +234,10 @@ AppDataSource.initialize()
         const obroncaIndex = Character.wszystkiePostacie.findIndex(
           (postac) => postac.imie === data.obronca,
         );
+        if (atakujacyIndex === -1 || obroncaIndex === -1) {
+          console.log("Character not found");
+          return;
+        }
 
         io.emit(
           "attackFeedback",

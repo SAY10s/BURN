@@ -50,4 +50,31 @@
     pointer-events: none;
     opacity: 0.3;
   }
+  //-----------------------------------------------------
+  .playerCharacter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    left: 2rem;
+    bottom: 2rem;
+    opacity: 0.6;
+
+    div {
+      font-size: 1rem;
+      color: $buttonFontColor;
+    }
+    div:last-child {
+      font-family: "The Witcher", Courier, monospace;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fefefe;
+      font-size: 2rem;
+    }
+    transition: 0.2s;
+  }
+  .playerCharacter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
