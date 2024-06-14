@@ -1,3 +1,17 @@
+@mixin shadowProperties($color, $zIndex) {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 5%;
+  width: 90%;
+  height: 70px;
+  border-radius: 50% / 50%;
+  box-shadow: 0 0 3rem $color;
+  z-index: $zIndex;
+  padding: 0;
+  background-color: transparent;
+}
+
 .diceTable {
   padding: 3rem 0;
   text-align: center;
@@ -9,16 +23,15 @@
     height: 380px;
     font-size: 1.5rem;
     div {
-      padding: 0.3rem;
+      padding: 0.1rem;
       opacity: 0.6;
     }
     .logOutsideWrapper:last-child {
       position: relative;
       padding: 2rem 0rem;
-      margin: 3rem;
-      font-size: 2.5rem;
+      margin: 4rem;
+      font-size: 2.4rem;
       opacity: 1;
-
       border: 2px solid #84763f;
       border-right: unset;
       border-left: unset;
@@ -29,29 +42,25 @@
         rgba(0, 0, 0, 1) 95%,
         rgba(0, 0, 0, 0) 100%
       );
+
       div {
         opacity: 1;
       }
-      //z-index: 10;
       .upperShadowYellow,
       .lowerShadowYellow {
-        content: "";
-        position: absolute;
-        top: 0%;
-        left: 5%;
-        width: 90%;
-        height: 70px;
-        border-radius: 50% / 50%; // Adjust these values to change the shape of the ellipse
-        box-shadow: 0 0rem 3rem #84763f;
-        z-index: -5;
-        padding: 0;
-        background-color: transparent;
-        //background-color: pink;
+        @include shadowProperties(#84763f, -5);
       }
       .lowerShadowYellow {
         top: unset;
         bottom: 0;
-        box-shadow: 0 0rem 3rem #84763f;
+      }
+      .upperShadowWhite,
+      .lowerShadowWhite {
+        @include shadowProperties(rgba(255, 255, 255, 0.1), -7);
+      }
+      .lowerShadowWhite {
+        top: unset;
+        bottom: 0;
       }
     }
   }
@@ -77,6 +86,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+
     button {
       width: 11%;
       text-transform: uppercase;
