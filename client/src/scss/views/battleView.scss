@@ -1,5 +1,9 @@
 @use "../variables" as *;
 
+.battleViewWrapper {
+  @include wrapper;
+}
+
 .characters {
   display: flex;
   flex-wrap: wrap;

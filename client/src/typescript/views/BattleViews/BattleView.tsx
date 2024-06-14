@@ -50,7 +50,7 @@ const BattleView = ({ isGameMaster }: { isGameMaster: boolean }) => {
   }, [isGameMaster, dispatch]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper battleViewWrapper">
       <div className="logs">
         {messages.map((msg, index) => (
           <div key={index}>{msg}</div>

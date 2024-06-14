@@ -1,5 +1,8 @@
+@use "../variables" as *;
 .diceTableViewWrapper {
-  padding: 0 2rem;
+  @include wrapper;
+
+  padding: 1rem 2rem;
   .diceTableLogs {
     display: flex;
     flex-direction: column;

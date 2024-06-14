@@ -23,7 +23,9 @@
   font-weight: normal;
   font-style: normal;
 }
-
+html {
+  padding: 0rem;
+}
 * {
   color: $primaryFontColor;
   text-transform: uppercase;
