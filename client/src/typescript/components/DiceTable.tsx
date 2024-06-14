@@ -32,27 +32,31 @@ const DiceTable = () => {
   const currentCharacter: string = useSelector(
     (state: any) => state.character.currentCharacter,
   );
-  const [diceTableMessages, setDiceTableMessages] = useState([
-    {
-      type: "simpleAttack",
-      name: "Geralt",
-      attackName: "srebrny miecz",
-      attackBasicChance: 15,
-      attackRoll: 5,
-      diceDMG: 16,
-      basicAdditionalDmg: 2,
-      bodyPart: "korpus",
-      isBleeding: false,
-      isSetOnFire: false,
-    },
-    {
-      type: "statRoll",
-      name: "Geralt",
-      rollName: "Unik",
-      rollBasicChance: 20,
-      rollRoll: 17,
-    },
-  ]);
+  interface SimpleAttackMessage {
+    type: "simpleAttack";
+    name: string;
+    attackName: string;
+    attackBasicChance: number;
+    attackRoll: number;
+    diceDMG: number;
+    basicAdditionalDmg: number;
+    bodyPart: string;
+    isBleeding: boolean;
+    isSetOnFire: boolean;
+  }
+
+  interface StatRollMessage {
+    type: "statRoll";
+    name: string;
+    rollName: string;
+    rollBasicChance: number;
+    rollRoll: number;
+  }
+
+  type DiceTableMessage = SimpleAttackMessage | StatRollMessage;
+  const [diceTableMessages, setDiceTableMessages] = useState<
+    DiceTableMessage[]
+  >([]);
   const attack = (attackData: attackInterface) => {
     socket.emit("simpleAttack", attackData);
   };
@@ -125,9 +129,12 @@ const DiceTable = () => {
                 na {message.rollName}!
               </div>
             );
-          } else if (message.type === "simpleRoll") {
+          }
+          // @ts-ignore
+          else if (message.type === "simpleRoll") {
             return (
               <div key={index}>
+                {/*// @ts-ignore*/}
                 <span className="name">{message.name}</span> rzucił{" "}
                 {/*// @ts-ignore*/}
                 {message.roll}!

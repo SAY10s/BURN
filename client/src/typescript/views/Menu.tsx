@@ -19,6 +19,16 @@ const Menu: React.FC = () => {
         </Link>
       </div>
       <div className="header-item">
+        <Link to="/add" className="menu-item">
+          <span className="icon add">
+            <span className="icon dice">
+              <CharacterAddIcon />
+            </span>
+          </span>
+          Dodaj postać
+        </Link>
+      </div>
+      <div className="header-item disabled">
         <Link to="/player" className="menu-item">
           <span className="icon player">
             <span className="icon dice">
@@ -28,7 +38,8 @@ const Menu: React.FC = () => {
           Bitwa (Gracz)
         </Link>
       </div>
-      <div className="header-item">
+
+      <div className="header-item disabled">
         <Link to="/gm" className="menu-item">
           <span className="icon gm">
             <span className="icon dice">
@@ -36,16 +47,6 @@ const Menu: React.FC = () => {
             </span>
           </span>
           Bitwa (GM)
-        </Link>
-      </div>
-      <div className="header-item">
-        <Link to="/add" className="menu-item">
-          <span className="icon add">
-            <span className="icon dice">
-              <CharacterAddIcon />
-            </span>
-          </span>
-          Dodaj postać
         </Link>
       </div>
     </div>

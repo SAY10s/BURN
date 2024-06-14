@@ -45,7 +45,7 @@ const DiceTableView = () => {
             key={index}
             character={character}
             showAttackPlayerMenu={false}
-            showChooseCharacterButton={true}
+            showChooseCharacterButton={false}
             showChances={false}
           />
         ))}
