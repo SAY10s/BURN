@@ -51,6 +51,8 @@ const EditPlayerView = () => {
       pzMax: Number(data.pzMax),
       pw: Number(data.pw),
       pwMax: Number(data.pwMax),
+      fart: Number(data.fart),
+      fartMax: Number(data.fartMax),
       wigor: Number(data.wigor),
       wyparowanie: Object.fromEntries(
         Object.entries(data.wyparowanie).map(([part, values]) => [
@@ -109,6 +111,12 @@ const EditPlayerView = () => {
               <input type="number" {...register("pw")} />
               <span className="slash">/</span>
               <input type="number" {...register("pwMax")} />
+            </div>
+            <div className="field-pair">
+              <label>Fart:</label>
+              <input type="number" {...register("fart")} />
+              <span className="slash">/</span>
+              <input type="number" {...register("fartMax")} />
             </div>
             <div>
               <label>Wigor:</label>
