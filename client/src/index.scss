@@ -35,8 +35,13 @@ body {
   background-image: url("./assets/smokebg.png");
 }
 
+option {
+  color: black;
+}
+
 button,
-input {
+input,
+select {
   background: linear-gradient(
     90deg,
     #291e0500 0%,

@@ -233,7 +233,16 @@ const AddPlayer = () => {
               </div>
               <div>
                 <label>Statystyka</label>
-                <input {...register(`ataki.${index}.nazwaStatystyki`)} />
+                <select {...register(`ataki.${index}.nazwaStatystyki`)}>
+                  <option value="atakMieczem">Atak Mieczem</option>
+                  <option value="atakPiescia">Bójka (pięści)</option>
+                  <option value="atakDrzewcowa">Broń Drzewcowa</option>
+                  <option value="atakBitewna">Broń Bitewna</option>
+                  <option value="atakKrotka">Broń krótka</option>
+                  <option value="atakZakleciem">Rzucanie Zaklęć</option>
+                  <option value="strzalZLuku">Łucznictwo</option>
+                  <option value="strzalZKuszy">Kusznictwo</option>
+                </select>
               </div>
               {/*<div>*/}
               {/*  <label>Możliwe Sposoby Uniku:</label>*/}
