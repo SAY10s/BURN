@@ -2,36 +2,77 @@
   padding: 3rem 0;
   text-align: center;
   .diceTableLogs {
-    .name {
-      font-family: "The Witcher", Courier, monospace;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #fefefe;
-      min-height: 350px;
-    }
-    .smallNums {
-      font-size: 0.4em;
-      opacity: 0.5;
-    }
-    .bleeding {
-      color: red;
-    }
-    .onFire {
-      color: #ffb616;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
-    padding: 2rem;
+    height: 380px;
     font-size: 1.5rem;
     div {
       padding: 0.3rem;
       opacity: 0.6;
     }
-    div:last-child {
-      padding: 3rem 1rem 1rem;
+    .logOutsideWrapper:last-child {
+      position: relative;
+      padding: 2rem 0rem;
+      margin: 3rem;
       font-size: 2.5rem;
       opacity: 1;
+
+      border: 2px solid #84763f;
+      border-right: unset;
+      border-left: unset;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 5%,
+        rgba(0, 0, 0, 1) 95%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      div {
+        opacity: 1;
+      }
+      //z-index: 10;
+      .upperShadowYellow,
+      .lowerShadowYellow {
+        content: "";
+        position: absolute;
+        top: 0%;
+        left: 5%;
+        width: 90%;
+        height: 70px;
+        border-radius: 50% / 50%; // Adjust these values to change the shape of the ellipse
+        box-shadow: 0 0rem 3rem #84763f;
+        z-index: -5;
+        padding: 0;
+        background-color: transparent;
+        //background-color: pink;
+      }
+      .lowerShadowYellow {
+        top: unset;
+        bottom: 0;
+        box-shadow: 0 0rem 3rem #84763f;
+      }
     }
   }
+
+  .name {
+    font-family: "The Witcher", Courier, monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fefefe;
+  }
+  .smallNums {
+    font-size: 0.4em;
+    opacity: 0.5;
+  }
+  .bleeding {
+    color: red;
+  }
+  .onFire {
+    color: #ffb616;
+  }
+
   .diceTableRolls {
     display: flex;
     align-items: center;

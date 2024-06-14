@@ -2,6 +2,7 @@ import attackInterface from "../../shared/interfaces/attackInterface.ts";
 import socket from "../helpers/socket.ts";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import Log from "./Log.tsx";
 
 const DiceTable = () => {
   function replacePolishChars(str: string) {
@@ -76,66 +77,71 @@ const DiceTable = () => {
 
     //   TEMP:
     <div className="diceTable">
-      <div className="diceTableLogs">
-        {diceTableMessages.map((message, index) => {
-          if (message.type === "simpleAttack") {
-            return (
-              <div key={index}>
-                <span className="name">{replacePolishChars(message.name)}</span>{" "}
-                użył{" "}
-                <span className="name">
-                  {/*@ts-ignore*/}
-                  {replacePolishChars(message.attackName)}
-                </span>{" "}
-                {/*// @ts-ignore*/}
-                {message.attackBasicChance + message.attackRoll}
-                <span className="smallNums">
-                  {message.attackBasicChance} + {message.attackRoll}
-                </span>{" "}
-                {/*// @ts-ignore*/}
-                {message.diceDMG > 0 && (
-                  <>
-                    i zadał {/*// @ts-ignore*/}
-                    {message.diceDMG + message.basicAdditionalDmg}
-                    <span className="smallNums">
-                      {message.diceDMG} + {message.basicAdditionalDmg}
-                    </span>{" "}
-                    obrażeń! ({message.bodyPart})
-                  </>
-                )}
-                <span className="bleeding">
-                  {" "}
-                  {message.isBleeding && " Nakłada krawienie!"}
-                </span>
-                <span className="onFire">
-                  {" "}
-                  {message.isSetOnFire && " Podpala cel!"}
-                </span>
-              </div>
-            );
-          } else if (message.type === "statRoll") {
-            return (
-              <div key={index}>
-                <span className="name">{message.name}</span> rzucił{" "}
-                {/*// @ts-ignore*/}
-                {message.rollRoll + message.rollBasicChance}
-                <span className="smallNums">
-                  {message.rollBasicChance} + {message.rollRoll}
-                </span>{" "}
-                na {message.rollName}!
-              </div>
-            );
-          } else if (message.type === "simpleRoll") {
-            return (
-              <div key={index}>
-                <span className="name">{message.name}</span> rzucił{" "}
-                {/*// @ts-ignore*/}
-                {message.roll}!
-              </div>
-            );
-          }
-        })}
+      <div className="diceTableLogsWrapper">
+        <div className="diceTableLogs">
+          {diceTableMessages.map((message, index) => {
+            if (message.type === "simpleAttack") {
+              return (
+                <Log key={index}>
+                  <span className="name">
+                    {replacePolishChars(message.name)}
+                  </span>{" "}
+                  użył{" "}
+                  <span className="name">
+                    {/*@ts-ignore*/}
+                    {replacePolishChars(message.attackName)}
+                  </span>{" "}
+                  {/*// @ts-ignore*/}
+                  {message.attackBasicChance + message.attackRoll}
+                  <span className="smallNums">
+                    {message.attackBasicChance} + {message.attackRoll}
+                  </span>{" "}
+                  {/*// @ts-ignore*/}
+                  {message.diceDMG > 0 && (
+                    <>
+                      i zadał {/*// @ts-ignore*/}
+                      {message.diceDMG + message.basicAdditionalDmg}
+                      <span className="smallNums">
+                        {message.diceDMG} + {message.basicAdditionalDmg}
+                      </span>{" "}
+                      obrażeń! ({message.bodyPart})
+                    </>
+                  )}
+                  <span className="bleeding">
+                    {" "}
+                    {message.isBleeding && " Nakłada krawienie!"}
+                  </span>
+                  <span className="onFire">
+                    {" "}
+                    {message.isSetOnFire && " Podpala cel!"}
+                  </span>
+                </Log>
+              );
+            } else if (message.type === "statRoll") {
+              return (
+                <Log key={index}>
+                  <span className="name">{message.name}</span> rzucił{" "}
+                  {/*// @ts-ignore*/}
+                  {message.rollRoll + message.rollBasicChance}
+                  <span className="smallNums">
+                    {message.rollBasicChance} + {message.rollRoll}
+                  </span>{" "}
+                  na {message.rollName}!
+                </Log>
+              );
+            } else if (message.type === "simpleRoll") {
+              return (
+                <Log key={index}>
+                  <span className="name">{message.name}</span> rzucił{" "}
+                  {/*// @ts-ignore*/}
+                  {message.roll}!
+                </Log>
+              );
+            }
+          })}
+        </div>
       </div>
+
       <div className="diceTableRolls">
         {currentCharacter &&
           ataki.map((atak: any, index: number) => {
