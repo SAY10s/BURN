@@ -10,10 +10,12 @@ import {
 const Menu: React.FC = () => {
   return (
     <div className="menu">
-      <div className="playerCharacter">
-        <div>grasz jako: </div>
-        <div>Prince Taco</div>
-      </div>
+      <Link to="choose">
+        <div className="playerCharacter">
+          <div>grasz jako: </div>
+          <div>Prince Taco</div>
+        </div>
+      </Link>
       <div className="header-item">
         <Link to="/dice" className="menu-item">
           <span className="icon dice">

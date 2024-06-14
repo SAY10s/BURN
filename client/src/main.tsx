@@ -16,6 +16,7 @@ import EditPlayerView from "./typescript/views/EditPlayerView.tsx";
 import AddPlayer from "./typescript/views/AddPlayer.tsx";
 import Root from "./typescript/views/Root.tsx";
 import Menu from "./typescript/views/Menu.tsx";
+import ChooseCharacterView from "./typescript/views/ChooseCharacterView.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
 
       <Route path="add" element={<AddPlayer />} />
       <Route path="edit" element={<EditPlayerView />} />
+      <Route path="choose" element={<ChooseCharacterView />} />
     </Route>,
   ),
 );
