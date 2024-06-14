@@ -1,93 +1,41 @@
-@mixin shadowProperties($color, $zIndex) {
-  content: "";
-  position: absolute;
-  top: 0%;
-  left: 5%;
-  width: 90%;
-  height: 70px;
-  border-radius: 50% / 50%;
-  box-shadow: 0 0 3rem $color;
-  z-index: $zIndex;
-  padding: 0;
-  background-color: transparent;
-}
-
 .diceTable {
   padding: 3rem 0;
   text-align: center;
   .diceTableLogs {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    .name {
+      font-family: "The Witcher", Courier, monospace;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fefefe;
+      min-height: 350px;
+    }
+    .smallNums {
+      font-size: 0.4em;
+      opacity: 0.5;
+    }
+    .bleeding {
+      color: red;
+    }
+    .onFire {
+      color: #ffb616;
+    }
 
-    height: 380px;
+    padding: 2rem;
     font-size: 1.5rem;
     div {
-      padding: 0.1rem;
+      padding: 0.3rem;
       opacity: 0.6;
     }
-    .logOutsideWrapper:last-child {
-      position: relative;
-      padding: 2rem 0rem;
-      margin: 4rem;
-      font-size: 2.4rem;
+    div:last-child {
+      padding: 3rem 1rem 1rem;
+      font-size: 2.5rem;
       opacity: 1;
-      border: 2px solid #84763f;
-      border-right: unset;
-      border-left: unset;
-      background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 1) 5%,
-        rgba(0, 0, 0, 1) 95%,
-        rgba(0, 0, 0, 0) 100%
-      );
-
-      div {
-        opacity: 1;
-      }
-      .upperShadowYellow,
-      .lowerShadowYellow {
-        @include shadowProperties(#84763f, -5);
-      }
-      .lowerShadowYellow {
-        top: unset;
-        bottom: 0;
-      }
-      .upperShadowWhite,
-      .lowerShadowWhite {
-        @include shadowProperties(rgba(255, 255, 255, 0.1), -7);
-      }
-      .lowerShadowWhite {
-        top: unset;
-        bottom: 0;
-      }
     }
   }
-
-  .name {
-    font-family: "The Witcher", Courier, monospace;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fefefe;
-  }
-  .smallNums {
-    font-size: 0.4em;
-    opacity: 0.5;
-  }
-  .bleeding {
-    color: red;
-  }
-  .onFire {
-    color: #ffb616;
-  }
-
   .diceTableRolls {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
-
     button {
       width: 11%;
       text-transform: uppercase;

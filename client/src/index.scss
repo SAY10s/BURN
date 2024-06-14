@@ -85,39 +85,3 @@ summary {
   z-index: 1000;
   height: 10rem;
 }
-
-.a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: visible;
-
-  width: 30%;
-  margin-left: 40rem;
-  height: 10rem;
-
-  font-size: 3rem;
-  position: relative;
-
-  //background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  padding: 10px 20px; /* Spacing around the text */
-  box-shadow: 0 0 5rem #84763f; /* Outer glow effect */
-
-  .b {
-    position: absolute;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 20%,
-      rgba(0, 0, 0, 1) 80%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    width: 900px;
-    height: 120%;
-    border: 2px solid #84763f; /* Yellow border around the text */
-    border-right: unset;
-    border-left: unset;
-  }
-
-  border-radius: 10rem;
-}

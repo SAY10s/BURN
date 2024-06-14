@@ -156,7 +156,7 @@ AppDataSource.initialize()
             attackData.procentSzansNaKrwawienie >= DiceManager.rollD100(false),
         });
 
-        if (diceTableLogs.length > 4) diceTableLogs.shift();
+        if (diceTableLogs.length > 5) diceTableLogs.shift();
 
         io.emit("diceTableFeedback", diceTableLogs);
       });
