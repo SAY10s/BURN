@@ -1,0 +1,18 @@
+.root {
+  .menu-link {
+    position: fixed;
+    padding: 2rem;
+    right: 0;
+    top: 0;
+    svg {
+      //width: 1rem;
+    }
+    transition: 0.2s;
+  }
+  .menu-link:hover {
+    svg {
+      filter: invert(67%) sepia(13%) saturate(1527%) hue-rotate(1deg)
+        brightness(88%) contrast(82%);
+    }
+  }
+}

@@ -1,11 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { Menu } from "../../assets/icons.tsx";
 
 const Root = () => {
   return (
-    <>
-      <h1>ROOT ADDED</h1>
+    <div className="root">
+      <Link to={"/"} className="menu-link">
+        <Menu />
+      </Link>
       <Outlet />
-    </>
+    </div>
   );
 };
 

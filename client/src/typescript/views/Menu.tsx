@@ -5,7 +5,7 @@ import {
   GmIcon,
   SwordIcon,
   DiceTableIcon,
-} from "../../assets/icons/menu/icons.tsx";
+} from "../../assets/icons.tsx";
 
 const Menu: React.FC = () => {
   return (

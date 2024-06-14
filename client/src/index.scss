@@ -14,6 +14,7 @@
 @use "scss/views/editPlayerView";
 @use "scss/views/battleView";
 @use "scss/views/menu";
+@use "scss/views/root";
 
 // TO BE MOVED
 @font-face {
@@ -34,6 +35,9 @@
 }
 body {
   background-image: url("./assets/smokebg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 option {
@@ -90,4 +94,10 @@ summary {
   padding: 2rem 10rem;
   z-index: 1000;
   height: 10rem;
+}
+svg {
+  width: 2rem;
+  height: 2rem;
+  filter: invert(33%) sepia(3%) saturate(4294%) hue-rotate(343deg)
+    brightness(88%) contrast(92%);
 }
