@@ -9,6 +9,17 @@ const AddPlayer = () => {
   // ----------------------------------- react hook form -------------------------
   const { register, handleSubmit, setValue } = useForm();
   const [numberOfAttacks, setNumberOfAttacks] = useState(1);
+  const statystykiOptions = [
+    "zejscieZLini",
+    "atakMieczem",
+    "atakPiescia",
+    "atakDrzewcowa",
+    "atakBitewna",
+    "atakKrotka",
+    "atakZakleciem",
+    "strzalZLuku",
+    "strzalZKuszy",
+  ];
 
   const setRandomValues = () => {
     console.log("Setting random values");
@@ -48,7 +59,7 @@ const AddPlayer = () => {
     ].forEach((chance) => {
       setValue(`szanse.${chance}`, Math.floor(Math.random() * 100));
     });
-    Array.from({ length: 5 }, (_, index) => {
+    Array.from({ length: 3 }, (_, index) => {
       setValue(`ataki.${index}.nazwa`, Math.random().toString(36).substring(7));
       setValue(`ataki.${index}.kosztPW`, Math.floor(Math.random() * 100));
       setValue(`ataki.${index}.kosztWigor`, Math.floor(Math.random() * 100));
@@ -56,7 +67,7 @@ const AddPlayer = () => {
       setValue(`ataki.${index}.dodatkowyDMG`, Math.floor(Math.random() * 100));
       setValue(
         `ataki.${index}.nazwaStatystyki`,
-        Math.random().toString(36).substring(7),
+        statystykiOptions[Math.floor(Math.random() * statystykiOptions.length)],
       );
       setValue(
         `ataki.${index}.mozliweSposobyUniku`,
