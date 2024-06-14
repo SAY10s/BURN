@@ -14,9 +14,8 @@ const ChooseCharacterView = () => {
 
   const bohaterowie = characters.filter((char) => char.jestBohaterem);
   useEffect(() => {
-    const character = JSON.parse(
-      localStorage.getItem("currentCharacter") || "{}",
-    );
+    // @ts-ignore
+    const character = JSON.parse(localStorage.getItem("currentCharacter"));
     if (character) dispatch(chooseCharacter(character));
 
     socket.emit("reloadPlz");

@@ -8,12 +8,19 @@ import {
 } from "../../assets/icons.tsx";
 
 const Menu: React.FC = () => {
+  let character = localStorage.getItem("currentCharacter");
+  if (character) {
+    character = character.slice(1, -1);
+  } else {
+    character = "--???--";
+  }
+
   return (
     <div className="menu">
       <Link to="choose">
         <div className="playerCharacter">
           <div>grasz jako: </div>
-          <div>Prince Taco</div>
+          <div>{character}</div>
         </div>
       </Link>
       <div className="header-item">
