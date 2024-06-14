@@ -116,7 +116,10 @@ AppDataSource.initialize()
         Object.assign(character, data);
 
         await AppDataSource.manager.save(character);
+        characters = await AppDataSource.manager.find(CharacterDB);
 
+        //@ts-ignore TODO: fix this (i mean, it works ig?)
+        Character.wszystkiePostacie = characters;
         socket.emit("addCharacterFeedback", character);
         io.emit("initCharacters", Character.wszystkiePostacie);
       });
