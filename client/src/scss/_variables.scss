@@ -4,6 +4,8 @@ $primaryFontWhite: #fefefe;
 $primaryFontColor: #d1cabc;
 $primaryFontColorTextShadow: #8f7e66;
 
+$test: #90816a;
+
 //button
 $buttonFontColor: #8f7e66;
 
@@ -33,10 +35,6 @@ $activeGradientBackground: linear-gradient(
   #2a210355 25%,
   #10100a55 100%
 );
-@mixin activeStyle {
-  //border: $activeBorder;
-  //background: $activeGradientBackground;
-  //* {
-  //  //color: $primaryFontWhite;
-  //}
-}
+
+//menu
+$menuFontColor: #604b3b;

@@ -1,0 +1,47 @@
+@use "../variables" as *;
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  gap: 1rem;
+
+  .header-item {
+    font-size: 1.4rem;
+    width: 200px;
+  }
+
+  .menu-item {
+    text-decoration: none;
+    display: flex;
+    color: $buttonFontColor;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .icon {
+      margin-bottom: 1rem;
+      svg {
+        width: 52px;
+        height: 52px;
+        filter: invert(33%) sepia(3%) saturate(4294%) hue-rotate(343deg)
+          brightness(88%) contrast(92%);
+      }
+    }
+  }
+  .menu-item:hover {
+    background-color: #b59051;
+    svg {
+      filter: invert(1%) sepia(13%) saturate(1731%) hue-rotate(71deg)
+        brightness(91%) contrast(99%);
+    }
+    color: $primaryFontBlack;
+  }
+}

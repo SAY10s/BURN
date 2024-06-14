@@ -15,11 +15,12 @@ import DiceTableView from "./typescript/views/DiceTableView.tsx";
 import EditPlayerView from "./typescript/views/EditPlayerView.tsx";
 import AddPlayer from "./typescript/views/AddPlayer.tsx";
 import Root from "./typescript/views/Root.tsx";
+import Menu from "./typescript/views/Menu.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route path="/" element={<Root />} />
+      <Route path="/" element={<Menu />} />
 
       <Route path="/dice" element={<DiceTableView />} />
 
