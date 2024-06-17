@@ -17,3 +17,12 @@ services:
       - "5050:80"
     depends_on:
       - db
+  nodejs:
+    build:
+      context: server/.
+      dockerfile: ../Dockerfile
+    image: nodejs
+    # container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - "3000:3000"

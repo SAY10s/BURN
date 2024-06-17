@@ -6,7 +6,7 @@ import { Character } from "./entity/Character";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: "db",
   port: 5432,
   username: "admin",
   password: "admin",
